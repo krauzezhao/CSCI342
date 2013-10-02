@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90D8FBE517FCD8DE00977AD4 /* PlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE417FCD8DE00977AD4 /* PlayView.m */; };
+		90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE917FCD97D00977AD4 /* LevelViewController.m */; };
+		90D8FBED17FCDAAF00977AD4 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBEC17FCDAAE00977AD4 /* PlayViewController.m */; };
+		90D8FBF017FCE21000977AD4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90D8FBEF17FCE21000977AD4 /* QuartzCore.framework */; };
 		90DF0C0317FB812A00C0EEE9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0217FB812A00C0EEE9 /* UIKit.framework */; };
 		90DF0C0517FB812A00C0EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0417FB812A00C0EEE9 /* Foundation.framework */; };
 		90DF0C0717FB812A00C0EEE9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0617FB812A00C0EEE9 /* CoreGraphics.framework */; };
@@ -37,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90D8FBE317FCD8DE00977AD4 /* PlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayView.h; sourceTree = "<group>"; };
+		90D8FBE417FCD8DE00977AD4 /* PlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayView.m; sourceTree = "<group>"; };
+		90D8FBE817FCD97D00977AD4 /* LevelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelViewController.h; sourceTree = "<group>"; };
+		90D8FBE917FCD97D00977AD4 /* LevelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelViewController.m; sourceTree = "<group>"; };
+		90D8FBEB17FCDAAE00977AD4 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
+		90D8FBEC17FCDAAE00977AD4 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		90D8FBEE17FCDD6A00977AD4 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		90D8FBEF17FCE21000977AD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		90DF0BFF17FB812A00C0EEE9 /* WordGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90DF0C0217FB812A00C0EEE9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		90DF0C0417FB812A00C0EEE9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90D8FBF017FCE21000977AD4 /* QuartzCore.framework in Frameworks */,
 				90DF0C0317FB812A00C0EEE9 /* UIKit.framework in Frameworks */,
 				90DF0C0517FB812A00C0EEE9 /* Foundation.framework in Frameworks */,
 				90DF0C0717FB812A00C0EEE9 /* CoreGraphics.framework in Frameworks */,
@@ -86,6 +99,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90D8FBE617FCD8EF00977AD4 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				90D8FBE717FCD90C00977AD4 /* Level */,
+			);
+			name = Play;
+			sourceTree = "<group>";
+		};
+		90D8FBE717FCD90C00977AD4 /* Level */ = {
+			isa = PBXGroup;
+			children = (
+				90D8FBE317FCD8DE00977AD4 /* PlayView.h */,
+				90D8FBE417FCD8DE00977AD4 /* PlayView.m */,
+				90D8FBE817FCD97D00977AD4 /* LevelViewController.h */,
+				90D8FBE917FCD97D00977AD4 /* LevelViewController.m */,
+				90D8FBEB17FCDAAE00977AD4 /* PlayViewController.h */,
+				90D8FBEC17FCDAAE00977AD4 /* PlayViewController.m */,
+			);
+			name = Level;
+			sourceTree = "<group>";
+		};
 		90DF0BF617FB812900C0EEE9 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +142,7 @@
 		90DF0C0117FB812A00C0EEE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90D8FBEF17FCE21000977AD4 /* QuartzCore.framework */,
 				90DF0C0217FB812A00C0EEE9 /* UIKit.framework */,
 				90DF0C0417FB812A00C0EEE9 /* Foundation.framework */,
 				90DF0C0617FB812A00C0EEE9 /* CoreGraphics.framework */,
@@ -119,6 +154,8 @@
 		90DF0C0817FB812A00C0EEE9 /* WordGame */ = {
 			isa = PBXGroup;
 			children = (
+				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
+				90D8FBE617FCD8EF00977AD4 /* Play */,
 				90DF0C1117FB812A00C0EEE9 /* AppDelegate.h */,
 				90DF0C1217FB812A00C0EEE9 /* AppDelegate.m */,
 				90DF0C1A17FB812A00C0EEE9 /* MainStoryboard_iPhone.storyboard */,
@@ -277,6 +314,9 @@
 				90DF0C0F17FB812A00C0EEE9 /* main.m in Sources */,
 				90DF0C1317FB812A00C0EEE9 /* AppDelegate.m in Sources */,
 				90DF0C2217FB812A00C0EEE9 /* ViewController.m in Sources */,
+				90D8FBE517FCD8DE00977AD4 /* PlayView.m in Sources */,
+				90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */,
+				90D8FBED17FCDAAF00977AD4 /* PlayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +507,7 @@
 				90DF0C3C17FB812A00C0EEE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		90DF0C3D17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "WordGameTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +516,7 @@
 				90DF0C3F17FB812A00C0EEE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

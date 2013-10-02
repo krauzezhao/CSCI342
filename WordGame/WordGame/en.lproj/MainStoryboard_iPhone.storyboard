@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="531" y="93"/>
         </scene>
-        <!--View Controller - Playing...-->
+        <!--Play View Controller - Playing...-->
         <scene sceneID="dvX-OT-sJT">
             <objects>
-                <viewController id="bSp-0T-3Wu" sceneMemberID="viewController">
+                <viewController id="bSp-0T-3Wu" customClass="PlayViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k8h-Tf-Qjf">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,25 +99,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aJ-IP-WsA">
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WU5-2R-Q3o" customClass="PlayView">
+                                <color key="backgroundColor" red="1" green="0.89831951367380358" blue="0.091354669893471852" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1aJ-IP-WsA" firstAttribute="top" secondItem="k8h-Tf-Qjf" secondAttribute="top" type="default" id="9hy-e6-rd0"/>
+                            <constraint firstItem="WU5-2R-Q3o" firstAttribute="bottom" secondItem="k8h-Tf-Qjf" secondAttribute="bottom" type="default" id="Hk2-J4-1hr"/>
                             <constraint firstAttribute="bottom" secondItem="1aJ-IP-WsA" secondAttribute="bottom" constant="416" id="O7q-Uy-qKL"/>
+                            <constraint firstItem="WU5-2R-Q3o" firstAttribute="leading" secondItem="k8h-Tf-Qjf" secondAttribute="leading" type="default" id="PvF-4j-KdE"/>
                             <constraint firstItem="1aJ-IP-WsA" firstAttribute="leading" secondItem="k8h-Tf-Qjf" secondAttribute="leading" type="default" id="ZqZ-hw-4e5"/>
+                            <constraint firstItem="WU5-2R-Q3o" firstAttribute="top" secondItem="k8h-Tf-Qjf" secondAttribute="top" constant="39" id="Zs1-lf-VXO"/>
                             <constraint firstItem="1aJ-IP-WsA" firstAttribute="trailing" secondItem="k8h-Tf-Qjf" secondAttribute="trailing" type="default" id="gQc-ap-iLG"/>
+                            <constraint firstItem="WU5-2R-Q3o" firstAttribute="trailing" secondItem="k8h-Tf-Qjf" secondAttribute="trailing" type="default" id="ySO-BW-XeY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playing..." id="BLq-10-wfA"/>
+                    <connections>
+                        <outlet property="vPlay" destination="WU5-2R-Q3o" id="36g-gB-2BU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffR-Of-HWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2060" y="-1349"/>
         </scene>
-        <!--View Controller - Level-->
+        <!--Level View Controller - Level-->
         <scene sceneID="ErK-QX-hLQ">
             <objects>
-                <viewController id="NPX-D4-Aye" sceneMemberID="viewController">
+                <viewController id="NPX-D4-Aye" customClass="LevelViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5dI-3D-jnc">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -138,7 +148,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bSp-0T-3Wu" kind="push" id="9Vx-Og-l0d"/>
+                                    <segue destination="bSp-0T-3Wu" kind="push" identifier="SEG_MASTER1" id="9Vx-Og-l0d"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PU-oc-B2W">
@@ -151,7 +161,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bSp-0T-3Wu" kind="push" id="FqA-69-te5"/>
+                                    <segue destination="bSp-0T-3Wu" kind="push" identifier="SEG_MASTER2" id="FqA-69-te5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eb-67-aFR">
@@ -164,7 +174,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bSp-0T-3Wu" kind="push" id="dFx-VE-Fih"/>
+                                    <segue destination="bSp-0T-3Wu" kind="push" identifier="SEG_MASTER3" id="dFx-VE-Fih"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -195,7 +205,7 @@
             <objects>
                 <tabBarController definesPresentationContext="YES" id="dHb-oK-Hba" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Game" id="Jd4-SW-gwX"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2Ly-PR-kB3">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -336,7 +346,7 @@
             <objects>
                 <tabBarController definesPresentationContext="YES" id="qOk-Gv-Lgs" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="BQZ-DR-rLw"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="tJH-4X-4qb">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -353,11 +363,6 @@
             <point key="canvasLocation" x="1077" y="1006"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
