@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Constants.h"
 
-#define SPACE 20
+#define SPACE 50
 
 @interface PlayView : UIView
 
@@ -21,5 +21,7 @@
 
 ///*** PRIVATE ***///
 - (void)layoutBricks;
+- (void)handlePanGesture:(UIPanGestureRecognizer*)recogniser;
+- (NSRange)getDraggedRange:(UIView*)view;
 ///*** END OF PRIVATE ***///
 @end

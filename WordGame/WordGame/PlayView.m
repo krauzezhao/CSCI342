@@ -8,6 +8,7 @@
 
 #import "PlayView.h"
 #import <QuartzCore/QuartzCore.h> // to access border functionality
+#import <math.h> // abs()
 
 @implementation PlayView
 
@@ -63,7 +64,6 @@
             vBrick.layer.borderWidth = 1;
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
-            [_maBrick addObject:vBrick];
             // constraints
             NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:vBrick
                                                                   attribute:NSLayoutAttributeLeft
@@ -97,7 +97,52 @@
                                              multiplier:1.0 / _nDim
                                                constant:-2.0 * SPACE / _nDim];
             [self addConstraint:lc];
+            // to add the gesture recogniser
+            UIPanGestureRecognizer* pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(handlePanGesture:)];
+            [vBrick addGestureRecognizer:pgr];
+            [_maBrick addObject:vBrick];
+            
         }
+}
+
+-(void)handlePanGesture:(UIPanGestureRecognizer *)recogniser
+{
+    // to get the index of the dragged brick
+    int index = [self getDraggedBrickIndex:recogniser.view];
+    // the size of the brick
+    CGFloat fWidth = recogniser.view.bounds.size.width;
+    CGFloat fHeight = recogniser.view.bounds.size.height;
+    ///*** MOVING ***///
+    CGPoint translation = [recogniser translationInView:self]; // the new location
+    CGPoint velocity = [recogniser velocityInView:self]; // the velocity
+    // to limit the move to horizontal and vertical
+    // and the velocity is changed to the integer multiple of the width or height
+    if (abs(velocity.x) > abs(velocity.y)) // horizontally
+    {
+        // to compute the displacement
+        int displacement = ((int)translation.x / fWidth) * fWidth;
+        // to move the row
+        recogniser.view.center = CGPointMake(recogniser.view.center.x + displacement, recogniser.view.center.y);
+    }
+    else // vertically
+    {
+        recogniser.view.center = CGPointMake(recogniser.view.center.x, recogniser.view.center.y + translation.y);
+    }
+    [recogniser setTranslation:CGPointMake(0, 0) inView:self];
+    ///*** MOVING ***///
+}
+
+- (NSRange)getDraggedRange:(UIView *)view
+{
+    int index = 0;
+    for (int i = 0; i < _maBrick.count; i++)
+        if ([_maBrick objectAtIndex:i] == view)
+        {
+            index = i;
+            break;
+        }
+    
 }
 ///*** END OF PRIVATE ***///
 
