@@ -24,4 +24,10 @@ typedef enum _Direction
     D_VERTICAL
 }Direction;
 
+typedef enum _BrickStatus
+{
+    BS_HIGHLIGHTED,
+    BS_UNSELECTED
+}BrickStatus;
+
 #endif

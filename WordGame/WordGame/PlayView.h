@@ -22,6 +22,7 @@
 ///*** PRIVATE ***///
 - (void)layoutBricks;
 - (void)handlePanGesture:(UIPanGestureRecognizer*)recogniser;
+- (void)handleTap:(UITapGestureRecognizer*)tgr;
 - (NSRange)getDraggedRange:(UIView*)view direction:(Direction)direction;
 ///*** END OF PRIVATE ***///
 @end

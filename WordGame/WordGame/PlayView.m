@@ -62,6 +62,7 @@
             vBrick.backgroundColor = [UIColor redColor];
             vBrick.layer.borderColor = [UIColor blackColor].CGColor;
             vBrick.layer.borderWidth = 1;
+            vBrick.tag = BS_UNSELECTED;
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
             // constraints
@@ -97,12 +98,20 @@
                                              multiplier:1.0 / _nDim
                                                constant:-2.0 * SPACE / _nDim];
             [self addConstraint:lc];
-            // to add the gesture recogniser
-            UIPanGestureRecognizer* pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(handlePanGesture:)];
-            [vBrick addGestureRecognizer:pgr];
-            [_maBrick addObject:vBrick];
-            
+            // to add the span gesture recogniser
+//            UIPanGestureRecognizer* pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self
+//                                                                                  action:@selector(handlePanGesture:)];
+//            [vBrick addGestureRecognizer:pgr];
+            // to add the tap gesture recogniser
+            UITapGestureRecognizer* tgr = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(handleTap:)];
+            [tgr setNumberOfTapsRequired:1];
+            [vBrick addGestureRecognizer:tgr];
+            // to add a label to the brick
+            UILabel* label = [[UILabel alloc] init];
+            label.text = [NSString stringWithFormat:@"%d", i * _nDim + j];
+            [vBrick addSubview:label];
+            [_maBrick addObject:vBrick];            
         }
 }
 
@@ -121,13 +130,15 @@
         // to get the range of bricks to be moved
         NSRange range = [self getDraggedRange:recogniser.view direction:D_HORIZONTAL];
         // to compute the displacement
-        int displacement = ((int)translation.x / fWidth) * fWidth;
+        int displacement = ((int)(translation.x / fWidth)) * fWidth;
         // to move the row
         for (int i = 0; i < _nDim; i++)
         {
             int index = range.location + i;
             UIView* vBrick = [_maBrick objectAtIndex:index];
-            vBrick.center = CGPointMake(vBrick.center.x + displacement, vBrick.center.y);
+            CGFloat fX = vBrick.center.x;
+            //vBrick.center = CGPointMake(fX + translation.x, vBrick.center.y);
+            vBrick.center = CGPointMake(fX + displacement, vBrick.center.y);
         }
     }
     else // vertically
@@ -160,12 +171,42 @@
     {
         case D_HORIZONTAL:
             // to get the first brick within the range
-            range.location = index % _nDim;
+            range.location = (index / _nDim) * _nDim;
             break;
         case D_VERTICAL:
-            range.location = index - (index % _nDim) * _nDim;
+            range.location = index - (index / _nDim) * _nDim;
     }
     return range;
+}
+
+- (void)handleTap:(UITapGestureRecognizer*)tgr
+{
+    // the tapped brick
+    int index = -1;
+    for (int i = 0; i < _maBrick.count; i++)
+        if ([_maBrick objectAtIndex:i] == tgr.view)
+        {
+            index = i;
+            break;
+        }
+    // to change status
+    UIView* vBrick = [_maBrick objectAtIndex:index];
+    switch (vBrick.tag)
+    {
+        case BS_HIGHLIGHTED:
+            vBrick.tag = BS_UNSELECTED;
+            // to change appearance
+            vBrick.backgroundColor = [UIColor redColor];
+            vBrick.layer.borderColor = [UIColor blackColor].CGColor;
+            vBrick.layer.borderWidth = 1;
+            break;
+        case BS_UNSELECTED:
+            vBrick.tag = BS_HIGHLIGHTED;
+            // to change appearance
+            vBrick.backgroundColor = [UIColor greenColor];
+            vBrick.layer.borderColor = [UIColor redColor].CGColor;
+            vBrick.layer.borderWidth = 2;
+    }
 }
 ///*** END OF PRIVATE ***///
 
