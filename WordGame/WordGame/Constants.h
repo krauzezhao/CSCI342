@@ -10,11 +10,18 @@
 #define WordGame_Constants_h
 
 // the level enumeration
-enum Level
+typedef enum _Level
 {
     LV_MASTER1,
     LV_MASTER2,
     LV_MASTER3
-};
+}Level;
+
+// the direction of the brick movvement
+typedef enum _Direction
+{
+    D_HORIZONTAL,
+    D_VERTICAL
+}Direction;
 
 #endif

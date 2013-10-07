@@ -17,11 +17,11 @@
 
 @property (strong, nonatomic) NSMutableArray* maBrick;
 
-- (void)setLevel:(enum Level)level;
+- (void)setLevel:(Level)level;
 
 ///*** PRIVATE ***///
 - (void)layoutBricks;
 - (void)handlePanGesture:(UIPanGestureRecognizer*)recogniser;
-- (NSRange)getDraggedRange:(UIView*)view;
+- (NSRange)getDraggedRange:(UIView*)view direction:(Direction)direction;
 ///*** END OF PRIVATE ***///
 @end

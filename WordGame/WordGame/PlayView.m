@@ -30,7 +30,7 @@
 }
 */
 
-- (void)setLevel:(enum Level)level
+- (void)setLevel:(Level)level
 {
     switch (level)
     {
@@ -108,8 +108,6 @@
 
 -(void)handlePanGesture:(UIPanGestureRecognizer *)recogniser
 {
-    // to get the index of the dragged brick
-    int index = [self getDraggedBrickIndex:recogniser.view];
     // the size of the brick
     CGFloat fWidth = recogniser.view.bounds.size.width;
     CGFloat fHeight = recogniser.view.bounds.size.height;
@@ -120,29 +118,54 @@
     // and the velocity is changed to the integer multiple of the width or height
     if (abs(velocity.x) > abs(velocity.y)) // horizontally
     {
+        // to get the range of bricks to be moved
+        NSRange range = [self getDraggedRange:recogniser.view direction:D_HORIZONTAL];
         // to compute the displacement
         int displacement = ((int)translation.x / fWidth) * fWidth;
         // to move the row
-        recogniser.view.center = CGPointMake(recogniser.view.center.x + displacement, recogniser.view.center.y);
+        for (int i = 0; i < _nDim; i++)
+        {
+            int index = range.location + i;
+            UIView* vBrick = [_maBrick objectAtIndex:index];
+            vBrick.center = CGPointMake(vBrick.center.x + displacement, vBrick.center.y);
+        }
     }
     else // vertically
     {
-        recogniser.view.center = CGPointMake(recogniser.view.center.x, recogniser.view.center.y + translation.y);
+        NSRange range = [self getDraggedRange:recogniser.view direction:D_VERTICAL];
+        for (int i = 0; i < _nDim; i++)
+        {
+            int index = i * _nDim + range.location;
+            UIView* vBrick = [_maBrick objectAtIndex:index];
+            vBrick.center = CGPointMake(vBrick.center.x, vBrick.center.y + translation.y);
+        }
     }
     [recogniser setTranslation:CGPointMake(0, 0) inView:self];
     ///*** MOVING ***///
 }
 
-- (NSRange)getDraggedRange:(UIView *)view
+- (NSRange)getDraggedRange:(UIView *)view direction:(Direction)direction
 {
-    int index = 0;
+    int index = 0; // the index of the brick being dragged
     for (int i = 0; i < _maBrick.count; i++)
         if ([_maBrick objectAtIndex:i] == view)
         {
             index = i;
             break;
         }
-    
+    // to get the range by direction
+    NSRange range;
+    range.length = _nDim;
+    switch (direction)
+    {
+        case D_HORIZONTAL:
+            // to get the first brick within the range
+            range.location = index % _nDim;
+            break;
+        case D_VERTICAL:
+            range.location = index - (index % _nDim) * _nDim;
+    }
+    return range;
 }
 ///*** END OF PRIVATE ***///
 

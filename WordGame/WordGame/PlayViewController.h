@@ -12,7 +12,7 @@
 
 @interface PlayViewController : UIViewController
 
-@property enum Level level;
+@property Level level;
 
 @property (weak, nonatomic) IBOutlet PlayView *vPlay;
 
