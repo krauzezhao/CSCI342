@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+///*** CORE DATA SUPPORT ***///
+@property (strong, nonatomic) NSManagedObjectModel* mom;
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) NSPersistentStoreCoordinator* psc;
+
+// initialisation
+- (NSManagedObjectModel*)managedObjectModel;
+- (NSManagedObjectContext*)managedObjectContext;
+- (NSPersistentStoreCoordinator*)persistentStoreCoordinator;
+///*** END OF CORE DATA ***///
 
 @end

@@ -41,6 +41,57 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // to avoid losses of any unsaved data
+    NSError* err = nil;
+    if (_moc)
+        if ([_moc hasChanges] && ![_moc save:&err])
+        {
+            NSLog(@"Error: %@, %@", err, err.userInfo);
+            abort();
+        }
 }
+
+///*** CORE DATA SUPPORT ***///
+// model init
+- (NSManagedObjectModel*)managedObjectModel
+{
+    if (_mom)
+        return _mom;
+    _mom = [NSManagedObjectModel mergedModelFromBundles:nil];
+    return _mom;
+}
+
+// context init
+- (NSManagedObjectContext*)managedObjectContext
+{
+    if (_moc)
+        return _moc;
+    NSPersistentStoreCoordinator* psc = [self persistentStoreCoordinator];
+    if (psc)
+    {
+        _moc = [[NSManagedObjectContext alloc] init];
+        [_moc setPersistentStoreCoordinator:psc];
+    }
+    return _moc;
+}
+
+// persistence init
+- (NSPersistentStoreCoordinator*)persistentStoreCoordinator
+{
+    if (_psc)
+        return _psc;
+    // the database path
+    NSURL* urlPath = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"TripModel.db"]];
+    _psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSError* err = nil;
+    if (![_psc addPersistentStoreWithType:NSSQLiteStoreType
+                            configuration:nil
+                                      URL:urlPath
+                                  options:nil
+                                    error:&err])
+        NSLog(@"Error: %@, %@", err, err.userInfo);
+    return _psc;
+}
+///*** END OF CORE DATA ***///
 
 @end
