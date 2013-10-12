@@ -34,6 +34,9 @@
 		90DF0C2C17FB812A00C0EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0417FB812A00C0EEE9 /* Foundation.framework */; };
 		90DF0C3417FB812A00C0EEE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */; };
 		90DF0C3717FB812A00C0EEE9 /* WordGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */; };
+		A5BEA4CC1806882700AFE409 /* BuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BEA4CB1806882700AFE409 /* BuildViewController.m */; };
+		A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D51AD21807B9D8000E2D1B /* TitleView.m */; };
+		A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D51AD61807BC39000E2D1B /* ExpBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +91,12 @@
 		90DF0C3317FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C3517FB812A00C0EEE9 /* WordGameTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordGameTests.h; sourceTree = "<group>"; };
 		90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordGameTests.m; sourceTree = "<group>"; };
+		A5BEA4CA1806882700AFE409 /* BuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildViewController.h; sourceTree = "<group>"; };
+		A5BEA4CB1806882700AFE409 /* BuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildViewController.m; sourceTree = "<group>"; };
+		A5D51AD11807B9D8000E2D1B /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
+		A5D51AD21807B9D8000E2D1B /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
+		A5D51AD51807BC39000E2D1B /* ExpBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpBar.h; sourceTree = "<group>"; };
+		A5D51AD61807BC39000E2D1B /* ExpBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +168,7 @@
 		90D8FBE717FCD90C00977AD4 /* Level */ = {
 			isa = PBXGroup;
 			children = (
+				A5D51AD41807BBCE000E2D1B /* Title View */,
 				90D8FBE317FCD8DE00977AD4 /* PlayView.h */,
 				90D8FBE417FCD8DE00977AD4 /* PlayView.m */,
 				90D8FBE817FCD97D00977AD4 /* LevelViewController.h */,
@@ -204,6 +214,7 @@
 		90DF0C0817FB812A00C0EEE9 /* WordGame */ = {
 			isa = PBXGroup;
 			children = (
+				A5BEA4C8180684C000AFE409 /* Words */,
 				9012B68F1802634D001424AE /* Core Data Model */,
 				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
 				90D8FBE617FCD8EF00977AD4 /* Play */,
@@ -249,6 +260,34 @@
 				90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5BEA4C8180684C000AFE409 /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				A5BEA4C9180684CC00AFE409 /* Build */,
+			);
+			name = Words;
+			sourceTree = "<group>";
+		};
+		A5BEA4C9180684CC00AFE409 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				A5BEA4CA1806882700AFE409 /* BuildViewController.h */,
+				A5BEA4CB1806882700AFE409 /* BuildViewController.m */,
+			);
+			name = Build;
+			sourceTree = "<group>";
+		};
+		A5D51AD41807BBCE000E2D1B /* Title View */ = {
+			isa = PBXGroup;
+			children = (
+				A5D51AD11807B9D8000E2D1B /* TitleView.h */,
+				A5D51AD21807B9D8000E2D1B /* TitleView.m */,
+				A5D51AD51807BC39000E2D1B /* ExpBar.h */,
+				A5D51AD61807BC39000E2D1B /* ExpBar.m */,
+			);
+			name = "Title View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +412,9 @@
 				9012B698180266F9001424AE /* Ingredients.m in Sources */,
 				9012B69B18026718001424AE /* Spells.m in Sources */,
 				9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */,
+				A5BEA4CC1806882700AFE409 /* BuildViewController.m in Sources */,
+				A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */,
+				A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

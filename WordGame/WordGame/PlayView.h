@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Constants.h"
 
-#define SPACE 50
-
 @interface PlayView : UIView
 
 @property int nDim; // the dimension of the brick region

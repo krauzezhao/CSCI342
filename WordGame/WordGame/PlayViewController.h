@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Constants.h"
+#import "TitleView.h"
 #import "PlayView.h"
 
 @interface PlayViewController : UIViewController
 
 @property Level level;
 
+
 @property (weak, nonatomic) IBOutlet PlayView *vPlay;
+@property (weak, nonatomic) IBOutlet TitleView *tvTitle;
 
 
 @end
