@@ -14,6 +14,8 @@
 @property (strong, nonatomic) UILabel* lblNum; // the number of found words
 @property (strong, nonatomic) UILabel* lblTimer;
 
+- (void)addLetter:(NSString*)letter;
+
 ///*** INIT ***///
 - (void)initWordLabel;
 - (void)initNumLabel;

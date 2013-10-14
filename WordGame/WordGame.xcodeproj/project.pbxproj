@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9012B69118026372001424AE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9012B69018026372001424AE /* CoreData.framework */; };
 		9012B6941802662D001424AE /* SpellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9012B6931802662D001424AE /* SpellsTableViewController.m */; };
-		9012B69B18026718001424AE /* Spells.m in Sources */ = {isa = PBXBuildFile; fileRef = 9012B69A18026718001424AE /* Spells.m */; };
 		9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9012B69E18026C37001424AE /* LibraryTableViewController.m */; };
 		90D8FBE517FCD8DE00977AD4 /* PlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE417FCD8DE00977AD4 /* PlayView.m */; };
 		90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE917FCD97D00977AD4 /* LevelViewController.m */; };
@@ -32,9 +31,17 @@
 		90DF0C2C17FB812A00C0EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0417FB812A00C0EEE9 /* Foundation.framework */; };
 		90DF0C3417FB812A00C0EEE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */; };
 		90DF0C3717FB812A00C0EEE9 /* WordGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */; };
-		A5BEA4CC1806882700AFE409 /* BuildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BEA4CB1806882700AFE409 /* BuildViewController.m */; };
-		A5C6D5D7180B73E900E3EDC6 /* Ingredients.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D6180B73E900E3EDC6 /* Ingredients.m */; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
+		A5C6D5DE180B87C800E3EDC6 /* WordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */; };
+		A5C6D5EA180BC05A00E3EDC6 /* Dictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */; };
+		A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */; };
+		A5C6D5F0180BC07D00E3EDC6 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EF180BC07D00E3EDC6 /* Library.m */; };
+		A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F2180BC08E00E3EDC6 /* Spells.m */; };
+		A5C6D5F6180BC08E00E3EDC6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F5180BC08E00E3EDC6 /* Player.m */; };
+		A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */; };
+		A5C6D600180BD5AC00E3EDC6 /* SpellsTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5FF180BD5AC00E3EDC6 /* SpellsTabBarController.m */; };
+		A5C6D603180BD83E00E3EDC6 /* LibrariesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */; };
+		A5C6D606180BDC6100E3EDC6 /* WordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */; };
 		A5CA091D180B502300E31CF9 /* BuildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA091C180B502300E31CF9 /* BuildTableViewController.m */; };
 		A5CA0923180B57E000E31CF9 /* BuildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0922180B57E000E31CF9 /* BuildCell.m */; };
 		A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D51AD21807B9D8000E2D1B /* TitleView.m */; };
@@ -107,8 +114,6 @@
 		9012B69018026372001424AE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9012B6921802662C001424AE /* SpellsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellsTableViewController.h; sourceTree = "<group>"; };
 		9012B6931802662D001424AE /* SpellsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellsTableViewController.m; sourceTree = "<group>"; };
-		9012B69918026718001424AE /* Spells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spells.h; sourceTree = "<group>"; };
-		9012B69A18026718001424AE /* Spells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spells.m; sourceTree = "<group>"; };
 		9012B69D18026C37001424AE /* LibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryTableViewController.h; sourceTree = "<group>"; };
 		9012B69E18026C37001424AE /* LibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryTableViewController.m; sourceTree = "<group>"; };
 		90D8FBE317FCD8DE00977AD4 /* PlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayView.h; sourceTree = "<group>"; };
@@ -142,11 +147,27 @@
 		90DF0C3317FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C3517FB812A00C0EEE9 /* WordGameTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordGameTests.h; sourceTree = "<group>"; };
 		90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordGameTests.m; sourceTree = "<group>"; };
-		A5BEA4CA1806882700AFE409 /* BuildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildViewController.h; sourceTree = "<group>"; };
-		A5BEA4CB1806882700AFE409 /* BuildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildViewController.m; sourceTree = "<group>"; };
-		A5C6D5D5180B73E900E3EDC6 /* Ingredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredients.h; sourceTree = "<group>"; };
-		A5C6D5D6180B73E900E3EDC6 /* Ingredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredients.m; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A5C6D5DC180B87C700E3EDC6 /* WordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordViewController.h; sourceTree = "<group>"; };
+		A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordViewController.m; sourceTree = "<group>"; };
+		A5C6D5E8180BC05A00E3EDC6 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dictionary.h; path = ../Dictionary.h; sourceTree = "<group>"; };
+		A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dictionary.m; path = ../Dictionary.m; sourceTree = "<group>"; };
+		A5C6D5EB180BC07400E3EDC6 /* Ingredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredients.h; sourceTree = "<group>"; };
+		A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredients.m; sourceTree = "<group>"; };
+		A5C6D5EE180BC07D00E3EDC6 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Library.h; path = ../Library.h; sourceTree = "<group>"; };
+		A5C6D5EF180BC07D00E3EDC6 /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Library.m; path = ../Library.m; sourceTree = "<group>"; };
+		A5C6D5F1180BC08E00E3EDC6 /* Spells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spells.h; sourceTree = "<group>"; };
+		A5C6D5F2180BC08E00E3EDC6 /* Spells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spells.m; sourceTree = "<group>"; };
+		A5C6D5F4180BC08E00E3EDC6 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		A5C6D5F5180BC08E00E3EDC6 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		A5C6D5F7180BD42A00E3EDC6 /* PlayTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayTabBarController.h; sourceTree = "<group>"; };
+		A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayTabBarController.m; sourceTree = "<group>"; };
+		A5C6D5FE180BD5AC00E3EDC6 /* SpellsTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellsTabBarController.h; sourceTree = "<group>"; };
+		A5C6D5FF180BD5AC00E3EDC6 /* SpellsTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellsTabBarController.m; sourceTree = "<group>"; };
+		A5C6D601180BD83E00E3EDC6 /* LibrariesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrariesTableViewController.h; sourceTree = "<group>"; };
+		A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrariesTableViewController.m; sourceTree = "<group>"; };
+		A5C6D604180BDC6000E3EDC6 /* WordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsTableViewController.h; sourceTree = "<group>"; };
+		A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsTableViewController.m; sourceTree = "<group>"; };
 		A5CA091B180B502300E31CF9 /* BuildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildTableViewController.h; sourceTree = "<group>"; };
 		A5CA091C180B502300E31CF9 /* BuildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildTableViewController.m; sourceTree = "<group>"; };
 		A5CA0921180B57E000E31CF9 /* BuildCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildCell.h; sourceTree = "<group>"; };
@@ -238,11 +259,17 @@
 		9012B68F1802634D001424AE /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5C6D5EE180BC07D00E3EDC6 /* Library.h */,
+				A5C6D5EF180BC07D00E3EDC6 /* Library.m */,
+				A5C6D5E8180BC05A00E3EDC6 /* Dictionary.h */,
+				A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */,
 				A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */,
-				A5C6D5D5180B73E900E3EDC6 /* Ingredients.h */,
-				A5C6D5D6180B73E900E3EDC6 /* Ingredients.m */,
-				9012B69918026718001424AE /* Spells.h */,
-				9012B69A18026718001424AE /* Spells.m */,
+				A5C6D5F4180BC08E00E3EDC6 /* Player.h */,
+				A5C6D5F5180BC08E00E3EDC6 /* Player.m */,
+				A5C6D5F1180BC08E00E3EDC6 /* Spells.h */,
+				A5C6D5F2180BC08E00E3EDC6 /* Spells.m */,
+				A5C6D5EB180BC07400E3EDC6 /* Ingredients.h */,
+				A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */,
 			);
 			name = "Core Data Model";
 			sourceTree = "<group>";
@@ -271,6 +298,8 @@
 				9012B69C18026C1A001424AE /* Library */,
 				9012B69518026636001424AE /* Spells */,
 				90D8FBE717FCD90C00977AD4 /* Level */,
+				A5C6D5F7180BD42A00E3EDC6 /* PlayTabBarController.h */,
+				A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */,
 			);
 			name = Play;
 			sourceTree = "<group>";
@@ -292,7 +321,6 @@
 		90DF0BF617FB812900C0EEE9 = {
 			isa = PBXGroup;
 			children = (
-				E5F9C1C9180A7E57002E5C29 /* images */,
 				90DF0C0817FB812A00C0EEE9 /* WordGame */,
 				90DF0C2F17FB812A00C0EEE9 /* WordGameTests */,
 				90DF0C0117FB812A00C0EEE9 /* Frameworks */,
@@ -325,9 +353,9 @@
 		90DF0C0817FB812A00C0EEE9 /* WordGame */ = {
 			isa = PBXGroup;
 			children = (
-				A5CA06CC180B4EE900E31CF9 /* Words */,
+				A5C6D5FD180BD59500E3EDC6 /* Spells */,
+				A5CA06CC180B4EE900E31CF9 /* Libraries */,
 				A5D51AD8180A0324000E2D1B /* Resources */,
-				A5BEA4C8180684C000AFE409 /* Words */,
 				9012B68F1802634D001424AE /* Core Data Model */,
 				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
 				90D8FBE617FCD8EF00977AD4 /* Play */,
@@ -375,30 +403,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A5BEA4C8180684C000AFE409 /* Words */ = {
+		A5C6D5FD180BD59500E3EDC6 /* Spells */ = {
 			isa = PBXGroup;
 			children = (
-				A5BEA4C9180684CC00AFE409 /* Build */,
+				A5C6D5FE180BD5AC00E3EDC6 /* SpellsTabBarController.h */,
+				A5C6D5FF180BD5AC00E3EDC6 /* SpellsTabBarController.m */,
 			);
-			name = Words;
+			name = Spells;
 			sourceTree = "<group>";
 		};
-		A5BEA4C9180684CC00AFE409 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				A5BEA4CA1806882700AFE409 /* BuildViewController.h */,
-				A5BEA4CB1806882700AFE409 /* BuildViewController.m */,
-			);
-			name = Build;
-			sourceTree = "<group>";
-		};
-		A5CA06CC180B4EE900E31CF9 /* Words */ = {
+		A5CA06CC180B4EE900E31CF9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				A5CA06CE180B4EFB00E31CF9 /* Library */,
 				A5CA06CD180B4EF600E31CF9 /* Build */,
+				A5C6D601180BD83E00E3EDC6 /* LibrariesTableViewController.h */,
+				A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */,
+				A5C6D604180BDC6000E3EDC6 /* WordsTableViewController.h */,
+				A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */,
 			);
-			name = Words;
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		A5CA06CD180B4EF600E31CF9 /* Build */ = {
@@ -408,6 +432,8 @@
 				A5CA091C180B502300E31CF9 /* BuildTableViewController.m */,
 				A5CA0921180B57E000E31CF9 /* BuildCell.h */,
 				A5CA0922180B57E000E31CF9 /* BuildCell.m */,
+				A5C6D5DC180B87C700E3EDC6 /* WordViewController.h */,
+				A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */,
 			);
 			name = Build;
 			sourceTree = "<group>";
@@ -675,15 +701,22 @@
 				90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */,
 				90D8FBED17FCDAAF00977AD4 /* PlayViewController.m in Sources */,
 				9012B6941802662D001424AE /* SpellsTableViewController.m in Sources */,
-				9012B69B18026718001424AE /* Spells.m in Sources */,
 				9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */,
-				A5BEA4CC1806882700AFE409 /* BuildViewController.m in Sources */,
 				A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */,
 				A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */,
 				A5CA091D180B502300E31CF9 /* BuildTableViewController.m in Sources */,
 				A5CA0923180B57E000E31CF9 /* BuildCell.m in Sources */,
-				A5C6D5D7180B73E900E3EDC6 /* Ingredients.m in Sources */,
 				A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */,
+				A5C6D5DE180B87C800E3EDC6 /* WordViewController.m in Sources */,
+				A5C6D5EA180BC05A00E3EDC6 /* Dictionary.m in Sources */,
+				A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */,
+				A5C6D5F0180BC07D00E3EDC6 /* Library.m in Sources */,
+				A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */,
+				A5C6D5F6180BC08E00E3EDC6 /* Player.m in Sources */,
+				A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */,
+				A5C6D600180BD5AC00E3EDC6 /* SpellsTabBarController.m in Sources */,
+				A5C6D603180BD83E00E3EDC6 /* LibrariesTableViewController.m in Sources */,
+				A5C6D606180BDC6100E3EDC6 /* WordsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

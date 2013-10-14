@@ -1,18 +1,19 @@
 //
-//  Spells.m
+//  Player.m
 //  WordGame
 //
 //  Created by Brendan Dickinson on 14/10/13.
 //  Copyright (c) 2013 Hong Zhao. All rights reserved.
 //
 
-#import "Spells.h"
+#import "Player.h"
 
 
-@implementation Spells
+@implementation Player
 
-@dynamic id;
+@dynamic experience;
 @dynamic ingredients;
-@dynamic name;
+@dynamic level;
+@dynamic spells;
 
 @end

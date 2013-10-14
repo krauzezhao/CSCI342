@@ -21,13 +21,18 @@
     return self;
 }
 
+- (void)addLetter:(NSString *)letter
+{
+    _lblWord.text = [NSString stringWithFormat:@"%@%@", _lblWord.text, letter];
+}
+
 ///*** INIT ***///
 - (void)initWordLabel
 {
     _lblWord = [[UILabel alloc] init];
     _lblWord.textAlignment = NSTextAlignmentCenter;
     _lblWord.backgroundColor = [UIColor clearColor];
-    _lblWord.text = @"Word Here";
+    _lblWord.text = @"";
     [_lblWord setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblWord];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblWord

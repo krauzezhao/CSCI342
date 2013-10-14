@@ -7,8 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
 #import "BuildCell.h"
+#import "WordViewController.h"
+///*** PERSISTENCE ENTITIES ***///
+#import "Library.h"
+///*** END OF ENTITIES ***///
 
-@interface BuildTableViewController : UITableViewController
+@interface BuildTableViewController : UITableViewController <BuildCellDelegate>
+
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) NSString* strWord;
+
+///*** PERSISTENCE ENTITIES ***///
+@property Library* lib;
+///*** END OF ENTITIES ***///
 
 @end

@@ -1,18 +1,18 @@
 //
-//  BuildTableViewController.m
+//  WordsTableViewController.m
 //  WordGame
 //
 //  Created by Brendan Dickinson on 14/10/13.
 //  Copyright (c) 2013 Hong Zhao. All rights reserved.
 //
 
-#import "BuildTableViewController.h"
+#import "WordsTableViewController.h"
 
-@interface BuildTableViewController ()
+@interface WordsTableViewController ()
 
 @end
 
-@implementation BuildTableViewController
+@implementation WordsTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,16 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // to register the custom cell class
-    [self.tableView registerClass:[BuildCell class] forCellReuseIdentifier:@"Cell"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    // the database context
-    _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,45 +40,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2; // 1st: library name; 2nd: words
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == 0)
-        return 1;
-    else
-        return 2;
+    return _words.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    BuildCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell)
-        cell = [[BuildCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                reuseIdentifier:CellIdentifier];
-    cell.delegate = self;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     // Configure the cell...
-    if (indexPath.section == 0)
-    { // library name
-        [cell setAsLibraryName];
-    }
-    else
-    { // words
-        [cell setAsWord];
-    }
+    
     return cell;
 }
 
@@ -136,39 +114,6 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-}
-
-///*** CELL DELEGATE METHODS ***///
-- (void)accessoryWasTapped:(NSString*)word
-{
-    _strWord = word;
-    [self performSegueWithIdentifier:@"SEG_WORD" sender:nil];
-}
-
-- (void)inputWasFinished:(NSString*)input type:(LibraryInputType)type
-{
-    switch (type)
-    {
-        case LIT_NAME:
-        {
-            _lib = [NSEntityDescription insertNewObjectForEntityForName:@"Library"
-                                                 inManagedObjectContext:_moc];
-        }
-            break;
-        case LIT_WORD:
-            break;
-    }
-}
-///*** END OF CELL DELEGATE METHODS ***///
-
-// segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"SEG_WORD"])
-    {
-        WordViewController* wvc = [segue destinationViewController];
-        wvc.strWord = _strWord;
-    }
 }
 
 @end

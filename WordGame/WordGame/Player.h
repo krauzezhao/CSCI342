@@ -1,5 +1,5 @@
 //
-//  Spells.h
+//  Player.h
 //  WordGame
 //
 //  Created by Brendan Dickinson on 14/10/13.
@@ -10,10 +10,11 @@
 #import <CoreData/CoreData.h>
 
 
-@interface Spells : NSManagedObject
+@interface Player : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) id ingredients;
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * level;
+@property (nonatomic, retain) id spells;
 
 @end

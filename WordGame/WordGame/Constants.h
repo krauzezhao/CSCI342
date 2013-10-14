@@ -9,6 +9,8 @@
 #ifndef WordGame_Constants_h
 #define WordGame_Constants_h
 
+#import <Foundation/Foundation.h>
+
 static const int SPACE = 0; // the space between the border and the play view
 
 // the level enumeration
@@ -91,4 +93,33 @@ static const Ingredient FORMULA[NUM_FORMULAS][4] = {
     {I_CONVEXLENS, I_HANDLE, I_PH, I_PH} // magnifier
 };
 
+///*** CAMBRIDGE DICTIONARY WEB SERVICE ***///
+// URL
+static NSString* WS_URL = @"https://dictionary.cambridge.org/api/v1/dictionaries/british/search";
+//** HTTP HEADER PARAMETERS **//
+// accessKey
+static NSString* WS_FIELD_KEY = @"accessKey";
+static NSString* WS_KEY = @"HslsykNY8sI5Zjxt8UTYSqztTluQr6SmCeFRszPuCM3tQvc0vkM9GAyHPvJJTjyT";
+// Accept
+static NSString* WS_FIELD_ACCEPT = @"Accept";
+static NSString* WS_ACCEPT = @"application/json";
+// pageindex
+static NSString* WS_FIELD_PAGEINDEX = @"pageindex";
+static NSString* WS_PAGEINDEX = @"1";
+// pagesize
+static NSString* WS_FIELD_PAGESIZE = @"pagesize";
+static NSString* WS_PAGESIZE = @"10";
+// q: the word to be searched for
+//** END OF HTTP HEADER MESSAGE **//
+//** JSON RESPONSE **//
+static NSString* WS_JSON_RESULT = @"results";
+//** END OF JSON RESPONSE **//
+///*** END OF WEB SERVICE ***///
+
+// library input type
+typedef enum _LibraryInputType
+{
+    LIT_NAME,
+    LIT_WORD
+}LibraryInputType;
 #endif

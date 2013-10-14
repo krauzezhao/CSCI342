@@ -1,18 +1,18 @@
 //
-//  PlayViewController.m
+//  PlayTabBarController.m
 //  WordGame
 //
-//  Created by Hong Zhao on 3/10/13.
+//  Created by Brendan Dickinson on 14/10/13.
 //  Copyright (c) 2013 Hong Zhao. All rights reserved.
 //
 
-#import "PlayViewController.h"
+#import "PlayTabBarController.h"
 
-@interface PlayViewController ()
+@interface PlayTabBarController ()
 
 @end
 
-@implementation PlayViewController
+@implementation PlayTabBarController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,12 +27,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _vPlay.delegate = self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [_vPlay setLevel:_level];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,10 +35,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-// letter selection delegate
-- (void)letterWasSelected:(NSString*)letter
+- (IBAction)homeWasTapped:(id)sender
 {
-    [_tvTitle addLetter:letter];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
 @end

@@ -1,5 +1,5 @@
 //
-//  Spells.h
+//  Ingredients.h
 //  WordGame
 //
 //  Created by Brendan Dickinson on 14/10/13.
@@ -10,10 +10,9 @@
 #import <CoreData/CoreData.h>
 
 
-@interface Spells : NSManagedObject
+@interface Ingredients : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) id ingredients;
 @property (nonatomic, retain) NSString * name;
 
 @end

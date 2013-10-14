@@ -11,10 +11,9 @@
 #import "TitleView.h"
 #import "PlayView.h"
 
-@interface PlayViewController : UIViewController
+@interface PlayViewController : UIViewController <LetterSelectionDelegate>
 
 @property Level level;
-
 
 @property (weak, nonatomic) IBOutlet PlayView *vPlay;
 @property (weak, nonatomic) IBOutlet TitleView *tvTitle;
