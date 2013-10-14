@@ -292,6 +292,7 @@
 		90DF0BF617FB812900C0EEE9 = {
 			isa = PBXGroup;
 			children = (
+				E5F9C1C9180A7E57002E5C29 /* images */,
 				90DF0C0817FB812A00C0EEE9 /* WordGame */,
 				90DF0C2F17FB812A00C0EEE9 /* WordGameTests */,
 				90DF0C0117FB812A00C0EEE9 /* Frameworks */,
