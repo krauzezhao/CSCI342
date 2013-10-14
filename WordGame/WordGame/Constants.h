@@ -19,7 +19,26 @@ typedef enum _Level
     LV_MASTER3
 }Level;
 
-// the direction of the brick movvement
+// the letter image prefix
+typedef  enum _LetterIndex{
+    LI_BLACK,
+    LI_BLUE,
+    LI_DG,
+    LI_GOLD,
+    LI_GREY,
+    LI_LG,
+    LI_ORANGE,
+    LI_PINK,
+    LI_RED,
+    LI_VIOLET
+}LetterIndex;
+
+static const char* LETTER[] = {
+    "black", "blue", "dg", "gold", "grey",
+    "lg", "orange", "pink", "red", "violet"
+};
+
+// the direction of the brick movement
 typedef enum _Direction
 {
     D_HORIZONTAL,

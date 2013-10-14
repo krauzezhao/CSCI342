@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <stdlib.h>
 #import "Constants.h"
 
 @interface PlayView : UIView
@@ -14,6 +15,7 @@
 @property int nDim; // the dimension of the brick region
 
 @property (strong, nonatomic) NSMutableArray* maBrick;
+@property (strong, nonatomic) NSMutableArray* maLetters;
 
 - (void)setLevel:(Level)level;
 
@@ -22,5 +24,6 @@
 - (void)handlePanGesture:(UIPanGestureRecognizer*)recogniser;
 - (void)handleTap:(UITapGestureRecognizer*)tgr;
 - (NSRange)getDraggedRange:(UIView*)view direction:(Direction)direction;
+- (void)initLetters;
 ///*** END OF PRIVATE ***///
 @end

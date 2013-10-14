@@ -42,11 +42,20 @@
 {
     PlayViewController* pvc = [segue destinationViewController];
     if ([segue.identifier isEqualToString:@"SEG_MASTER1"])
+    {
         pvc.level = LV_MASTER1;
+        pvc.navigationItem.title = @"Master 1";
+    }
     else if ([segue.identifier isEqualToString:@"SEG_MASTER2"])
+    {
         pvc.level = LV_MASTER2;
+        pvc.navigationItem.title = @"Master 2";
+    }
     else
+    {
         pvc.level = LV_MASTER3;
+        pvc.navigationItem.title = @"Master 3";
+    }
 }
 
 @end

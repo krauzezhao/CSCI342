@@ -10,18 +10,6 @@
 
 @implementation TitleView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        [self initWordLabel];
-        [self initNumLabel];
-        [self initTimerLabel];
-    }
-    return self;
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -37,6 +25,7 @@
 - (void)initWordLabel
 {
     _lblWord = [[UILabel alloc] init];
+    _lblWord.textAlignment = NSTextAlignmentCenter;
     _lblWord.backgroundColor = [UIColor clearColor];
     _lblWord.text = @"Word Here";
     [_lblWord setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -78,6 +67,7 @@
 - (void)initNumLabel
 {
     _lblNum = [[UILabel alloc] init];
+    _lblNum.textAlignment = NSTextAlignmentCenter;
     _lblNum.backgroundColor = [UIColor clearColor];
     _lblNum.text = @"Num Here";
     [_lblNum setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -119,6 +109,7 @@
 - (void)initTimerLabel
 {
     _lblTimer = [[UILabel alloc] init];
+    _lblTimer.textAlignment = NSTextAlignmentCenter;
     _lblTimer.backgroundColor = [UIColor clearColor];
     _lblTimer.text = @"Timer Here";
     [_lblTimer setTranslatesAutoresizingMaskIntoConstraints:NO];

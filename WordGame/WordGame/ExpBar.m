@@ -68,6 +68,7 @@
 - (void)initExpLabel
 {
     _lblExpPoints = [[UILabel alloc] init];
+    _lblExpPoints.textAlignment = NSTextAlignmentRight;
     _lblExpPoints.backgroundColor = [UIColor clearColor];
     _lblExpPoints.text = @"Exp Points Here";
     [_lblExpPoints setTranslatesAutoresizingMaskIntoConstraints:NO];

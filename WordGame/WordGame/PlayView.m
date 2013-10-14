@@ -26,7 +26,7 @@
     switch (level)
     {
         case LV_MASTER1:
-            _nDim = 6;
+            _nDim = 7;
             break;
         case LV_MASTER2:
             _nDim = 10;
@@ -34,6 +34,7 @@
         case LV_MASTER3:
             _nDim = 14;
     }
+    [self initLetters];
     [self layoutBricks];
 }
 
@@ -49,10 +50,12 @@
     for (int i = 0; i < _nDim; i++)
         for (int j = 0; j < _nDim; j++)
         {
-            UIView* vBrick = [[UIView alloc] init];
-            vBrick.backgroundColor = [UIColor redColor];
-            vBrick.layer.borderColor = [UIColor blackColor].CGColor;
-            vBrick.layer.borderWidth = 1;
+            UIImageView* vBrick = [[UIImageView alloc] init];
+            vBrick.contentMode = UIViewContentModeScaleToFill;
+            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]]];
+            //vBrick.backgroundColor = [UIColor redColor];
+            //vBrick.layer.borderColor = [UIColor blackColor].CGColor;
+            //vBrick.layer.borderWidth = 1;
             vBrick.tag = BS_UNSELECTED;
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
@@ -97,6 +100,7 @@
             UITapGestureRecognizer* tgr = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                   action:@selector(handleTap:)];
             [tgr setNumberOfTapsRequired:1];
+            vBrick.userInteractionEnabled = YES;
             [vBrick addGestureRecognizer:tgr];
             // to add a label to the brick
             UILabel* label = [[UILabel alloc] init];
@@ -181,13 +185,14 @@
             break;
         }
     // to change status
-    UIView* vBrick = [_maBrick objectAtIndex:index];
+    UIImageView* vBrick = [_maBrick objectAtIndex:index];
     switch (vBrick.tag)
     {
         case BS_HIGHLIGHTED:
             vBrick.tag = BS_UNSELECTED;
             // to change appearance
             vBrick.backgroundColor = [UIColor redColor];
+            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@", LETTER[LI_BLUE], _maLetters[index]]];
             vBrick.layer.borderColor = [UIColor blackColor].CGColor;
             vBrick.layer.borderWidth = 1;
             break;
@@ -195,8 +200,21 @@
             vBrick.tag = BS_HIGHLIGHTED;
             // to change appearance
             vBrick.backgroundColor = [UIColor greenColor];
+            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@", LETTER[LI_ORANGE], _maLetters[index]]];
             vBrick.layer.borderColor = [UIColor redColor].CGColor;
             vBrick.layer.borderWidth = 2;
+    }
+}
+
+- (void)initLetters
+{
+    _maLetters = [[NSMutableArray alloc] init];
+    srand(time(NULL));
+    int nNumBricks = _nDim * _nDim;
+    for (int i = 0; i < nNumBricks; i++)
+    {
+        char letter = rand() % ('Z' + 1 - 'A') + 'A';
+        [_maLetters addObject:[NSString stringWithFormat:@"%c.ico", letter]];
     }
 }
 ///*** END OF PRIVATE ***///
