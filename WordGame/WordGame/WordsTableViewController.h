@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+#import "Library.h"
+#import "Word.h"
+#import "WordCell.h"
 
-@interface WordsTableViewController : UITableViewController
+@interface WordsTableViewController : UITableViewController <UIAlertViewDelegate, WordCellDelegate>
 
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) Library* lib;
 @property (strong, nonatomic) NSMutableArray* words;
+
+// events
+- (IBAction)addWasTapped:(id)sender;
 
 @end

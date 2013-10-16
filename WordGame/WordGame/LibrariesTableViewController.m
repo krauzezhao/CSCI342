@@ -32,6 +32,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // to register the cell
+    [self.tableView registerClass:[WordCell class] forCellReuseIdentifier:@"Cell"];
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
@@ -60,6 +62,7 @@
                                            otherButtonTitles:nil];
         [av show];
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -79,22 +82,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    WordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     if (!cell)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:CellIdentifier];
+        cell = [[WordCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                               reuseIdentifier:CellIdentifier];
+    cell.delegate = self;
     
     Library* lib = [_maLib objectAtIndex:indexPath.row];
-    cell.textLabel.text = lib.name;
-    NSLog(@"%@", lib.date);
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", lib.date];
-    
-    UIButton* btnWords = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [btnWords addTarget:self action:@selector(detailWasTapped)
-       forControlEvents:UIControlEventTouchUpInside];
-    cell.accessoryView = btnWords;
+    [cell setTitle:lib.name];
+    [cell setInfoTitle:[NSString stringWithFormat:@"Usage: %@", lib.usage]];
+    [cell setSubtitle:[self makeSubtitle:lib.date numWords:lib.fkLibWords.count]];
     
     return cell;
 }
@@ -161,7 +160,8 @@
         // the destination view
         WordsTableViewController* wtvc = [segue destinationViewController];
         wtvc.title = lib.name;
-        wtvc.words = [NSMutableArray arrayWithArray:[lib.fkLibDict allObjects]];
+        wtvc.lib = lib;
+        wtvc.words = [NSMutableArray arrayWithArray:[lib.fkLibWords allObjects]];
     }
 }
 
@@ -169,6 +169,29 @@
 - (void)detailWasTapped
 {
     [self performSegueWithIdentifier:@"SEG_WORDS" sender:nil];
+}
+
+- (void)deleteWasTapped
+{
+    // the selected data
+    NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
+    Library* lib = [_maLib objectAtIndex:ip.row];
+    // to delete the data
+    [_moc deleteObject:lib];
+    NSError* err = nil;
+    BOOL bDel = [_moc save:&err];
+    if (!bDel || err)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Deletion Failed"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    [_maLib removeObjectAtIndex:ip.row];
+    [self.tableView deleteRowsAtIndexPaths:@[ip] withRowAnimation:YES];
 }
 
 // navigation bar item events
@@ -203,7 +226,7 @@
                                                      inManagedObjectContext:_moc];
         lib.name = strName;
         lib.date = [NSDate date];
-        NSLog(@"%@, %@", lib.date, [NSDate date]);
+        lib.usage = 0;
         // to save the library
         NSError* err = nil;
         BOOL bSucc = [_moc save:&err];
@@ -223,4 +246,16 @@
         [self.tableView insertRowsAtIndexPaths:@[insertion] withRowAnimation:YES];
     }
 }
+
+///*** PRIVATE ***///
+- (NSString*)makeSubtitle:(NSDate *)date numWords:(NSUInteger)numWords
+{
+    // to format the date
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd/mm/yyyy"];
+    NSString* strDate = [df stringFromDate:date];
+    // the return
+    return [NSString stringWithFormat:@"%d Words Created On %@", numWords, strDate];
+}
+///*** END OF PRIVATE ***///
 @end

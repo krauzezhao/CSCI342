@@ -31,19 +31,17 @@
 		90DF0C2C17FB812A00C0EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0417FB812A00C0EEE9 /* Foundation.framework */; };
 		90DF0C3417FB812A00C0EEE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */; };
 		90DF0C3717FB812A00C0EEE9 /* WordGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */; };
+		A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB608180E1EEE0039E9CE /* WordCell.m */; };
+		A58BB61B180E51BC0039E9CE /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB61A180E51BC0039E9CE /* Word.m */; };
+		A58BB621180E51FE0039E9CE /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB620180E51FE0039E9CE /* Library.m */; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
-		A5C6D5DE180B87C800E3EDC6 /* WordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */; };
-		A5C6D5EA180BC05A00E3EDC6 /* Dictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */; };
 		A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */; };
-		A5C6D5F0180BC07D00E3EDC6 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EF180BC07D00E3EDC6 /* Library.m */; };
 		A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F2180BC08E00E3EDC6 /* Spells.m */; };
 		A5C6D5F6180BC08E00E3EDC6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F5180BC08E00E3EDC6 /* Player.m */; };
 		A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */; };
 		A5C6D600180BD5AC00E3EDC6 /* SpellsTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5FF180BD5AC00E3EDC6 /* SpellsTabBarController.m */; };
 		A5C6D603180BD83E00E3EDC6 /* LibrariesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */; };
 		A5C6D606180BDC6100E3EDC6 /* WordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */; };
-		A5CA091D180B502300E31CF9 /* BuildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA091C180B502300E31CF9 /* BuildTableViewController.m */; };
-		A5CA0923180B57E000E31CF9 /* BuildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CA0922180B57E000E31CF9 /* BuildCell.m */; };
 		A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D51AD21807B9D8000E2D1B /* TitleView.m */; };
 		A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D51AD61807BC39000E2D1B /* ExpBar.m */; };
 		A5F643BC180A59C200C4F2EA /* orange_A.ico in Resources */ = {isa = PBXBuildFile; fileRef = A5F643A2180A59C200C4F2EA /* orange_A.ico */; };
@@ -147,15 +145,15 @@
 		90DF0C3317FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C3517FB812A00C0EEE9 /* WordGameTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordGameTests.h; sourceTree = "<group>"; };
 		90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordGameTests.m; sourceTree = "<group>"; };
+		A58BB607180E1EEE0039E9CE /* WordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordCell.h; sourceTree = "<group>"; };
+		A58BB608180E1EEE0039E9CE /* WordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordCell.m; sourceTree = "<group>"; };
+		A58BB619180E51BC0039E9CE /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
+		A58BB61A180E51BC0039E9CE /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
+		A58BB61F180E51FE0039E9CE /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		A58BB620180E51FE0039E9CE /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		A5C6D5DC180B87C700E3EDC6 /* WordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordViewController.h; sourceTree = "<group>"; };
-		A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordViewController.m; sourceTree = "<group>"; };
-		A5C6D5E8180BC05A00E3EDC6 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dictionary.h; path = ../Dictionary.h; sourceTree = "<group>"; };
-		A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dictionary.m; path = ../Dictionary.m; sourceTree = "<group>"; };
 		A5C6D5EB180BC07400E3EDC6 /* Ingredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredients.h; sourceTree = "<group>"; };
 		A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredients.m; sourceTree = "<group>"; };
-		A5C6D5EE180BC07D00E3EDC6 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Library.h; path = ../Library.h; sourceTree = "<group>"; };
-		A5C6D5EF180BC07D00E3EDC6 /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Library.m; path = ../Library.m; sourceTree = "<group>"; };
 		A5C6D5F1180BC08E00E3EDC6 /* Spells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spells.h; sourceTree = "<group>"; };
 		A5C6D5F2180BC08E00E3EDC6 /* Spells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spells.m; sourceTree = "<group>"; };
 		A5C6D5F4180BC08E00E3EDC6 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -168,10 +166,6 @@
 		A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrariesTableViewController.m; sourceTree = "<group>"; };
 		A5C6D604180BDC6000E3EDC6 /* WordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsTableViewController.h; sourceTree = "<group>"; };
 		A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsTableViewController.m; sourceTree = "<group>"; };
-		A5CA091B180B502300E31CF9 /* BuildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildTableViewController.h; sourceTree = "<group>"; };
-		A5CA091C180B502300E31CF9 /* BuildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildTableViewController.m; sourceTree = "<group>"; };
-		A5CA0921180B57E000E31CF9 /* BuildCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildCell.h; sourceTree = "<group>"; };
-		A5CA0922180B57E000E31CF9 /* BuildCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildCell.m; sourceTree = "<group>"; };
 		A5D51AD11807B9D8000E2D1B /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
 		A5D51AD21807B9D8000E2D1B /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
 		A5D51AD51807BC39000E2D1B /* ExpBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpBar.h; sourceTree = "<group>"; };
@@ -259,11 +253,11 @@
 		9012B68F1802634D001424AE /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				A5C6D5EE180BC07D00E3EDC6 /* Library.h */,
-				A5C6D5EF180BC07D00E3EDC6 /* Library.m */,
-				A5C6D5E8180BC05A00E3EDC6 /* Dictionary.h */,
-				A5C6D5E9180BC05A00E3EDC6 /* Dictionary.m */,
+				A58BB61F180E51FE0039E9CE /* Library.h */,
+				A58BB620180E51FE0039E9CE /* Library.m */,
 				A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */,
+				A58BB619180E51BC0039E9CE /* Word.h */,
+				A58BB61A180E51BC0039E9CE /* Word.m */,
 				A5C6D5F4180BC08E00E3EDC6 /* Player.h */,
 				A5C6D5F5180BC08E00E3EDC6 /* Player.m */,
 				A5C6D5F1180BC08E00E3EDC6 /* Spells.h */,
@@ -415,34 +409,14 @@
 		A5CA06CC180B4EE900E31CF9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A5CA06CE180B4EFB00E31CF9 /* Library */,
-				A5CA06CD180B4EF600E31CF9 /* Build */,
 				A5C6D601180BD83E00E3EDC6 /* LibrariesTableViewController.h */,
 				A5C6D602180BD83E00E3EDC6 /* LibrariesTableViewController.m */,
 				A5C6D604180BDC6000E3EDC6 /* WordsTableViewController.h */,
 				A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */,
+				A58BB607180E1EEE0039E9CE /* WordCell.h */,
+				A58BB608180E1EEE0039E9CE /* WordCell.m */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		A5CA06CD180B4EF600E31CF9 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				A5CA091B180B502300E31CF9 /* BuildTableViewController.h */,
-				A5CA091C180B502300E31CF9 /* BuildTableViewController.m */,
-				A5CA0921180B57E000E31CF9 /* BuildCell.h */,
-				A5CA0922180B57E000E31CF9 /* BuildCell.m */,
-				A5C6D5DC180B87C700E3EDC6 /* WordViewController.h */,
-				A5C6D5DD180B87C700E3EDC6 /* WordViewController.m */,
-			);
-			name = Build;
-			sourceTree = "<group>";
-		};
-		A5CA06CE180B4EFB00E31CF9 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 		A5D51AD41807BBCE000E2D1B /* Title View */ = {
@@ -704,19 +678,17 @@
 				9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */,
 				A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */,
 				A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */,
-				A5CA091D180B502300E31CF9 /* BuildTableViewController.m in Sources */,
-				A5CA0923180B57E000E31CF9 /* BuildCell.m in Sources */,
 				A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */,
-				A5C6D5DE180B87C800E3EDC6 /* WordViewController.m in Sources */,
-				A5C6D5EA180BC05A00E3EDC6 /* Dictionary.m in Sources */,
 				A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */,
-				A5C6D5F0180BC07D00E3EDC6 /* Library.m in Sources */,
 				A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */,
 				A5C6D5F6180BC08E00E3EDC6 /* Player.m in Sources */,
 				A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */,
 				A5C6D600180BD5AC00E3EDC6 /* SpellsTabBarController.m in Sources */,
 				A5C6D603180BD83E00E3EDC6 /* LibrariesTableViewController.m in Sources */,
 				A5C6D606180BDC6100E3EDC6 /* WordsTableViewController.m in Sources */,
+				A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */,
+				A58BB61B180E51BC0039E9CE /* Word.m in Sources */,
+				A58BB621180E51FE0039E9CE /* Library.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

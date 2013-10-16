@@ -10,9 +10,10 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "Library.h"
+#import "WordCell.h"
 #import "WordsTableViewController.h"
 
-@interface LibrariesTableViewController : UITableViewController <UIAlertViewDelegate>
+@interface LibrariesTableViewController : UITableViewController <UIAlertViewDelegate, WordCellDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) NSMutableArray* maLib; // the libraries
@@ -22,4 +23,8 @@
 // navigation bar item events
 - (IBAction)homeWasTapped:(id)sender;
 - (IBAction)addWasTapped:(id)sender;
+
+///*** PRIVATE ***///
+- (NSString*)makeSubtitle:(NSDate*)date numWords:(NSUInteger)numWords;
+///*** END OF PRIVATE ***///
 @end
