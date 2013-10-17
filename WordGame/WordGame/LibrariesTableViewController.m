@@ -76,6 +76,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSLog(@"i.%d", _maLib.count);
     return _maLib.count;
 }
 
@@ -88,7 +89,6 @@
     if (!cell)
         cell = [[WordCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                reuseIdentifier:CellIdentifier];
-    cell.delegate = self;
     
     Library* lib = [_maLib objectAtIndex:indexPath.row];
     [cell setTitle:lib.name];
@@ -112,19 +112,35 @@
 }
 */
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        Library* lib = [_maLib objectAtIndex:indexPath.row];
+        // to delete the data
+        for (Word* word in lib.fkLibWords)
+            [_moc deleteObject:word];
+        [_moc deleteObject:lib];
+        NSError* err = nil;
+        BOOL bDel = [_moc save:&err];
+        if (!bDel || err)
+        {
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Deletion Failed"
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+            return;
+        }
+        [_maLib removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -146,13 +162,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self performSegueWithIdentifier:@"SEG_WORDS" sender:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -168,35 +178,6 @@
         wtvc.lib = lib;
         wtvc.words = [NSMutableArray arrayWithArray:[lib.fkLibWords allObjects]];
     }
-}
-
-// detail button is tapped
-- (void)detailWasTapped
-{
-    [self performSegueWithIdentifier:@"SEG_WORDS" sender:nil];
-}
-
-- (void)deleteWasTapped
-{
-    // the selected data
-    NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
-    Library* lib = [_maLib objectAtIndex:ip.row];
-    // to delete the data
-    [_moc deleteObject:lib];
-    NSError* err = nil;
-    BOOL bDel = [_moc save:&err];
-    if (!bDel || err)
-    {
-        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Deletion Failed"
-                                                     message:nil
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;
-    }
-    [_maLib removeObjectAtIndex:ip.row];
-    [self.tableView deleteRowsAtIndexPaths:@[ip] withRowAnimation:YES];
 }
 
 // navigation bar item events

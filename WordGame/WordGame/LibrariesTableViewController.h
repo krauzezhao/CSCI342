@@ -13,13 +13,11 @@
 #import "WordCell.h"
 #import "WordsTableViewController.h"
 
-@interface LibrariesTableViewController : UITableViewController <UIAlertViewDelegate, WordCellDelegate>
+@interface LibrariesTableViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) NSMutableArray* maLib; // the libraries
 
-// detail button is tapped
-- (void)detailWasTapped;
 // navigation bar item events
 - (IBAction)homeWasTapped:(id)sender;
 - (IBAction)addWasTapped:(id)sender;

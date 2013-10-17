@@ -24,17 +24,8 @@
     // all the words
     _words = words;
     // to set the level
-    switch (level)
-    {
-        case LV_MASTER1:
-            _nDim = 7;
-            break;
-        case LV_MASTER2:
-            _nDim = 10;
-            break;
-        case LV_MASTER3:
-            _nDim = 12;
-    }
+    _level = level;
+    _nDim = DIM[level];
     [self initLetters];
     [self layoutBricks];
 }
@@ -42,19 +33,69 @@
 - (void)reshuffle
 {
     [self initLetters];
-    if (_prevBricks && _prevBricks.count)
-        for (UIImageView* vBrick in _prevBricks)
-            [vBrick removeFromSuperview];
     for (UIImageView* vBrick in _maBrick)
     {
-        [UIImageView beginAnimations:nil context:nil];
-        CATransform3D t = CATransform3DRotate(vBrick.layer.transform, 1.57, 0, 1, 0);
-        [UIImageView setAnimationDuration:.5];
-        vBrick.layer.transform = t;
-        [UIImageView commitAnimations];
+        [UIImageView animateWithDuration:.3
+                              animations:^{
+                                  CGFloat fX = vBrick.frame.origin.x;
+                                  CGFloat fWidth = vBrick.frame.size.width;
+                                  vBrick.frame = CGRectMake(fX + fWidth * .45,
+                                                            vBrick.frame.origin.y,
+                                                            fWidth * .1,
+                                                            vBrick.frame.size.height);
+                              }
+                              completion:^(BOOL finished){
+                                  vBrick.image =
+                                  [UIImage imageNamed:
+                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[vBrick.tag]]];
+                              }];
+        [UIImageView animateWithDuration:.3
+                              animations:^{
+                                  CGFloat fX = vBrick.frame.origin.x;
+                                  CGFloat fWidth = vBrick.frame.size.width;
+                                  vBrick.frame = CGRectMake(fX - fWidth * 4.5,
+                                                            vBrick.frame.origin.y,
+                                                            fWidth * 10,
+                                                            vBrick.frame.size.height);
+                              }
+                              completion:nil];
     }
-    _prevBricks = [NSMutableArray arrayWithArray:_maBrick];
-    [self layoutBricks];
+}
+
+- (void)reset
+{
+    for (UIImageView* vBrick in _selectedLetters)
+    {
+        [UIImageView animateWithDuration:.2
+                              animations:^{
+                                  CGFloat fX = vBrick.frame.origin.x;
+                                  CGFloat fY = vBrick.frame.origin.y;
+                                  CGFloat fWidth = vBrick.frame.size.width;
+                                  CGFloat fHeight = vBrick.frame.size.height;
+                                  vBrick.frame = CGRectMake(fX + fWidth * .45,
+                                                            fY + fHeight * .45,
+                                                            fWidth * .1,
+                                                            fHeight * .1);
+                              }
+                              completion:^(BOOL finished){
+                                  vBrick.image =
+                                  [UIImage imageNamed:
+                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[vBrick.tag]]];
+                              }];
+        [UIImageView animateWithDuration:.2
+                              animations:^{
+                                  CGFloat fX = vBrick.frame.origin.x;
+                                  CGFloat fY = vBrick.frame.origin.y;
+                                  CGFloat fWidth = vBrick.frame.size.width;
+                                  CGFloat fHeight = vBrick.frame.size.height;
+                                  vBrick.frame = CGRectMake(fX - fWidth * 4.5,
+                                                            fY - fHeight * 4.5,
+                                                            fWidth * 10,
+                                                            fHeight * 10);
+                              }
+                              completion:nil];
+    }
+    [_selectedLetters removeAllObjects];
 }
 
 ///*** PRIVATE ***///
@@ -83,7 +124,7 @@
         [_maLetters addObject:strLetter];
     }
     // to permute the letter array
-    for (int i = 0; i < NUM_SWAPS; i++)
+    for (int i = 0; i < NUM_SWAPS[_level]; i++)
     {
         int nIndex1 = rand() % _maLetters.count;
         int nIndex2 = rand() % _maLetters.count;
@@ -108,7 +149,7 @@
             [UIImage imageNamed:
              [NSString stringWithFormat:
               @"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]]];
-            vBrick.tag = LS_UNSELECTED;
+            vBrick.tag = i * _nDim + j;
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
             // constraints
@@ -168,26 +209,12 @@
         }
     // to change status
     UIImageView* vBrick = [_maBrick objectAtIndex:nIndex];
-    switch (vBrick.tag)
-    {
-//        case LS_SELECTED:
-//            vBrick.tag = LS_UNSELECTED;
-//            // to change appearance
-//            vBrick.image =
-//            [UIImage imageNamed:
-//             [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[nIndex]]];
-//            // to delete the letter
-//            [_delegate letterWasUnselected:_maLetters[nIndex]];
-//            break;
-        case LS_UNSELECTED:
-            vBrick.tag = LS_SELECTED;
-            // to change appearance
-            vBrick.image =
-            [UIImage imageNamed:
-             [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];
-            // to add the letter
-            [_delegate letterWasSelected:_maLetters[nIndex]];
-    }
+    [_selectedLetters addObject:[_maBrick objectAtIndex:nIndex]];
+    // to change appearance
+    vBrick.image = [UIImage imageNamed:
+                    [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];
+    // to add the letter
+    [_delegate letterWasSelected:_maLetters[nIndex]];
 }
 ///*** END OF PRIVATE ***///
 

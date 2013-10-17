@@ -15,8 +15,6 @@
 
 // the space between the play view and the border
 static const int SPACE = 0;
-// the number of swaps needed to permute the letter array
-static const int NUM_SWAPS = 20;
 
 // the level enumeration
 typedef enum _Level
@@ -25,13 +23,10 @@ typedef enum _Level
     LV_MASTER2,
     LV_MASTER3
 }Level;
-
-// the letter status
-typedef enum _LetterStatus
-{
-    LS_SELECTED,
-    LS_UNSELECTED
-}LetterStatus;
+// the number of swaps needed to permute the letter array
+static const int NUM_SWAPS[] = {49, 81, 121};
+// the dimension of the bricks
+static const int DIM[] = {7, 9, 11};
 
 // the letter image prefix
 typedef  enum _LetterIndex{
@@ -64,16 +59,17 @@ __unused static const char* LETTER[] = {
 
 @property (strong, nonatomic) id<LetterSelectionDelegate> delegate;
 ///*** PRIVATE ***///
+@property Level level;
 @property int nDim; // the dimension of the brick region
 @property (strong, nonatomic) NSMutableArray* maBrick;
-@property (strong, nonatomic) NSMutableArray* prevBricks;
 @property (strong, nonatomic) NSMutableArray* maLetters;
 @property (strong, nonatomic) NSArray* words;
 @property (strong, nonatomic) NSMutableArray* selectedLetters;
 ///*** END OF PRIVATE ***///
 
 - (void)setLevel:(Level)level words:(NSArray*)words;
-- (void)reshuffle;
+- (void)reshuffle; // every time when a word is found or the user wants to play another game
+- (void)reset; // every time when the user cancels the selection
 ///*** PRIVATE ***///
 - (void)initLetters;
 - (void)layoutBricks;

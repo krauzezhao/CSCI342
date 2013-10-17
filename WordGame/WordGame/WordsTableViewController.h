@@ -13,7 +13,7 @@
 #import "Word.h"
 #import "WordCell.h"
 
-@interface WordsTableViewController : UITableViewController <UIAlertViewDelegate, WordCellDelegate>
+@interface WordsTableViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) Library* lib;

@@ -43,6 +43,11 @@
         [_trie addString:word.word];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [_tvTitle stop];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -64,7 +69,29 @@
 
 - (void)timerDidFinish
 {
-    NSLog(@"dd");
+    UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Time's Up"
+                                                 message:@"Would you like to play another game?"
+                                                delegate:self
+                                       cancelButtonTitle:@"No"
+                                       otherButtonTitles:@"Yes", nil];
+    [av show];
+}
+
+- (void)viewWasTapped
+{
+    [_vPlay reset];
+    [_tvTitle clearLetters];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) // No button is tapped
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    else // Yes button is tapped
+    {
+        [_vPlay reshuffle];
+        [_tvTitle restart];
+    }
 }
 
 @end

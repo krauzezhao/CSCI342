@@ -16,7 +16,9 @@
 #import "PlayView.h"
 #import "Word.h"
 
-@interface PlayViewController : UIViewController <LetterSelectionDelegate, TimerDelegate>
+@interface PlayViewController : UIViewController <LetterSelectionDelegate,
+                                                  TitleViewDelegate,
+                                                  UIAlertViewDelegate>
 
 @property Level level;
 @property (strong, nonatomic) NSManagedObjectContext* moc;

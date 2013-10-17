@@ -18,27 +18,6 @@
         [self initTitle];
         [self initInfoTitle];
         [self initSubtitle];
-        // the Detail button
-        [self configureDetailButton];
-        self.accessoryView = _btnDetail;
-        // the Delete button
-        [self configureDeleteButton];
-        ///*** SWIPE GESTURE ***///
-        // the cancel gesture
-        UISwipeGestureRecognizer* sgrCancel =
-        [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                  action:@selector(cellWasSwipedOverFromRightToLeft:)];
-        sgrCancel.direction = UISwipeGestureRecognizerDirectionRight;
-        sgrCancel.numberOfTouchesRequired = 1;
-        [self addGestureRecognizer:sgrCancel];
-        // the detele gesture
-        UISwipeGestureRecognizer* sgrDel =
-        [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                  action:@selector(cellWasSwipedOverFromLeftToRight:)];
-        sgrDel.direction = UISwipeGestureRecognizerDirectionLeft;
-        sgrDel.numberOfTouchesRequired = 1;
-        [self addGestureRecognizer:sgrDel];
-        ///*** END OF SWIPE GESTURE ***///
     }
     return self;
 }
@@ -192,58 +171,6 @@
                                      multiplier:.5
                                        constant:0];
     [self.contentView addConstraint:lc];
-}
-
-// accessory buttons config
-- (void)configureDetailButton
-{
-    _btnDetail = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [_btnDetail addTarget:self
-                   action:@selector(detailWasTapped)
-         forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)configureDeleteButton
-{
-    _btnDel = [UIButton buttonWithType:UIButtonTypeCustom];
-    _btnDel.clipsToBounds = YES;
-    _btnDel.frame = self.accessoryView.frame;
-    _btnDel.layer.cornerRadius = 6.0;
-    [_btnDel setBackgroundColor:[UIColor redColor]];
-    [_btnDel setTitle:@"X" forState:UIControlStateNormal];
-    [_btnDel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_btnDel addTarget:self
-                action:@selector(deleteWasTapped)
-      forControlEvents:UIControlEventTouchUpInside];
-}
-
-// events
-- (void)detailWasTapped
-{
-    [_delegate detailWasTapped];
-}
-
-- (void)deleteWasTapped
-{
-    [_delegate deleteWasTapped];
-    // to restore the Detial button
-    //self.accessoryView = _btnDetail;
-}
-
-- (void)cellWasSwipedOverFromLeftToRight:(UISwipeGestureRecognizer *)sgr
-{
-    if (sgr.state == UIGestureRecognizerStateEnded)
-    {
-        self.accessoryView = _btnDel;
-    }
-}
-
-- (void)cellWasSwipedOverFromRightToLeft:(UISwipeGestureRecognizer *)sgr
-{
-    if (sgr.state == UIGestureRecognizerStateEnded)
-    {
-        self.accessoryView = _btnDetail;
-    }
 }
 ///*** END OF PRIVATE ***///
 

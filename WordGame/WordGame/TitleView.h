@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol TimerDelegate <NSObject>
+static const int TIME = 50;
+
+@protocol TitleViewDelegate <NSObject>
 
 @required
 - (void)timerDidFinish;
+- (void)viewWasTapped;
 
 @end
 
@@ -25,7 +28,7 @@
 @property NSUInteger nNumHits; // the number of words found
 @property NSUInteger nTime;
 @property (strong, nonatomic) NSTimer* timer;
-@property (strong, nonatomic) id<TimerDelegate> delegate;
+@property (strong, nonatomic) id<TitleViewDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
 - (void)addLetter:(NSString*)letter;
@@ -33,6 +36,8 @@
 - (void)clearLetters;
 - (void)incrementHits;
 - (NSUInteger)getHits;
+- (void)restart; // when the user wants to play another game
+- (void)stop; // when the user quits the game
 
 ///*** PRIVATE ***///
 // init
@@ -41,6 +46,8 @@
 - (void)initTimerLabel;
 // timer
 - (void)timerDidTick;
+// tap event
+- (void)viewWasTapped; // used to reset the selected bricks
 ///*** END OF PRIVATE ***///
 
 @end

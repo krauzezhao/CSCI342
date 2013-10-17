@@ -67,7 +67,6 @@
     if (!cell)
         cell = [[WordCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                reuseIdentifier:CellIdentifier];
-    cell.delegate = self;
     
     Word* word = [_words objectAtIndex:indexPath.row];
     [cell setTitle:word.word];
@@ -84,19 +83,33 @@
 }
 */
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        Word* word = [_words objectAtIndex:indexPath.row];
+        // to delete the data
+        [_moc deleteObject:word];
+        NSError* err = nil;
+        BOOL bDel = [_moc save:&err];
+        if (!bDel || err)
+        {
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Deletion Failed"
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+            return;
+        }
+        [_words removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
@@ -147,7 +160,7 @@
         Word* word = [NSEntityDescription insertNewObjectForEntityForName:@"Word"
                                                    inManagedObjectContext:_moc];
         word.word = [[alertView textFieldAtIndex:0].text lowercaseString];
-        [_lib addFkLibWordsObject:word];
+        word.fkWordLib = _lib;
         // to save it
         NSError* err = nil;
         BOOL bSucc = [_moc save:&err];
@@ -166,34 +179,6 @@
         NSIndexPath* insertion = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView insertRowsAtIndexPaths:@[insertion] withRowAnimation:YES];
     }
-}
-
-- (void)detailWasTapped
-{
-    
-}
-
-- (void)deleteWasTapped
-{
-    // the selected data
-    NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
-    Word* word = [_words objectAtIndex:ip.row];
-    // to delete the data
-    [_moc deleteObject:word];
-    NSError* err = nil;
-    BOOL bDel = [_moc save:&err];
-    if (!bDel || err)
-    {
-        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Deletion Failed"
-                                                     message:nil
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;
-    }
-    [_words removeObjectAtIndex:ip.row];
-    [self.tableView deleteRowsAtIndexPaths:@[ip] withRowAnimation:YES];
 }
 
 @end

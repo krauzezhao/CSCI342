@@ -15,10 +15,15 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _nNumHits = 0;
-        _nTime = 50;
+        _nTime = TIME;
         [self initWordLabel];
         [self initNumLabel];
         [self initTimerLabel];
+        // the tap gesture for resetting the selected bricks
+        UITapGestureRecognizer* tgr =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
+        tgr.numberOfTapsRequired = 1;
+        [self addGestureRecognizer:tgr];
         // to start the timer
         _timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
@@ -55,6 +60,28 @@
     return _nNumHits;
 }
 
+- (void)restart
+{
+    _nNumHits = 0;
+    _nTime = TIME;
+    // the labels
+    _lblWord.text = @"";
+    _lblNum.text = @"0 Found";
+    _lblTimer.text = @"50 Sec";
+    // to restart the timer
+    // to start the timer
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                              target:self
+                                            selector:@selector(timerDidTick)
+                                            userInfo:nil
+                                             repeats:YES];
+}
+
+- (void)stop
+{
+    [_timer invalidate];
+}
+
 ///*** PRIVATE ***///
 //** INIT **//
 - (void)initWordLabel
@@ -63,6 +90,7 @@
     _lblWord.textAlignment = NSTextAlignmentCenter;
     _lblWord.backgroundColor = [UIColor clearColor];
     _lblWord.text = @"";
+    _lblWord.textColor = [UIColor whiteColor];
     [_lblWord setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblWord];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblWord
@@ -105,6 +133,7 @@
     _lblNum.textAlignment = NSTextAlignmentCenter;
     _lblNum.backgroundColor = [UIColor clearColor];
     _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
+    _lblNum.textColor = [UIColor whiteColor];
     [_lblNum setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblNum];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblNum
@@ -147,6 +176,7 @@
     _lblTimer.textAlignment = NSTextAlignmentCenter;
     _lblTimer.backgroundColor = [UIColor clearColor];
     _lblTimer.text = [NSString stringWithFormat:@"%d Sec", _nTime];
+    _lblTimer.textColor = [UIColor whiteColor];
     [_lblTimer setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblTimer];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblTimer
@@ -193,6 +223,14 @@
         [_delegate timerDidFinish];
     }
 }
+
+- (void)viewWasTapped
+{
+    [_delegate viewWasTapped];
+}
+
+// The timer should stop when the view disappears
+//- (void)viewDidDisappear
 ///*** END OF PRIVATE ***///
 
 @end
