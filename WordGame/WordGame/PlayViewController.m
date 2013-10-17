@@ -28,11 +28,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _vPlay.delegate = self;
+    _tvTitle.delegate = self;
+    // the db context
+    _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_vPlay setLevel:_level];
+    NSArray* words = [_lib.fkLibWords allObjects];
+    [_vPlay setLevel:_level words:words];
+    // the word trie
+    _trie = [[NDMutableTrie alloc] initWithCaseInsensitive:YES];
+    for (Word* word in words)
+        [_trie addString:word.word];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,10 +49,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-// letter selection delegate
+// delegate
 - (void)letterWasSelected:(NSString*)letter
 {
     [_tvTitle addLetter:letter];
+    BOOL bFound = [_trie containsObjectForKeyWithPrefix:[_tvTitle getLetters]];
+    if (bFound)
+    {
+//        [_vPlay reshuffle];
+//        [_tvTitle clearLetters];
+//        [_tvTitle incrementHits];
+        NSLog(@"d");
+    }
+}
+
+- (void)timerDidFinish
+{
+    NSLog(@"dd");
 }
 
 @end

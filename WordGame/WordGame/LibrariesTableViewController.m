@@ -92,12 +92,17 @@
     
     Library* lib = [_maLib objectAtIndex:indexPath.row];
     [cell setTitle:lib.name];
-    [cell setInfoTitle:[NSString stringWithFormat:@"Usage: %@", lib.usage]];
+    [cell setInfoTitle:[self makeInfoTitle:lib.usage]];
     [cell setSubtitle:[self makeSubtitle:lib.date numWords:lib.fkLibWords.count]];
     
     return cell;
 }
 
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -248,6 +253,12 @@
 }
 
 ///*** PRIVATE ***///
+- (NSString*)makeInfoTitle:(NSNumber *)num
+{
+    int nNum = num ? [num intValue] : 0;
+    return [NSString stringWithFormat:@"Usage: %d", nNum];
+}
+
 - (NSString*)makeSubtitle:(NSDate *)date numWords:(NSUInteger)numWords
 {
     // to format the date

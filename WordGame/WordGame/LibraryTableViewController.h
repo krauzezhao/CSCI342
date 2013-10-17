@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
 #import "AppDelegate.h"
+#import "Library.h"
 
 @interface LibraryTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
-@property (strong, nonatomic) NSArray* aLibrary;
+@property (strong, nonatomic) NSMutableArray* libs;
+
+- (Library*)getSelectedLibrary;
 
 @end

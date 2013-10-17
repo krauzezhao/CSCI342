@@ -138,7 +138,7 @@
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
                                       attribute:NSLayoutAttributeWidth
-                                     multiplier:1
+                                     multiplier:1 - PERCENTAGE_WIDTH_TITLE
                                        constant:0];
     [self.contentView addConstraint:lc];
     lc = [NSLayoutConstraint constraintWithItem:_lblInfoTitle
@@ -227,19 +227,23 @@
 {
     [_delegate deleteWasTapped];
     // to restore the Detial button
-    self.accessoryView = _btnDetail;
+    //self.accessoryView = _btnDetail;
 }
 
 - (void)cellWasSwipedOverFromLeftToRight:(UISwipeGestureRecognizer *)sgr
 {
     if (sgr.state == UIGestureRecognizerStateEnded)
+    {
         self.accessoryView = _btnDel;
+    }
 }
 
 - (void)cellWasSwipedOverFromRightToLeft:(UISwipeGestureRecognizer *)sgr
 {
     if (sgr.state == UIGestureRecognizerStateEnded)
+    {
         self.accessoryView = _btnDetail;
+    }
 }
 ///*** END OF PRIVATE ***///
 

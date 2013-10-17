@@ -146,7 +146,7 @@
         // the word to be added
         Word* word = [NSEntityDescription insertNewObjectForEntityForName:@"Word"
                                                    inManagedObjectContext:_moc];
-        word.word = [alertView textFieldAtIndex:0].text;
+        word.word = [[alertView textFieldAtIndex:0].text lowercaseString];
         [_lib addFkLibWordsObject:word];
         // to save it
         NSError* err = nil;

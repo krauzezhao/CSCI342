@@ -34,6 +34,7 @@
 		A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB608180E1EEE0039E9CE /* WordCell.m */; };
 		A58BB61B180E51BC0039E9CE /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB61A180E51BC0039E9CE /* Word.m */; };
 		A58BB621180E51FE0039E9CE /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB620180E51FE0039E9CE /* Library.m */; };
+		A58D39AE180F46F700128D6C /* NDTrie.m in Sources */ = {isa = PBXBuildFile; fileRef = A58D39AD180F46F700128D6C /* NDTrie.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
 		A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */; };
 		A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F2180BC08E00E3EDC6 /* Spells.m */; };
@@ -151,6 +152,8 @@
 		A58BB61A180E51BC0039E9CE /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
 		A58BB61F180E51FE0039E9CE /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		A58BB620180E51FE0039E9CE /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
+		A58D39AC180F46F700128D6C /* NDTrie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTrie.h; sourceTree = "<group>"; };
+		A58D39AD180F46F700128D6C /* NDTrie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTrie.m; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A5C6D5EB180BC07400E3EDC6 /* Ingredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredients.h; sourceTree = "<group>"; };
 		A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredients.m; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 				90D8FBE717FCD90C00977AD4 /* Level */,
 				A5C6D5F7180BD42A00E3EDC6 /* PlayTabBarController.h */,
 				A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */,
+				A58D39AC180F46F700128D6C /* NDTrie.h */,
+				A58D39AD180F46F700128D6C /* NDTrie.m */,
 			);
 			name = Play;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 				A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */,
 				A58BB61B180E51BC0039E9CE /* Word.m in Sources */,
 				A58BB621180E51FE0039E9CE /* Library.m in Sources */,
+				A58D39AE180F46F700128D6C /* NDTrie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

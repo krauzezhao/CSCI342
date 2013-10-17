@@ -7,16 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
 #import "Constants.h"
+#import "Library.h"
+#import "NDTrie.h"
 #import "TitleView.h"
 #import "PlayView.h"
+#import "Word.h"
 
-@interface PlayViewController : UIViewController <LetterSelectionDelegate>
+@interface PlayViewController : UIViewController <LetterSelectionDelegate, TimerDelegate>
 
 @property Level level;
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) Library* lib;
+@property NDMutableTrie* trie;
 
 @property (weak, nonatomic) IBOutlet PlayView *vPlay;
 @property (weak, nonatomic) IBOutlet TitleView *tvTitle;
-
 
 @end

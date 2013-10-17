@@ -7,8 +7,6 @@
 //
 
 #import "PlayView.h"
-#import <QuartzCore/QuartzCore.h> // to access border functionality
-#import <math.h> // abs()
 
 @implementation PlayView
 
@@ -21,8 +19,11 @@
     return self;
 }
 
-- (void)setLevel:(Level)level
+- (void)setLevel:(Level)level words:(NSArray *)words
 {
+    // all the words
+    _words = words;
+    // to set the level
     switch (level)
     {
         case LV_MASTER1:
@@ -32,28 +33,82 @@
             _nDim = 10;
             break;
         case LV_MASTER3:
-            _nDim = 14;
+            _nDim = 12;
     }
     [self initLetters];
     [self layoutBricks];
 }
 
+- (void)reshuffle
+{
+    [self initLetters];
+    if (_prevBricks && _prevBricks.count)
+        for (UIImageView* vBrick in _prevBricks)
+            [vBrick removeFromSuperview];
+    for (UIImageView* vBrick in _maBrick)
+    {
+        [UIImageView beginAnimations:nil context:nil];
+        CATransform3D t = CATransform3DRotate(vBrick.layer.transform, 1.57, 0, 1, 0);
+        [UIImageView setAnimationDuration:.5];
+        vBrick.layer.transform = t;
+        [UIImageView commitAnimations];
+    }
+    _prevBricks = [NSMutableArray arrayWithArray:_maBrick];
+    [self layoutBricks];
+}
+
 ///*** PRIVATE ***///
+- (void)initLetters
+{
+    // to initialise the letter array
+    _maLetters = [[NSMutableArray alloc] init];
+    _selectedLetters = [[NSMutableArray alloc] init];
+    // to pick up one random word from the library
+    // so that at least one word is presented
+    Word* word = [_words objectAtIndex:rand() % _words.count];
+    // to add its letters to the letter array
+    NSString* strWord = [word.word uppercaseString];
+    for (int i = 0; i < strWord.length; i++)
+    {
+        NSString* strLetter = [NSString stringWithFormat:@"%c", [strWord characterAtIndex:i]];
+        [_maLetters addObject:strLetter];
+    }
+    // to add the other letters randomly
+    srand(time(NULL));
+    int nNumLetters = _nDim * _nDim;
+    for (int i = _maLetters.count - 1; i < nNumLetters; i++)
+    {
+        char letter = rand() % ('Z' + 1 - 'A') + 'A';
+        NSString* strLetter = [NSString stringWithFormat:@"%c", letter];
+        [_maLetters addObject:strLetter];
+    }
+    // to permute the letter array
+    for (int i = 0; i < NUM_SWAPS; i++)
+    {
+        int nIndex1 = rand() % _maLetters.count;
+        int nIndex2 = rand() % _maLetters.count;
+        [_maLetters exchangeObjectAtIndex:nIndex1 withObjectAtIndex:nIndex2];
+    }
+}
+
 - (void)layoutBricks
 {
     int nNumBricks = _nDim * _nDim;
     _maBrick = [[NSMutableArray alloc] initWithCapacity:nNumBricks];
     // the width and height of every brick
-    _fWidth = (self.frame.size.width - 2 * SPACE) * 1.0 / _nDim;
-    _fHeight = (self.frame.size.height - 2 * SPACE) * 1.0 / _nDim;
+    CGFloat fWidth = (self.frame.size.width - 2 * SPACE) * 1.0 / _nDim;
+    CGFloat fHeight = (self.frame.size.height - 2 * SPACE) * 1.0 / _nDim;
     // to add bricks
     for (int i = 0; i < _nDim; i++)
         for (int j = 0; j < _nDim; j++)
         {
             UIImageView* vBrick = [[UIImageView alloc] init];
             vBrick.contentMode = UIViewContentModeScaleToFill;
-            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]]];
-            vBrick.tag = BS_UNSELECTED;
+            vBrick.image =
+            [UIImage imageNamed:
+             [NSString stringWithFormat:
+              @"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]]];
+            vBrick.tag = LS_UNSELECTED;
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
             // constraints
@@ -63,7 +118,7 @@
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeLeft
                                                                  multiplier:1
-                                                                   constant:SPACE + _fWidth * j];
+                                                                   constant:SPACE + fWidth * j];
             [self addConstraint:lc];
             lc = [NSLayoutConstraint constraintWithItem:vBrick
                                               attribute:NSLayoutAttributeTop
@@ -71,7 +126,7 @@
                                                  toItem:self
                                               attribute:NSLayoutAttributeTop
                                              multiplier:1
-                                               constant:SPACE + _fHeight * i];
+                                               constant:SPACE + fHeight * i];
             [self addConstraint:lc];
             lc = [NSLayoutConstraint constraintWithItem:vBrick
                                               attribute:NSLayoutAttributeWidth
@@ -89,14 +144,10 @@
                                              multiplier:1.0 / _nDim
                                                constant:-2.0 * SPACE / _nDim];
             [self addConstraint:lc];
-            // to add the span gesture recogniser
-//            UIPanGestureRecognizer* pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self
-//                                                                                  action:@selector(handlePanGesture:)];
-//            vBrick.userInteractionEnabled = YES;
-//            [vBrick addGestureRecognizer:pgr];
             // to add the tap gesture recogniser
-            UITapGestureRecognizer* tgr = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(handleTap:)];
+            UITapGestureRecognizer* tgr =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(letterWasSelected:)];
             [tgr setNumberOfTapsRequired:1];
             vBrick.userInteractionEnabled = YES;
             [vBrick addGestureRecognizer:tgr];
@@ -104,125 +155,38 @@
         }
 }
 
--(void)handlePanGesture:(UIPanGestureRecognizer *)recogniser
-{
-    CGPoint translation = [recogniser locationInView:self];
-    // to get the index of the brick
-    int nX = ((int)translation.x) / ((int)_fWidth);
-    int nY = ((int)translation.y) / ((int)_fHeight);
-    int nIndex = _nDim * nY + nX;
-    //NSLog(@"%d", nIndex);
-    NSLog(@"%f, %f", translation.x, _fWidth);
-    CGPoint v = [recogniser velocityInView:self];
-    if (abs(v.x) > abs(v.y))
-        NSLog(@"H");
-    else if (abs(v.x) < abs(v.y))
-        NSLog(@"V");
-    else
-        NSLog(@"D");
-    // the brick
-    /*
-    UIImageView* vBrick = [_maBrick objectAtIndex:nIndex];
-    vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];*/
-//    // the size of the brick
-//    CGFloat fWidth = recogniser.view.bounds.size.width;
-//    CGFloat fHeight = recogniser.view.bounds.size.height;
-//    ///*** MOVING ***///
-//    CGPoint translation = [recogniser translationInView:self]; // the new location
-//    CGPoint velocity = [recogniser velocityInView:self]; // the velocity
-//    // to limit the move to horizontal and vertical
-//    // and the velocity is changed to the integer multiple of the width or height
-//    if (abs(velocity.x) > abs(velocity.y)) // horizontally
-//    {
-//        // to get the range of bricks to be moved
-//        NSRange range = [self getDraggedRange:recogniser.view direction:D_HORIZONTAL];
-//        // to compute the displacement
-//        int displacement = ((int)(translation.x / fWidth)) * fWidth;
-//        // to move the row
-//        for (int i = 0; i < _nDim; i++)
-//        {
-//            int index = range.location + i;
-//            UIView* vBrick = [_maBrick objectAtIndex:index];
-//            CGFloat fX = vBrick.center.x;
-//            //vBrick.center = CGPointMake(fX + translation.x, vBrick.center.y);
-//            vBrick.center = CGPointMake(fX + displacement, vBrick.center.y);
-//        }
-//    }
-//    else // vertically
-//    {
-//        NSRange range = [self getDraggedRange:recogniser.view direction:D_VERTICAL];
-//        for (int i = 0; i < _nDim; i++)
-//        {
-//            int index = i * _nDim + range.location;
-//            UIView* vBrick = [_maBrick objectAtIndex:index];
-//            vBrick.center = CGPointMake(vBrick.center.x, vBrick.center.y + translation.y);
-//        }
-//    }
-//    [recogniser setTranslation:CGPointMake(0, 0) inView:self];
-//    ///*** MOVING ***///
-}
-
-- (NSRange)getDraggedRange:(UIView *)view direction:(Direction)direction
-{
-    int index = 0; // the index of the brick being dragged
-    for (int i = 0; i < _maBrick.count; i++)
-        if ([_maBrick objectAtIndex:i] == view)
-        {
-            index = i;
-            break;
-        }
-    // to get the range by direction
-    NSRange range;
-    range.length = _nDim;
-    switch (direction)
-    {
-        case D_HORIZONTAL:
-            // to get the first brick within the range
-            range.location = (index / _nDim) * _nDim;
-            break;
-        case D_VERTICAL:
-            range.location = index - (index / _nDim) * _nDim;
-    }
-    return range;
-}
-
-- (void)handleTap:(UITapGestureRecognizer*)tgr
+// events
+- (void)letterWasSelected:(UITapGestureRecognizer *)tgr
 {
     // the tapped brick
-    int index = -1;
+    int nIndex = -1;
     for (int i = 0; i < _maBrick.count; i++)
         if ([_maBrick objectAtIndex:i] == tgr.view)
         {
-            index = i;
+            nIndex = i;
             break;
         }
     // to change status
-    UIImageView* vBrick = [_maBrick objectAtIndex:index];
+    UIImageView* vBrick = [_maBrick objectAtIndex:nIndex];
     switch (vBrick.tag)
     {
-        case BS_HIGHLIGHTED:
-            vBrick.tag = BS_UNSELECTED;
+//        case LS_SELECTED:
+//            vBrick.tag = LS_UNSELECTED;
+//            // to change appearance
+//            vBrick.image =
+//            [UIImage imageNamed:
+//             [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[nIndex]]];
+//            // to delete the letter
+//            [_delegate letterWasUnselected:_maLetters[nIndex]];
+//            break;
+        case LS_UNSELECTED:
+            vBrick.tag = LS_SELECTED;
             // to change appearance
-            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[index]]];
-            break;
-        case BS_UNSELECTED:
-            vBrick.tag = BS_HIGHLIGHTED;
-            // to change appearance
-            vBrick.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[index]]];
+            vBrick.image =
+            [UIImage imageNamed:
+             [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];
             // to add the letter
-            [_delegate letterWasSelected:_maLetters[index]];
-    }
-}
-
-- (void)initLetters
-{
-    _maLetters = [[NSMutableArray alloc] init];
-    srand(time(NULL));
-    int nNumBricks = _nDim * _nDim;
-    for (int i = 0; i < nNumBricks; i++)
-    {
-        char letter = rand() % ('Z' + 1 - 'A') + 'A';
-        [_maLetters addObject:[NSString stringWithFormat:@"%c", letter]];
+            [_delegate letterWasSelected:_maLetters[nIndex]];
     }
 }
 ///*** END OF PRIVATE ***///

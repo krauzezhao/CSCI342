@@ -14,9 +14,17 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        _nNumHits = 0;
+        _nTime = 50;
         [self initWordLabel];
         [self initNumLabel];
         [self initTimerLabel];
+        // to start the timer
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(timerDidTick)
+                                                userInfo:nil
+                                                 repeats:YES];
     }
     return self;
 }
@@ -26,7 +34,29 @@
     _lblWord.text = [NSString stringWithFormat:@"%@%@", _lblWord.text, letter];
 }
 
-///*** INIT ***///
+- (NSString*)getLetters
+{
+    return _lblWord.text;
+}
+
+- (void)clearLetters
+{
+    _lblWord.text = @"";
+}
+
+- (void)incrementHits
+{
+    _nNumHits++;
+    _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
+}
+
+- (NSUInteger)getHits
+{
+    return _nNumHits;
+}
+
+///*** PRIVATE ***///
+//** INIT **//
 - (void)initWordLabel
 {
     _lblWord = [[UILabel alloc] init];
@@ -74,7 +104,7 @@
     _lblNum = [[UILabel alloc] init];
     _lblNum.textAlignment = NSTextAlignmentCenter;
     _lblNum.backgroundColor = [UIColor clearColor];
-    _lblNum.text = @"Num Here";
+    _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
     [_lblNum setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblNum];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblNum
@@ -116,7 +146,7 @@
     _lblTimer = [[UILabel alloc] init];
     _lblTimer.textAlignment = NSTextAlignmentCenter;
     _lblTimer.backgroundColor = [UIColor clearColor];
-    _lblTimer.text = @"Timer Here";
+    _lblTimer.text = [NSString stringWithFormat:@"%d Sec", _nTime];
     [_lblTimer setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:_lblTimer];
     NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblTimer
@@ -152,6 +182,17 @@
                                        constant:0];
     [self addConstraint:lc];
 }
-///*** END OF INIT ***///
+//** END OF INIT **//
+- (void)timerDidTick
+{
+    _nTime--;
+    _lblTimer.text = [NSString stringWithFormat:@"%d Sec", _nTime];
+    if (_nTime == 0)
+    {
+        [_timer invalidate];
+        [_delegate timerDidFinish];
+    }
+}
+///*** END OF PRIVATE ***///
 
 @end

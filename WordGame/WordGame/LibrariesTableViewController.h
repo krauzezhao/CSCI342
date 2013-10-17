@@ -25,6 +25,7 @@
 - (IBAction)addWasTapped:(id)sender;
 
 ///*** PRIVATE ***///
+- (NSString*)makeInfoTitle:(NSNumber*)num;
 - (NSString*)makeSubtitle:(NSDate*)date numWords:(NSUInteger)numWords;
 ///*** END OF PRIVATE ***///
 @end

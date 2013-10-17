@@ -11,48 +11,6 @@
 
 #import <Foundation/Foundation.h>
 
-static const int SPACE = 0; // the space between the border and the play view
-
-// the level enumeration
-typedef enum _Level
-{
-    LV_MASTER1,
-    LV_MASTER2,
-    LV_MASTER3
-}Level;
-
-// the letter image prefix
-typedef  enum _LetterIndex{
-    LI_BLACK,
-    LI_BLUE,
-    LI_DG,
-    LI_GOLD,
-    LI_GREY,
-    LI_LG,
-    LI_ORANGE,
-    LI_PINK,
-    LI_RED,
-    LI_VIOLET
-}LetterIndex;
-
-static const char* LETTER[] = {
-    "black", "blue", "dg", "gold", "grey",
-    "lg", "orange", "pink", "red", "violet"
-};
-
-// the direction of the brick movement
-typedef enum _Direction
-{
-    D_HORIZONTAL,
-    D_VERTICAL
-}Direction;
-
-typedef enum _BrickStatus
-{
-    BS_HIGHLIGHTED,
-    BS_UNSELECTED
-}BrickStatus;
-
 // ingredients
 typedef enum _Ingredient
 {

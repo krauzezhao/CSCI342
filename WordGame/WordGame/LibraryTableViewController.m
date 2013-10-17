@@ -40,7 +40,8 @@
     [fr setEntity:ed];
     // the result
     NSError* err = nil;
-    //_aLibrary = [[_moc executeFetchRequest:fr error:&err]];
+    _libs = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,24 +54,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return _libs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    if (!cell)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:CellIdentifier];
+    
+    Library* lib = [_libs objectAtIndex:indexPath.row];
+    int nNum = lib.usage ? [lib.usage intValue] : 0;
+    NSString* strUsage = [NSString stringWithFormat:@"Usage: %d", nNum];
+    
+    cell.textLabel.text = lib.name;
+    cell.detailTextLabel.text = strUsage;
     
     return cell;
 }
@@ -114,17 +123,19 @@
 }
 */
 
-#pragma mark - Table view delegate
+// Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+// functions
+- (Library*)getSelectedLibrary
+{
+    NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
+    return [_libs objectAtIndex:ip.row];
 }
 
 @end

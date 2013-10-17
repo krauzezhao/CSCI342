@@ -8,18 +8,39 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TimerDelegate <NSObject>
+
+@required
+- (void)timerDidFinish;
+
+@end
+
 @interface TitleView : UIView
 
+///*** PRIVATE ***///
 @property (strong, nonatomic) UILabel* lblWord;
 @property (strong, nonatomic) UILabel* lblNum; // the number of found words
 @property (strong, nonatomic) UILabel* lblTimer;
 
-- (void)addLetter:(NSString*)letter;
+@property NSUInteger nNumHits; // the number of words found
+@property NSUInteger nTime;
+@property (strong, nonatomic) NSTimer* timer;
+@property (strong, nonatomic) id<TimerDelegate> delegate;
+///*** END OF PRIVATE ***///
 
-///*** INIT ***///
+- (void)addLetter:(NSString*)letter;
+- (NSString*)getLetters;
+- (void)clearLetters;
+- (void)incrementHits;
+- (NSUInteger)getHits;
+
+///*** PRIVATE ***///
+// init
 - (void)initWordLabel;
 - (void)initNumLabel;
 - (void)initTimerLabel;
-///*** END OF INIT ***///
+// timer
+- (void)timerDidTick;
+///*** END OF PRIVATE ***///
 
 @end
