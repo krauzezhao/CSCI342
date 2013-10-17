@@ -56,10 +56,9 @@
     BOOL bFound = [_trie containsObjectForKeyWithPrefix:[_tvTitle getLetters]];
     if (bFound)
     {
-//        [_vPlay reshuffle];
-//        [_tvTitle clearLetters];
-//        [_tvTitle incrementHits];
-        NSLog(@"d");
+        [_vPlay reshuffle];
+        [_tvTitle clearLetters];
+        [_tvTitle incrementHits];
     }
 }
 
