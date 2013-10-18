@@ -43,9 +43,21 @@
         [_trie addString:word.word];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [_tvTitle stop];
+    // to update the database
+    NSError* err = nil;
+    BOOL bSucc = [_moc save:&err];
+    if (err || !bSucc)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,12 +70,19 @@
 - (void)letterWasSelected:(NSString*)letter
 {
     [_tvTitle addLetter:letter];
-    BOOL bFound = [_trie containsObjectForKeyWithPrefix:[_tvTitle getLetters]];
+    NSString* strWord = [[_tvTitle getLetters] lowercaseString];
+    BOOL bFound = [_trie containsObjectForKeyWithPrefix:strWord];
     if (bFound)
     {
+        // to update the view
         [_vPlay reshuffle];
         [_tvTitle clearLetters];
         [_tvTitle incrementHits];
+        // to update the hits of the word
+        for (Word* word in _lib.fkLibWords)
+            if ([word.word isEqualToString:strWord])
+                word.hits = [NSNumber numberWithInt:[word.hits intValue] + 1];
+                // Database is updated when the view disappears;
     }
 }
 
@@ -75,9 +94,22 @@
                                        cancelButtonTitle:@"No"
                                        otherButtonTitles:@"Yes", nil];
     [av show];
+    // to update the usage of the current library
+    _lib.usage = [NSNumber numberWithInt:[_lib.usage intValue] + 1];
+    NSError* err = nil;
+    BOOL bSucc = [_moc save:&err];
+    if (!bSucc || err)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
 }
 
-- (void)viewWasTapped
+- (void)titleViewWasTapped
 {
     [_vPlay reset];
     [_tvTitle clearLetters];

@@ -16,6 +16,4 @@
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) NSMutableArray* libs;
 
-- (Library*)getSelectedLibrary;
-
 @end

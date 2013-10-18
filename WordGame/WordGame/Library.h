@@ -2,7 +2,7 @@
 //  Library.h
 //  WordGame
 //
-//  Created by Brendan Dickinson on 16/10/13.
+//  Created by Brendan Dickinson on 17/10/13.
 //  Copyright (c) 2013 Hong Zhao. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * usage;
+@property (nonatomic, retain) NSNumber * selected;
 @property (nonatomic, retain) NSSet *fkLibWords;
 @end
 

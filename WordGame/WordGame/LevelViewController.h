@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "AppDelegate.h";
+#import "AppDelegate.h"
 #import "Library.h"
-#import "LibraryTableViewController.h"
 
 static const int TAB_LIBRARY = 1;
 
@@ -18,6 +17,9 @@ static const int TAB_LIBRARY = 1;
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) Library* lib;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnLevel;
+@property (weak, nonatomic) IBOutlet UILabel *lblMsg;
 
 - (IBAction)levelWasSelected:(id)sender;
 

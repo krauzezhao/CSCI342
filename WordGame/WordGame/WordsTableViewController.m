@@ -70,7 +70,7 @@
     
     Word* word = [_words objectAtIndex:indexPath.row];
     [cell setTitle:word.word];
-    [cell setSubtitle:nil];
+    [cell setSubtitle:[NSString stringWithFormat:@"%@ Hits", word.hits]];
     return cell;
 }
 

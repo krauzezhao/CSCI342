@@ -16,7 +16,7 @@
 #import "PlayView.h"
 #import "Word.h"
 
-@interface PlayViewController : UIViewController <LetterSelectionDelegate,
+@interface PlayViewController : UIViewController <PlayViewDelegate,
                                                   TitleViewDelegate,
                                                   UIAlertViewDelegate>
 

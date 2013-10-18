@@ -12,6 +12,8 @@
 #import <Foundation/Foundation.h>
 
 // ingredients
+static const int NUM_INGREDIENTS = 11;
+
 typedef enum _Ingredient
 {
     // placeholder

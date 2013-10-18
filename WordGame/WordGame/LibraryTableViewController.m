@@ -75,11 +75,12 @@
                                       reuseIdentifier:CellIdentifier];
     
     Library* lib = [_libs objectAtIndex:indexPath.row];
-    int nNum = lib.usage ? [lib.usage intValue] : 0;
-    NSString* strUsage = [NSString stringWithFormat:@"Usage: %d", nNum];
-    
     cell.textLabel.text = lib.name;
-    cell.detailTextLabel.text = strUsage;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Usage: %d", [lib.usage intValue]];
+    if ([lib.selected boolValue])
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType = UITableViewCellAccessoryNone;
     
     return cell;
 }
@@ -129,13 +130,24 @@
 {
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-}
-
-// functions
-- (Library*)getSelectedLibrary
-{
-    NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
-    return [_libs objectAtIndex:ip.row];
+    // to update the library
+    Library* lib = [_libs objectAtIndex:indexPath.row];
+    if ([lib.selected boolValue] == NO) // not selected yet
+        lib.selected = [NSNumber numberWithBool:YES];
+    else // already selected
+        lib.selected = [NSNumber numberWithBool:NO];
+    NSError* err = nil;
+    BOOL bSucc = [_moc save:&err];
+    if (err || !bSucc)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
+    [self.tableView reloadData];
 }
 
 @end

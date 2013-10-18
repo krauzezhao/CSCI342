@@ -48,7 +48,7 @@ __unused static const char* LETTER[] = {
 };
 
 // delegate when the letter is selected
-@protocol LetterSelectionDelegate <NSObject>
+@protocol PlayViewDelegate <NSObject>
 
 @required
 - (void)letterWasSelected:(NSString*)letter;
@@ -57,7 +57,7 @@ __unused static const char* LETTER[] = {
 
 @interface PlayView : UIView
 
-@property (strong, nonatomic) id<LetterSelectionDelegate> delegate;
+@property (strong, nonatomic) id<PlayViewDelegate> delegate;
 ///*** PRIVATE ***///
 @property Level level;
 @property int nDim; // the dimension of the brick region

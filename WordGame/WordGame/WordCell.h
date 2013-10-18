@@ -30,8 +30,6 @@ static const float PERCENTAGE_WIDTH_TITLE = .7;
 - (void)initTitle;
 - (void)initInfoTitle;
 - (void)initSubtitle;
-// events
-- (void)detailWasTapped;
 ///*** END OF PRIVATE ***///
 
 @end

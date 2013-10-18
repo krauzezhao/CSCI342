@@ -76,7 +76,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSLog(@"i.%d", _maLib.count);
     return _maLib.count;
 }
 
@@ -103,6 +102,7 @@
 {
     return UITableViewCellEditingStyleDelete;
 }
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,7 +110,7 @@
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+ */
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,10 +136,7 @@
         }
         [_maLib removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }  
 }
 
 /*
@@ -212,7 +209,8 @@
                                                      inManagedObjectContext:_moc];
         lib.name = strName;
         lib.date = [NSDate date];
-        lib.usage = 0;
+        lib.selected = NO;
+        lib.usage = [NSNumber numberWithInt:0];
         // to save the library
         NSError* err = nil;
         BOOL bSucc = [_moc save:&err];
@@ -236,8 +234,7 @@
 ///*** PRIVATE ***///
 - (NSString*)makeInfoTitle:(NSNumber *)num
 {
-    int nNum = num ? [num intValue] : 0;
-    return [NSString stringWithFormat:@"Usage: %d", nNum];
+    return [NSString stringWithFormat:@"Usage: %d", [num intValue]];
 }
 
 - (NSString*)makeSubtitle:(NSDate *)date numWords:(NSUInteger)numWords

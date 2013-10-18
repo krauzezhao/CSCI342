@@ -33,6 +33,43 @@
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
 
+// to retrieve the selected library
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSFetchRequest* fr = [[NSFetchRequest alloc] init];
+    // the entity
+    NSEntityDescription* ed = [NSEntityDescription entityForName:@"Library"
+                                          inManagedObjectContext:_moc];
+    [fr setEntity:ed];
+    // condition
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"selected = %@", [NSNumber numberWithBool:YES]];
+    [fr setPredicate:pred];
+    // the result
+    NSError* err = nil;
+    NSArray* results = [_moc executeFetchRequest:fr error:&err];
+    if (err || !results)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Library Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
+    // to check if a library is selected
+    if (results.count == 1)
+    {
+        // the message label
+        _lib = [results objectAtIndex:0];
+        _lblMsg.text = [NSString stringWithFormat:@"Current Library: %@", _lib.name];
+        // to enable the buttons
+        for (UIButton* btn in _btnLevel)
+            [btn setEnabled:YES];
+    }
+    else
+        _lblMsg.text = @"No Library Selected.";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,9 +113,7 @@
 {
     // the selected library
     PlayViewController* pvc = [segue destinationViewController];
-    LibraryTableViewController* ltvc =
-    [self.tabBarController.childViewControllers objectAtIndex:TAB_LIBRARY];
-    pvc.lib = [ltvc getSelectedLibrary];
+    pvc.lib = _lib;
     // the segue
     if ([segue.identifier isEqualToString:@"SEG_MASTER1"])
     {

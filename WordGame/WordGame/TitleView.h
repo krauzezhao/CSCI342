@@ -14,7 +14,7 @@ static const int TIME = 50;
 
 @required
 - (void)timerDidFinish;
-- (void)viewWasTapped;
+- (void)titleViewWasTapped;
 
 @end
 

@@ -7,6 +7,7 @@
     <entity name="Library" representedClassName="Library" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="usage" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="fkLibWords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Word" inverseName="fkWordLib" inverseEntity="Word" syncable="YES"/>
     </entity>
@@ -29,7 +30,7 @@
     </entity>
     <elements>
         <element name="Ingredients" positionX="126" positionY="195" width="128" height="75"/>
-        <element name="Library" positionX="-153" positionY="135" width="128" height="103"/>
+        <element name="Library" positionX="-153" positionY="135" width="128" height="118"/>
         <element name="Player" positionX="117" positionY="9" width="128" height="103"/>
         <element name="Spells" positionX="-144" positionY="18" width="128" height="90"/>
         <element name="Word" positionX="-135" positionY="297" width="128" height="103"/>

@@ -46,7 +46,14 @@
 
 - (void)clearLetters
 {
-    _lblWord.text = @"";
+    [UILabel animateWithDuration:.5
+                      animations:^{
+                          _lblWord.alpha = 0;
+                      }
+                      completion:^(BOOL finished){
+                          _lblWord.alpha = 1;
+                          _lblWord.text = @"";
+                      }];
 }
 
 - (void)incrementHits
@@ -226,7 +233,7 @@
 
 - (void)viewWasTapped
 {
-    [_delegate viewWasTapped];
+    [_delegate titleViewWasTapped];
 }
 
 // The timer should stop when the view disappears

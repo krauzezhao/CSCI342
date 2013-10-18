@@ -31,10 +31,14 @@
 		90DF0C2C17FB812A00C0EEE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DF0C0417FB812A00C0EEE9 /* Foundation.framework */; };
 		90DF0C3417FB812A00C0EEE9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */; };
 		90DF0C3717FB812A00C0EEE9 /* WordGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */; };
+		A58B5C3F181091B300965261 /* ComposeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C3E181091B300965261 /* ComposeCollectionView.m */; };
+		A58B5C42181092DE00965261 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C41181092DE00965261 /* ComposeViewController.m */; };
+		A58B5C491810B07000965261 /* ComposeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C481810B07000965261 /* ComposeCell.m */; };
+		A58B5C4C1810B11500965261 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C4B1810B11500965261 /* ItemCell.m */; };
 		A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB608180E1EEE0039E9CE /* WordCell.m */; };
 		A58BB61B180E51BC0039E9CE /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB61A180E51BC0039E9CE /* Word.m */; };
-		A58BB621180E51FE0039E9CE /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB620180E51FE0039E9CE /* Library.m */; };
 		A58D39AE180F46F700128D6C /* NDTrie.m in Sources */ = {isa = PBXBuildFile; fileRef = A58D39AD180F46F700128D6C /* NDTrie.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A5963116180FE27900E6C72A /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A5963115180FE27900E6C72A /* Library.m */; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
 		A5C6D5ED180BC07400E3EDC6 /* Ingredients.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */; };
 		A5C6D5F3180BC08E00E3EDC6 /* Spells.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F2180BC08E00E3EDC6 /* Spells.m */; };
@@ -146,14 +150,22 @@
 		90DF0C3317FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C3517FB812A00C0EEE9 /* WordGameTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordGameTests.h; sourceTree = "<group>"; };
 		90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordGameTests.m; sourceTree = "<group>"; };
+		A58B5C3D181091B300965261 /* ComposeCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCollectionView.h; sourceTree = "<group>"; };
+		A58B5C3E181091B300965261 /* ComposeCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCollectionView.m; sourceTree = "<group>"; };
+		A58B5C40181092DE00965261 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		A58B5C41181092DE00965261 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		A58B5C471810B07000965261 /* ComposeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCell.h; sourceTree = "<group>"; };
+		A58B5C481810B07000965261 /* ComposeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCell.m; sourceTree = "<group>"; };
+		A58B5C4A1810B11500965261 /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		A58B5C4B1810B11500965261 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		A58BB607180E1EEE0039E9CE /* WordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordCell.h; sourceTree = "<group>"; };
 		A58BB608180E1EEE0039E9CE /* WordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordCell.m; sourceTree = "<group>"; };
 		A58BB619180E51BC0039E9CE /* Word.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Word.h; sourceTree = "<group>"; };
 		A58BB61A180E51BC0039E9CE /* Word.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Word.m; sourceTree = "<group>"; };
-		A58BB61F180E51FE0039E9CE /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
-		A58BB620180E51FE0039E9CE /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		A58D39AC180F46F700128D6C /* NDTrie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTrie.h; sourceTree = "<group>"; };
 		A58D39AD180F46F700128D6C /* NDTrie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTrie.m; sourceTree = "<group>"; };
+		A5963114180FE27900E6C72A /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		A5963115180FE27900E6C72A /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A5C6D5EB180BC07400E3EDC6 /* Ingredients.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredients.h; sourceTree = "<group>"; };
 		A5C6D5EC180BC07400E3EDC6 /* Ingredients.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredients.m; sourceTree = "<group>"; };
@@ -256,9 +268,9 @@
 		9012B68F1802634D001424AE /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				A58BB61F180E51FE0039E9CE /* Library.h */,
-				A58BB620180E51FE0039E9CE /* Library.m */,
 				A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */,
+				A5963114180FE27900E6C72A /* Library.h */,
+				A5963115180FE27900E6C72A /* Library.m */,
 				A58BB619180E51BC0039E9CE /* Word.h */,
 				A58BB61A180E51BC0039E9CE /* Word.m */,
 				A5C6D5F4180BC08E00E3EDC6 /* Player.h */,
@@ -402,9 +414,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A58B5C3C1810918700965261 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				A58B5C431810AF7C00965261 /* CollectionViewCell */,
+				A58B5C3D181091B300965261 /* ComposeCollectionView.h */,
+				A58B5C3E181091B300965261 /* ComposeCollectionView.m */,
+				A58B5C40181092DE00965261 /* ComposeViewController.h */,
+				A58B5C41181092DE00965261 /* ComposeViewController.m */,
+			);
+			name = Compose;
+			sourceTree = "<group>";
+		};
+		A58B5C431810AF7C00965261 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A58B5C471810B07000965261 /* ComposeCell.h */,
+				A58B5C481810B07000965261 /* ComposeCell.m */,
+				A58B5C4A1810B11500965261 /* ItemCell.h */,
+				A58B5C4B1810B11500965261 /* ItemCell.m */,
+			);
+			name = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 		A5C6D5FD180BD59500E3EDC6 /* Spells */ = {
 			isa = PBXGroup;
 			children = (
+				A58B5C3C1810918700965261 /* Compose */,
 				A5C6D5FE180BD5AC00E3EDC6 /* SpellsTabBarController.h */,
 				A5C6D5FF180BD5AC00E3EDC6 /* SpellsTabBarController.m */,
 			);
@@ -693,8 +729,12 @@
 				A5C6D606180BDC6100E3EDC6 /* WordsTableViewController.m in Sources */,
 				A58BB609180E1EEE0039E9CE /* WordCell.m in Sources */,
 				A58BB61B180E51BC0039E9CE /* Word.m in Sources */,
-				A58BB621180E51FE0039E9CE /* Library.m in Sources */,
 				A58D39AE180F46F700128D6C /* NDTrie.m in Sources */,
+				A5963116180FE27900E6C72A /* Library.m in Sources */,
+				A58B5C3F181091B300965261 /* ComposeCollectionView.m in Sources */,
+				A58B5C42181092DE00965261 /* ComposeViewController.m in Sources */,
+				A58B5C491810B07000965261 /* ComposeCell.m in Sources */,
+				A58B5C4C1810B11500965261 /* ItemCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
