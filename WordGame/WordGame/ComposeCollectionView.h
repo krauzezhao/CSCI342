@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import <math.h>
 #import "ComposeCell.h"
 #import "Constants.h"
 #import "ItemCell.h"
+#import "Player.h"
 
 static const CGFloat PADDING = 10;
 static const int NUM_PAGES = 2;
@@ -30,5 +33,5 @@ static const int NUM_PAGES = 2;
 @property (strong, nonatomic) id<ComposeCollectionViewDelegate> ccvdDelegate;
 @property (strong, nonatomic) id<ItemCellDelegate> itemDelegate;
 
-
+@property (strong, nonatomic) Player* player;
 @end

@@ -18,17 +18,28 @@
         [self initContentView];
         [self initItem];
         [self initLabel];
-        // the tap gesture
-        self.userInteractionEnabled = YES;
-        UIPanGestureRecognizer* pgr =
-        [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(itemIsBeingDragged:)];
-        [self addGestureRecognizer:pgr];
     }
     return self;
 }
 
+- (void)setImage:(NSString *)image
+{
+    _strImage = image;
+    _ivItem.image = [UIImage imageNamed:_strImage];
+    // Unknown items cannot be dragged
+    if ([self isDraggable:image])
+    {
+        // the pan gesture
+        UIPanGestureRecognizer* pgr =
+        [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(itemIsBeingDragged:)];
+        _ivItem.userInteractionEnabled = YES;
+        [_ivItem addGestureRecognizer:pgr];
+    }
+}
+
 ///*** PRIVATE ***///
+//** INIT **//
 - (void)initContentView
 {
     CGRect rcContent = CGRectMake(self.frame.size.width * (1 - PERCENTAGE_CONTENTVIEW) / 2,
@@ -58,7 +69,7 @@
     _lblNum = [[UILabel alloc] initWithFrame:rcLabel];
     _lblNum.backgroundColor = [UIColor clearColor];
     _lblNum.font = [UIFont systemFontOfSize:14];
-    _lblNum.text = @"X1";
+    _lblNum.text = @"";
     _lblNum.textAlignment = NSTextAlignmentRight;
     _lblNum.textColor = [UIColor whiteColor];
     [_vContent addSubview:_lblNum];
@@ -74,23 +85,41 @@
     // the item
     _ivItem = [[UIImageView alloc] initWithFrame:rcItem];
     _ivItem.contentMode = UIViewContentModeScaleAspectFit;
-    _ivItem.image = [UIImage imageNamed:@"blue_A.ico"];
     _ivItem.layer.cornerRadius = 5;
     [_vContent addSubview:_ivItem];
+}
+//** END OF INIT **//
+
+- (BOOL)isDraggable:(NSString *)image
+{
+    BOOL bKnown = [image isEqualToString:[NSString stringWithFormat:@"%s", ITEM[II_UNKNOWN]]];
+    BOOL bAvail = ([image rangeOfString:
+                    [NSString stringWithFormat:@"%s", PREFIX_UNAVAIL]].location == NSNotFound);
+    return bKnown && bAvail;
 }
 
 // events
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer *)pgr
 {
-    if (pgr.state == UIGestureRecognizerStateBegan)
+    if (pgr.state == UIGestureRecognizerStateEnded)
+        _timer = [NSTimer scheduledTimerWithTimeInterval:TIME_RETURN / 2
+                                                  target:self
+                                                selector:@selector(itemShouldAppear)
+                                                userInfo:nil
+                                                 repeats:NO];
+    else if (pgr.state == UIGestureRecognizerStateBegan)
         [_ivItem setHidden:YES];
-    else if (pgr.state == UIGestureRecognizerStateEnded)
-        [_ivItem setHidden:NO];
     // to trigger the delegate method
     [_delegate itemIsBeingDragged:pgr
                            center:_ivItem.center
                               ref:[pgr locationInView:self]
-                            image:@"blue_A.ico"];
+                            image:_strImage];
+}
+
+- (void)itemShouldAppear
+{
+    [_ivItem setHidden:NO];
+    [_timer invalidate];
 }
 ///*** END OF PRIVATE ***///
 

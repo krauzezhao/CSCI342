@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+#import "Item.h"
 #import "ItemCell.h"
 #import "ComposeCollectionView.h"
-#import <math.h>
+#import "Player.h"
 
 @interface ComposeViewController : UIViewController <ComposeCollectionViewDelegate,
                                                      ItemCellDelegate>
@@ -18,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pcPage;
 
 @property (strong, nonatomic) UIImageView* ivDragged;
-@property CGPoint ptTap; // the coordinate of the drag starting point
+
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) Player* player;
 
 @end

@@ -11,13 +11,18 @@
 
 #import <Foundation/Foundation.h>
 
+// item type
+typedef enum _ItemType
+{
+    IT_INGREDIENT,
+    IT_FORMULA
+}ItemType;
+
 // ingredients
 static const int NUM_INGREDIENTS = 11;
 
 typedef enum _Ingredient
 {
-    // placeholder
-    I_PH = -1,
     // watch: to slow time
     I_QUARTZ,
     I_HOURHAND,
@@ -33,6 +38,8 @@ typedef enum _Ingredient
     // magnifier: to highlight words
     I_CONVEXLENS,
     I_HANDLE,
+    // placeholder
+    I_PH
 }Ingredient;
 
 // formula

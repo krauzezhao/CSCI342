@@ -7,7 +7,7 @@
         <!--View Controller-->
         <scene sceneID="gQ9-kR-FzU">
             <objects>
-                <viewController id="J8c-Xp-jg4" sceneMemberID="viewController">
+                <viewController id="J8c-Xp-jg4" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="STi-ra-wPq">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -573,91 +573,6 @@
             <point key="canvasLocation" x="1610" y="1734"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ComposeCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCell.h"/>
-        </class>
-        <class className="ComposeCollectionView" superclassName="UICollectionView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCollectionView.h"/>
-        </class>
-        <class className="ComposeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cvCompose" candidateClass="ComposeCollectionView"/>
-                <relationship kind="outlet" name="pcPage" candidateClass="UIPageControl"/>
-            </relationships>
-        </class>
-        <class className="ExpBar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpBar.h"/>
-        </class>
-        <class className="LevelViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LevelViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="levelWasSelected:"/>
-                <relationship kind="outlet" name="lblMsg" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="btnLevel" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="LibrariesTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibrariesTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addWasTapped:"/>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="LibraryTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibraryTableViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PlayTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayTabBarController.h"/>
-            <relationships>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="PlayView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayView.h"/>
-        </class>
-        <class className="PlayViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tvTitle" candidateClass="TitleView"/>
-                <relationship kind="outlet" name="vPlay" candidateClass="PlayView"/>
-            </relationships>
-        </class>
-        <class className="SpellsTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SpellsTabBarController.h"/>
-            <relationships>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="SpellsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SpellsTableViewController.h"/>
-        </class>
-        <class className="TitleView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitleView.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="WordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordCell.h"/>
-        </class>
-        <class className="WordsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addWasTapped:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

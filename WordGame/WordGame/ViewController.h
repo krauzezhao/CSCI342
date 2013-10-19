@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+#import "Item.h"
+#import "Player.h"
 
 @interface ViewController : UIViewController
+
+@property (strong, nonatomic) NSManagedObjectContext* moc;
+@property (strong, nonatomic) Player* player;
 
 @end

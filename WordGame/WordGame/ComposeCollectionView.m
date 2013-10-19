@@ -27,20 +27,24 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 2;
+    _items = _player.items;
+    return ceil(_items.count * 1.0 / NUM_ITEMS_PER_COMPOSECELL);
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ComposeCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell"
                                                                            forIndexPath:indexPath];
-    if (indexPath.row == 0)
+    if ([cell isSet] == NO)
     {
         cell.delegate = _itemDelegate;
-        [cell setNumberOfItems:NUM_INGREDIENTS];
+        // the items
+        NSRange range = {indexPath.row * NUM_ITEMS_PER_COMPOSECELL, NUM_ITEMS_PER_COMPOSECELL};
+        if (range.location + range.length >= _items.count)
+            range.length = _items.count - range.location;
+        NSMutableArray* items = [[_items subarrayWithRange:range] mutableCopy];
+        [cell setItems:items];
     }
-    else
-        [cell setNumberOfItems:NUM_FORMULAS];
     return cell;
 }
 

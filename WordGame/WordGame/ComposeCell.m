@@ -15,22 +15,19 @@
     if (self = [super initWithCoder:aDecoder])
     {
         self.backgroundColor = [UIColor clearColor];
+        _nNumItems = 0;
     }
     return self;
 }
 
-- (void)setNumberOfItems:(int)num
+- (void)setItems:(NSMutableArray *)numOfItems
 {
-    _nNumItems = num;
-    [self layoutItems];
-}
-
-///*** PRIVATE ***///
-- (void)layoutItems
-{
+    if (_nNumItems != 0)
+        return; // to avoid a second set
     // the width of one item
     CGFloat fWidth = self.frame.size.width / NUM_ITEMS_PER_ROW;
     // the item array
+    _nNumItems = numOfItems.count;
     _items = [[NSMutableArray alloc] initWithCapacity:_nNumItems];
     for (int i = 0; i < _nNumItems; i++)
     {
@@ -40,6 +37,14 @@
         // to initialise the item
         CGRect rcItem = CGRectMake(nCol * fWidth, nRow * fWidth, fWidth, fWidth);
         ItemCell* item = [[ItemCell alloc] initWithFrame:rcItem];
+        // the item image
+        ItemIndex ii = [[numOfItems objectAtIndex:i] intValue];
+        if (ii == II_UNKNOWN)
+            [item setImage:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
+        else if (ii == II_UNAVAIL)
+            [item setImage:[NSString stringWithFormat:@"%s_%s", PREFIX_UNAVAIL, ITEM[i]]];
+        else
+            [item setImage:[NSString stringWithFormat:@"%s_%s", PREFIX_AVAIL, ITEM[i]]];
         // the item delegate
         item.delegate = _delegate;
         // to add the item
@@ -47,5 +52,9 @@
         [self addSubview:item];
     }
 }
-///*** END OF PRIVATE ***///
+
+- (BOOL)isSet
+{
+    return _nNumItems != 0;
+}
 @end

@@ -32,6 +32,28 @@
     // to initialise the image view used for dragging
     _ivDragged = [[UIImageView alloc] init];
     _ivDragged.contentMode = UIViewContentModeScaleToFill;
+    // the db context
+    _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    // to get the Player object
+    NSFetchRequest* fr = [[NSFetchRequest alloc] init];
+    NSEntityDescription* ed = [NSEntityDescription entityForName:@"Player"
+                                          inManagedObjectContext:_moc];
+    [fr setEntity:ed];
+    NSError* err = nil;
+    NSMutableArray* results = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+    if (err || results.count == 0)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Error"
+                                                     message:@"Player Reading Error"
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    } else
+    {
+        _player = [results objectAtIndex:0];
+        _cvCompose.player = _player;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,7 +99,7 @@
     } else if (pgr.state == UIGestureRecognizerStateEnded)
     {
         // to move the item back
-        [UIImageView animateWithDuration:.3
+        [UIImageView animateWithDuration:TIME_RETURN / 2
                               animations:^{
                                   CGFloat fWidth = _ivDragged.frame.size.width;
                                   CGFloat fHeight = _ivDragged.frame.size.height;
@@ -88,7 +110,7 @@
                                   
                               }
                               completion:^(BOOL finished){
-                                  [UIImageView animateWithDuration:.3
+                                  [UIImageView animateWithDuration:TIME_RETURN / 2
                                                         animations:^{
                                                             CGFloat fWidth = _ivDragged.frame.size.width;
                                                             CGFloat fHeight = _ivDragged.frame.size.height;

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 #import "ItemCell.h"
 
+static const int NUM_ITEMS_PER_COMPOSECELL = 12;
 static const int NUM_ITEMS_PER_ROW = 4;
 
 @interface ComposeCell : UICollectionViewCell
@@ -19,10 +21,11 @@ static const int NUM_ITEMS_PER_ROW = 4;
 @property (strong, nonatomic) id<ItemCellDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
-- (void)setNumberOfItems:(int)num;
-
-///*** PRIVATE ***///
-- (void)layoutItems;
-///*** END OF PRIVATE ***///
+// The count of items should be no greater than NUM_ITEMS_PER_COMPOSECELL,
+// otherwise the rest are ignored
+// numOfItems: index is the item index, and the element is its number
+- (void)setItems:(NSMutableArray *)numOfItems;
+// whether this cell is set
+- (BOOL)isSet;
 
 @end
