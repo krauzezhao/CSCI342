@@ -43,7 +43,7 @@
         if (range.location + range.length >= _items.count)
             range.length = _items.count - range.location;
         NSMutableArray* items = [[_items subarrayWithRange:range] mutableCopy];
-        [cell setItems:items];
+        [cell setItems:items offset:range.location];
     }
     return cell;
 }

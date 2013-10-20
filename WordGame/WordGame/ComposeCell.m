@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void)setItems:(NSMutableArray *)numOfItems
+- (void)setItems:(NSMutableArray *)numOfItems offset:(int)offset
 {
     if (_nNumItems != 0)
         return; // to avoid a second set
@@ -42,9 +42,9 @@
         if (ii == II_UNKNOWN)
             [item setImage:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
         else if (ii == II_UNAVAIL)
-            [item setImage:[NSString stringWithFormat:@"%s_%s", PREFIX_UNAVAIL, ITEM[i]]];
+            [item setImage:[NSString stringWithFormat:@"%s%s", PREFIX_UNAVAIL, ITEM[i + offset]]];
         else
-            [item setImage:[NSString stringWithFormat:@"%s_%s", PREFIX_AVAIL, ITEM[i]]];
+            [item setImage:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[i + offset]]];
         // the item delegate
         item.delegate = _delegate;
         // to add the item

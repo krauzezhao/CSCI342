@@ -70,6 +70,7 @@
 		A58B066B18122A8B00850648 /* unavail_unknown.png in Resources */ = {isa = PBXBuildFile; fileRef = A58B065818122A8B00850648 /* unavail_unknown.png */; };
 		A58B066C18122A8B00850648 /* unavail_watch.png in Resources */ = {isa = PBXBuildFile; fileRef = A58B065918122A8B00850648 /* unavail_watch.png */; };
 		A58B0670181230E100850648 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B066F181230E100850648 /* Player.m */; };
+		A58B06731812522F00850648 /* ItemDropModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B06721812522F00850648 /* ItemDropModel.m */; };
 		A58B5C3F181091B300965261 /* ComposeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C3E181091B300965261 /* ComposeCollectionView.m */; };
 		A58B5C42181092DE00965261 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C41181092DE00965261 /* ComposeViewController.m */; };
 		A58B5C491810B07000965261 /* ComposeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A58B5C481810B07000965261 /* ComposeCell.m */; };
@@ -227,6 +228,8 @@
 		A58B066D18122AB300850648 /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		A58B066E181230E100850648 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		A58B066F181230E100850648 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		A58B06711812522E00850648 /* ItemDropModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDropModel.h; sourceTree = "<group>"; };
+		A58B06721812522F00850648 /* ItemDropModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDropModel.m; sourceTree = "<group>"; };
 		A58B5C3D181091B300965261 /* ComposeCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeCollectionView.h; sourceTree = "<group>"; };
 		A58B5C3E181091B300965261 /* ComposeCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeCollectionView.m; sourceTree = "<group>"; };
 		A58B5C40181092DE00965261 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */,
 				A58D39AC180F46F700128D6C /* NDTrie.h */,
 				A58D39AD180F46F700128D6C /* NDTrie.m */,
+				A58B06711812522E00850648 /* ItemDropModel.h */,
+				A58B06721812522F00850648 /* ItemDropModel.m */,
 			);
 			name = Play;
 			sourceTree = "<group>";
@@ -431,11 +436,12 @@
 		90DF0C0817FB812A00C0EEE9 /* WordGame */ = {
 			isa = PBXGroup;
 			children = (
+				A58B066D18122AB300850648 /* Item.h */,
+				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
 				A5C6D5FD180BD59500E3EDC6 /* Spells */,
 				A5CA06CC180B4EE900E31CF9 /* Libraries */,
 				A5D51AD8180A0324000E2D1B /* Resources */,
 				9012B68F1802634D001424AE /* Core Data Model */,
-				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
 				90D8FBE617FCD8EF00977AD4 /* Play */,
 				90DF0C1117FB812A00C0EEE9 /* AppDelegate.h */,
 				90DF0C1217FB812A00C0EEE9 /* AppDelegate.m */,
@@ -444,7 +450,6 @@
 				90DF0C2017FB812A00C0EEE9 /* ViewController.h */,
 				90DF0C2117FB812A00C0EEE9 /* ViewController.m */,
 				90DF0C0917FB812A00C0EEE9 /* Supporting Files */,
-				A58B066D18122AB300850648 /* Item.h */,
 			);
 			path = WordGame;
 			sourceTree = "<group>";
@@ -901,6 +906,7 @@
 				A58B5C491810B07000965261 /* ComposeCell.m in Sources */,
 				A58B5C4C1810B11500965261 /* ItemCell.m in Sources */,
 				A58B0670181230E100850648 /* Player.m in Sources */,
+				A58B06731812522F00850648 /* ItemDropModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,6 +1029,7 @@
 				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
 				INFOPLIST_FILE = "WordGame/WordGame-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1034,6 +1041,7 @@
 				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
 				INFOPLIST_FILE = "WordGame/WordGame-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

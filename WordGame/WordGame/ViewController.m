@@ -39,15 +39,15 @@
     // If no player is found, a new one is created.
     if (results.count == 0)
     {
-        _player = [NSEntityDescription insertNewObjectForEntityForName:@"Player"
-                                                inManagedObjectContext:_moc];
-        _player.experience = [NSNumber numberWithInt:0];
-        _player.level = [NSNumber numberWithInt:1];
+        Player* player = [NSEntityDescription insertNewObjectForEntityForName:@"Player"
+                                                       inManagedObjectContext:_moc];
+        player.experience = [NSNumber numberWithInt:0];
+        player.level = [NSNumber numberWithInt:1];
         // to initialise items to unknown
         // becaue the user has not found any items
-        _player.items = [[NSMutableArray alloc] init];
-        for (int i = 0; i < NUM_ITEMS + NUM_SCROLLS; i++)
-            [_player.items addObject:[NSNumber numberWithInt:II_UNKNOWN]];
+        player.items = [[NSMutableArray alloc] init];
+        for (int i = 0; i < NUM_ITEMS; i++)
+            [player.items addObject:[NSNumber numberWithInt:II_UNKNOWN]];
         // to save the player
         NSError* err = nil;
         BOOL bSucc = [_moc save:&err];
@@ -62,6 +62,21 @@
             return;
         }
     }
+//ItemDropModel* idm = [[ItemDropModel alloc] init];
+//for (int i = 0; i < 100; i++)
+//{
+//    int nIndex = [idm dropAnItem];
+//    if (nIndex == II_UNAVAIL)
+//        continue;
+//    NSLog(@"%s", ITEM[nIndex]);
+////    DroppedItem di = [idm dropAnItem];
+////    if (di.type == IT_NULL)
+////        NSLog(@"No Items");
+////    else if (di.type == IT_ITEM)
+////        NSLog(@"ITEM: %s", ITEM[di.index.iiIndex]);
+////    else
+////        NSLog(@"SCROLL: %s", SCROLL[di.index.siIndex]);
+//}
 }
 
 - (void)didReceiveMemoryWarning

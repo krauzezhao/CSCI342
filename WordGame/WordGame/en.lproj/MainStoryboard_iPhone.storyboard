@@ -199,6 +199,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Level" id="dfN-c1-aGP"/>
                     <connections>
+                        <outlet property="ebExpBar" destination="lG0-Kc-HAd" id="isX-q8-yAZ"/>
                         <outlet property="lblMsg" destination="jzG-6l-ab9" id="QKG-dg-4EY"/>
                         <outletCollection property="btnLevel" destination="LeL-Ue-qyc" id="2AD-NX-5Xd"/>
                         <outletCollection property="btnLevel" destination="4PU-oc-B2W" id="MrR-bw-VKu"/>

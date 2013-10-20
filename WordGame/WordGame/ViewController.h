@@ -12,9 +12,10 @@
 #import "Item.h"
 #import "Player.h"
 
+#import "ItemDropModel.h"
+
 @interface ViewController : UIViewController
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
-@property (strong, nonatomic) Player* player;
 
 @end

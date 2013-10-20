@@ -31,11 +31,34 @@
 	// Do any additional setup after loading the view.
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    ///*** TO FETCH THE PLAYER ***///
+    NSFetchRequest* fr = [[NSFetchRequest alloc] init];
+    NSEntityDescription* ed = [NSEntityDescription entityForName:@"Player"
+                     inManagedObjectContext:_moc];
+    [fr setEntity:ed];
+    NSError* err = nil;
+    NSMutableArray* mutableResults = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+    if (err || mutableResults.count == 0)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Player Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    } else
+    {
+        _player = [mutableResults objectAtIndex:0];
+        _numExp = _player.experience; // deep copy
+        [_ebExpBar setLevel:[_player.level intValue] exp:[_numExp intValue]];
+    }
+    ///*** END OF PLAYER ***///
 }
 
 // to retrieve the selected library
 - (void)viewWillAppear:(BOOL)animated
 {
+    ///*** TO FETCH THE LIBRARY ***///
     NSFetchRequest* fr = [[NSFetchRequest alloc] init];
     // the entity
     NSEntityDescription* ed = [NSEntityDescription entityForName:@"Library"
@@ -47,7 +70,7 @@
     // the result
     NSError* err = nil;
     NSArray* results = [_moc executeFetchRequest:fr error:&err];
-    if (err || !results)
+    if (err)
     {
         UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Library Error"
                                                      message:nil
@@ -68,6 +91,30 @@
     }
     else
         _lblMsg.text = @"No Library Selected.";
+    ///*** END OF LIBRARY ***///
+//    ///*** TO FETCH THE PLAYER ***///
+//    fr = [[NSFetchRequest alloc] init];
+//    ed = [NSEntityDescription entityForName:@"Player"
+//                     inManagedObjectContext:_moc];
+//    [fr setEntity:ed];
+//    err = nil;
+//    NSMutableArray* mutableResults = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+//    if (err || mutableResults.count == 0)
+//    {
+//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Player Error"
+//                                                     message:nil
+//                                                    delegate:nil
+//                                           cancelButtonTitle:@"OK"
+//                                           otherButtonTitles:nil];
+//        [av show];
+//    } else
+//    {
+//        _player = [mutableResults objectAtIndex:0];
+//        NSLog(@"1");
+//        [_ebExpBar setLevel:[_player.level intValue] exp:[_player.experience intValue]];
+//        NSLog(@"2");
+//    }
+//    ///*** END OF PLAYER ***///
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +160,9 @@
 {
     // the selected library
     PlayViewController* pvc = [segue destinationViewController];
+    pvc.delegate = self;
     pvc.lib = _lib;
+    pvc.player = _player;
     // the segue
     if ([segue.identifier isEqualToString:@"SEG_MASTER1"])
     {
@@ -137,6 +186,12 @@
 {
     if (buttonIndex == 1) // OK is tapped
         [self.tabBarController setSelectedIndex:TAB_LIBRARY];
+}
+
+- (void)playViewWasPoppedUp
+{
+    [_ebExpBar animateExp:_numExp endExp:_player.experience];
+    _numExp = _player.experience;
 }
 
 @end

@@ -56,6 +56,22 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // to update the database
+    NSError* err = nil;
+    BOOL bSucc = [_moc save:&err];
+    if (err || !bSucc)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,7 +92,6 @@
     CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
     CGFloat fInitX = center.x - fOffsetX;
     CGFloat fInitY = center.y - fOffsetY;
-    //NSLog(@"%f", fInitX);
     
     if (pgr.state == UIGestureRecognizerStateBegan)
     {

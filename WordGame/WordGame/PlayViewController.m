@@ -31,6 +31,26 @@
     _tvTitle.delegate = self;
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    // the player
+//    NSFetchRequest* fr = [[NSFetchRequest alloc] init];
+//    NSEntityDescription* ed = [NSEntityDescription entityForName:@"Player"
+//                                          inManagedObjectContext:_moc];
+//    [fr setEntity:ed];
+//    NSError* err = nil;
+//    NSMutableArray* results = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+//    if (err || results.count == 0)
+//    {
+//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Error"
+//                                                     message:@"Player Reading Error"
+//                                                    delegate:nil
+//                                           cancelButtonTitle:@"OK"
+//                                           otherButtonTitles:nil];
+//        [av show];
+//    } else
+//    {
+//        _player = [results objectAtIndex:0];
+//        _items = _player.items;
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -41,12 +61,15 @@
     _trie = [[NDMutableTrie alloc] initWithCaseInsensitive:YES];
     for (Word* word in words)
         [_trie addString:word.word];
+    // the items
+    _items = _player.items;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [_tvTitle stop];
     // to update the database
+    _player.items = _items;
     NSError* err = nil;
     BOOL bSucc = [_moc save:&err];
     if (err || !bSucc)
@@ -60,10 +83,29 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [_delegate playViewWasPoppedUp];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// events
+- (void)itemWasDropped:(ItemIndex)item
+{
+    if (item == II_NULL)
+        return;
+    NSLog(@"%s", ITEM[item]);
+    // the current number of this item
+    int nNum = [[_items objectAtIndex:item] intValue];
+    if (nNum == II_UNKNOWN)
+        nNum = 0;
+    // to increment the number
+    [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum + 1]];
 }
 
 // delegate
@@ -74,6 +116,8 @@
     BOOL bFound = [_trie containsObjectForKeyWithPrefix:strWord];
     if (bFound)
     {
+        // to drop an item
+        [self itemWasDropped:[[[ItemDropModel alloc] init] dropAnItem]];
         // to update the view
         [_vPlay reshuffle];
         [_tvTitle clearLetters];
@@ -81,8 +125,21 @@
         // to update the hits of the word
         for (Word* word in _lib.fkLibWords)
             if ([word.word isEqualToString:strWord])
+            {
                 word.hits = [NSNumber numberWithInt:[word.hits intValue] + 1];
                 // Database is updated when the view disappears;
+                int exp = [_player.experience intValue] + 100;
+                int level = [_player.level intValue];
+                if (level != MAX_LEVEL)
+                {
+                    if (exp >= LEVEL_THRESHOLD[level])
+                        level++;
+                    _player.experience = [NSNumber numberWithInt:exp];
+                    _player.level = [NSNumber numberWithInt:level];
+                }
+                else
+                    break;
+            }
     }
 }
 

@@ -81,7 +81,8 @@
     if (_psc)
         return _psc;
     // the database path
-    NSURL* urlPath = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"TripModel.db"]];
+    NSURL* urlPath =
+    [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"WordGame.db"]];
     _psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSError* err = nil;
     if (![_psc addPersistentStoreWithType:NSSQLiteStoreType

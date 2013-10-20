@@ -24,7 +24,7 @@ static const int NUM_ITEMS_PER_ROW = 4;
 // The count of items should be no greater than NUM_ITEMS_PER_COMPOSECELL,
 // otherwise the rest are ignored
 // numOfItems: index is the item index, and the element is its number
-- (void)setItems:(NSMutableArray *)numOfItems;
+- (void)setItems:(NSMutableArray *)numOfItems offset:(int)offset;
 // whether this cell is set
 - (BOOL)isSet;
 

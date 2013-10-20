@@ -11,53 +11,12 @@
 
 #import <Foundation/Foundation.h>
 
-// item type
-typedef enum _ItemType
-{
-    IT_INGREDIENT,
-    IT_FORMULA
-}ItemType;
+// the max level
+static const int MAX_LEVEL = 3;
 
-// ingredients
-static const int NUM_INGREDIENTS = 11;
-
-typedef enum _Ingredient
-{
-    // watch: to slow time
-    I_QUARTZ,
-    I_HOURHAND,
-    I_MINHAND,
-    I_SECHAND,
-    // powered watch: to stop time
-    I_WATCH,
-    I_POWERUP,
-    // king: to reshuffle letters
-    I_SCEPTRE,
-    I_CROWN,
-    I_THRONE,
-    // magnifier: to highlight words
-    I_CONVEXLENS,
-    I_HANDLE,
-    // placeholder
-    I_PH
-}Ingredient;
-
-// formula
-static const int NUM_FORMULAS = 4;
-
-typedef enum _FormulaIndex
-{
-    FI_WATCH = 0,
-    FI_PWATCH,
-    FI_KING,
-    FI_MAGNIFIER
-}FormulaIndex;
-
-static const Ingredient FORMULA[NUM_FORMULAS][4] = {
-    {I_QUARTZ, I_HOURHAND, I_MINHAND, I_SECHAND}, // watch
-    {I_WATCH, I_POWERUP, I_PH, I_PH}, // powered watch
-    {I_SCEPTRE, I_CROWN, I_THRONE, I_PH}, // king
-    {I_CONVEXLENS, I_HANDLE, I_PH, I_PH} // magnifier
+// the experience needed to reach a particular level
+static const int LEVEL_THRESHOLD[] = {
+    0, 1500, 4000
 };
 
 ///*** CAMBRIDGE DICTIONARY WEB SERVICE ***///

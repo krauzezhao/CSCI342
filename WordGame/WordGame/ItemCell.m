@@ -26,6 +26,7 @@
 {
     _strImage = image;
     _ivItem.image = [UIImage imageNamed:_strImage];
+    //NSLog(@"%@", _strImage);
     // Unknown items cannot be dragged
     if ([self isDraggable:image])
     {
@@ -92,7 +93,7 @@
 
 - (BOOL)isDraggable:(NSString *)image
 {
-    BOOL bKnown = [image isEqualToString:[NSString stringWithFormat:@"%s", ITEM[II_UNKNOWN]]];
+    BOOL bKnown = ![image isEqualToString:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
     BOOL bAvail = ([image rangeOfString:
                     [NSString stringWithFormat:@"%s", PREFIX_UNAVAIL]].location == NSNotFound);
     return bKnown && bAvail;

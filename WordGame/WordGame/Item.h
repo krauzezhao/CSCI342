@@ -11,14 +11,26 @@
 
 __unused static const char* PREFIX_AVAIL = "avail_";
 __unused static const char* PREFIX_UNAVAIL = "unavail_";
+// item type
+typedef enum _ItemType
+{
+    IT_ITEM,
+    IT_SCROLL,
+    IT_NULL // not an item
+}ItemType;
 
 // items
-static const int NUM_ITEMS = 14;
+static const int NUM_ITEMS = 18;
 
 typedef enum _ItemIndex
 {
-    II_UNKNOWN = -2, // The use has not found this item
+    II_NULL = -3, // no loot
+    II_UNKNOWN, // The user has not found this item
     II_UNAVAIL, // when the user used up an item
+    II_SCROLL_WATCH,
+    II_SCROLL_POWEREDWATCH,
+    II_SCROLL_KING,
+    II_SCROLL_MAGNIFIER,
     II_KING,
     II_MAGNIFIER,
     II_POWEREDWATCH,
@@ -36,6 +48,10 @@ typedef enum _ItemIndex
 }ItemIndex;
 
 __unused static const char* ITEM[] = {
+    "scroll_watch.png",
+    "scroll_poweredwatch.png",
+    "scroll_king.png",
+    "scroll_magnifier.png",
     "king.png", "magnifier.png", "poweredwatch.png",
     "convexlens.png", "crown.png", "handle.png",
     "hourhand.png", "minhand.png", "powerup.png",
@@ -43,25 +59,40 @@ __unused static const char* ITEM[] = {
     "throne.png", "watch.png"
 };
 
+// measured in 100
+static const int DROPRATE_ITEM[] = {
+    3, 4, 8, 2,
+    1, 1, 1, // Usable items rarely drop.
+    5, 1, 5,
+    5, 5, 3,
+    5, 1, 1,
+    7, 1
+};
+
 __unused static const char* ITEM_UNKNOWN = {"unknown.png"};
 
 // scrolls
-static const int NUM_SCROLLS = 4;
-
-typedef enum _ScrollIndex
-{
-    SI_WATCH,
-    SI_POWEREDWATCH,
-    SI_KING,
-    SI_MAGNIFIER
-}ScrollIndex;
-
-__unused static const char* SCROLL[] = {
-    "scroll_watch.png",
-    "scroll_poweredwatch.png",
-    "scroll_king.png",
-    "scroll_magnifier.png"
-};
+//static const int NUM_SCROLLS = 4;
+//
+//typedef enum _ScrollIndex
+//{
+//    SI_WATCH,
+//    SI_POWEREDWATCH,
+//    SI_KING,
+//    SI_MAGNIFIER
+//}ScrollIndex;
+//
+//__unused static const char* SCROLL[] = {
+//    "scroll_watch.png",
+//    "scroll_poweredwatch.png",
+//    "scroll_king.png",
+//    "scroll_magnifier.png"
+//};
+//
+//// measured in 100
+//static const int DROPRATE_SCROLL[] = {
+//    3, 4, 8, 2
+//};
 
 // the formula
 // indexed by ScrollIndex
@@ -73,15 +104,15 @@ static const ItemIndex FORMULA_MAGNIFIER[] = {II_CONVEXLENS, II_HANDLE};
 
 // usable items that can be used during a gameplay
 // indexed by ScrollIndex
-//static const int NUM_USABLE = 4;
+static const int NUM_USABLE = 4;
 
-//typedef enum _UsableIndex
-//{
-//    UI_WATCH,
-//    UI_POWEREDWATCH,
-//    UI_KING,
-//    UI_MAGNIFIER
-//}UsableIndex;
+typedef enum _UsableIndex
+{
+    UI_WATCH,
+    UI_POWEREDWATCH,
+    UI_KING,
+    UI_MAGNIFIER
+}UsableIndex;
 
 __unused static const char* USABLE[] = {
     "watch.png",
