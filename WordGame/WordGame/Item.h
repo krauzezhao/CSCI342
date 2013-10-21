@@ -102,6 +102,20 @@ static const ItemIndex FORMULA_POWEREDWATCH[] = {II_POWERUP, II_WATCH};
 static const ItemIndex FORMULA_KING[] = {II_CROWN, II_SCEPTRE, II_THRONE};
 static const ItemIndex FORMULA_MAGNIFIER[] = {II_CONVEXLENS, II_HANDLE};
 
+__unused static const ItemIndex* FORMULA[] = {
+    FORMULA_WATCH, FORMULA_POWEREDWATCH, FORMULA_KING, FORMULA_MAGNIFIER
+};
+
+// the final composition of each formula
+__unused static const ItemIndex FORMULA_COMPOSITION[] = {
+    II_WATCH, II_POWEREDWATCH, II_KING, II_MAGNIFIER
+};
+
+// the number of items in each formula
+static const int FORMULA_NUM_ITEMS[] = {
+    4, 2, 3, 2
+};
+
 // usable items that can be used during a gameplay
 // indexed by ScrollIndex
 static const int NUM_USABLE = 4;

@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Hong Zhao. All rights reserved.
 //
 
-#import "SpellsTabBarController.h"
+#import "MiscTabBarController.h"
 
-@interface SpellsTabBarController ()
+@interface MiscTabBarController ()
 
 @end
 
-@implementation SpellsTabBarController
+@implementation MiscTabBarController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

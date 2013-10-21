@@ -27,8 +27,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _cvCompose.ccvdDelegate = self;
-    _cvCompose.itemDelegate = self;
+    _ccvItems.ccvdDelegate = self;
+    _ccvItems.itemDelegate = self;
+    _cvCompose.delegate = self;
     // to initialise the image view used for dragging
     _ivDragged = [[UIImageView alloc] init];
     _ivDragged.contentMode = UIViewContentModeScaleToFill;
@@ -52,13 +53,15 @@
     } else
     {
         _player = [results objectAtIndex:0];
-        _cvCompose.player = _player;
+        _items = _player.items;
+        _ccvItems.player = _player;
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     // to update the database
+    _player.items = _items;
     NSError* err = nil;
     BOOL bSucc = [_moc save:&err];
     if (err || !bSucc)
@@ -78,26 +81,57 @@
     // Dispose of any resources that can be recreated.
 }
 
+// functions
+- (void)moveBackItem:(CGPoint)ptInitial
+{
+    // to move the item back
+    [UIImageView animateWithDuration:TIME_RETURN / 2
+                          animations:^{
+                              CGFloat fWidth = _ivDragged.frame.size.width;
+                              CGFloat fHeight = _ivDragged.frame.size.height;
+                              _ivDragged.frame = CGRectMake(ptInitial.x - fWidth / 2,
+                                                            ptInitial.y - fHeight / 2,
+                                                            fWidth,
+                                                            fHeight);
+                              
+                          }
+                          completion:^(BOOL finished){
+                              [UIImageView animateWithDuration:TIME_RETURN / 2
+                                                    animations:^{
+                                                        CGFloat fWidth = _ivDragged.frame.size.width;
+                                                        CGFloat fHeight = _ivDragged.frame.size.height;
+                                                        _ivDragged.frame =
+                                                        CGRectMake(ptInitial.x - fWidth * .05,
+                                                                   ptInitial.y - fHeight * .05,
+                                                                   fWidth * .1,
+                                                                   fHeight * .1);
+                                                    }
+                                                    completion:^(BOOL finished){
+                                                        [_ivDragged setHidden:YES];
+                                                    }];
+                          }];
+}
+
 // delegates
 - (void)pageWasScrolledTo:(int)page
 {
     _pcPage.currentPage = page;
 }
 
-// delegate
-- (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr center:(CGPoint)center ref:(CGPoint)ref  image:(NSString *)image
+- (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr center:(CGPoint)center ref:(CGPoint)ref  item:(ItemIndex)item
 {
-    // to compute the offset between 2 different refernces
-    CGFloat fOffsetX = ref.x - [pgr locationInView:self.view].x;
-    CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
-    CGFloat fInitX = center.x - fOffsetX;
-    CGFloat fInitY = center.y - fOffsetY;
-    
     if (pgr.state == UIGestureRecognizerStateBegan)
     {
+        // to compute the offset between 2 different refernces
+        CGFloat fOffsetX = ref.x - [pgr locationInView:self.view].x;
+        CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
+        _ptInitial.x = center.x - fOffsetX;
+        _ptInitial.y = center.y - fOffsetY;
         // to init the drag
-        _ivDragged.frame = CGRectMake(fInitX - .5, fInitY - .5, 1, 1);
-        _ivDragged.image = [UIImage imageNamed:image];
+        _ivDragged.frame = CGRectMake(_ptInitial.x - .5, _ptInitial.y - .5, 1, 1);
+        _ivDragged.image =
+            [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[item]]];
+        [_ivDragged setHidden:NO];
         [self.view addSubview:_ivDragged];
         [UIImageView animateWithDuration:.2
                               animations:^{
@@ -110,43 +144,76 @@
                                                                 fWidth * 80,
                                                                 fHeight * 80);
                               }
-                              completion:nil];
+                              completion:^(BOOL finished){
+                                  // to record the size of the image
+                                  _szItem = _ivDragged.frame.size;
+                              }];
     } else if (pgr.state == UIGestureRecognizerStateEnded)
     {
-        // to move the item back
-        [UIImageView animateWithDuration:TIME_RETURN / 2
+        ItemDropStatus ids = [_cvCompose itemWasDropped:item];
+        if (ids != IDS_SUCCESS)
+        {
+            // to show the message label
+            if (ids == IDS_NOSCROLL)
+                [UILabel animateWithDuration:.5
+                                  animations:^{
+                                      _lblMsg.alpha = 1;
+                                  }
+                                  completion:nil];
+            // to move the item back
+            [self moveBackItem:_ptInitial];
+        } else
+        {
+            [_lblMsg setHidden:YES];
+            [_ivDragged setHidden:YES];
+        }
+    } else
+    {
+        // to move the item
+        CGPoint ptCur = [pgr locationInView:self.view];
+        _ivDragged.frame = CGRectMake(ptCur.x - _ivDragged.frame.size.width / 2,
+                                      ptCur.y - _ivDragged.frame.size.height / 2,
+                                      _ivDragged.frame.size.width,
+                                      _ivDragged.frame.size.height);
+        // to check for intersection between the dragged item and the compose view
+        if (CGRectIntersectsRect(_ivDragged.frame, _cvCompose.frame))
+            [UILabel animateWithDuration:.5
                               animations:^{
-                                  CGFloat fWidth = _ivDragged.frame.size.width;
-                                  CGFloat fHeight = _ivDragged.frame.size.height;
-                                  _ivDragged.frame = CGRectMake(fInitX - fWidth / 2,
-                                                                fInitY - fHeight / 2,
-                                                                fWidth,
-                                                                fHeight);
-                                  
+                                  _lblMsg.alpha = 0;
                               }
-                              completion:^(BOOL finished){
-                                  [UIImageView animateWithDuration:TIME_RETURN / 2
-                                                        animations:^{
-                                                            CGFloat fWidth = _ivDragged.frame.size.width;
-                                                            CGFloat fHeight = _ivDragged.frame.size.height;
-                                                            _ivDragged.frame =
-                                                            CGRectMake(fInitX - fWidth * .05,
-                                                                       fInitY - fHeight * .05,
-                                                                       fWidth * .1,
-                                                                       fHeight * .1);
-                                                        }
-                                                        completion:^(BOOL finished){
-                                                            [_ivDragged removeFromSuperview];
-                                                        }];
-                              }];
-        return;
+                              completion:nil];
+        else
+            [UILabel animateWithDuration:.5
+                              animations:^{
+                                  _lblMsg.alpha = 1;
+                              }
+                              completion:nil];
     }
-    // to move the item
-    CGPoint ptCur = [pgr locationInView:self.view];
-    _ivDragged.frame = CGRectMake(ptCur.x - _ivDragged.frame.size.width / 2,
-                                  ptCur.y - _ivDragged.frame.size.height / 2,
-                                  _ivDragged.frame.size.width,
-                                  _ivDragged.frame.size.height);
+}
+
+- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll
+{
+//    // to map the center to the current coordinate reference
+//    CGFloat fCenterX = center.x + _cvCompose.frame.origin.x;
+//    CGFloat fCenterY = center.y + _cvCompose.frame.origin.y;
+//    // the frame of the scroll
+//    CGFloat fX = fCenterX - _szItem.width / 2;
+//    CGFloat fY = fCenterY - _szItem.height / 2;
+//    _ivDragged.frame = CGRectMake(fX, fY, _szItem.width, _szItem.height);
+//    // to show the scroll
+//    _ivDragged.image =
+//        [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[scroll]]];
+//    [_ivDragged setHidden:NO];
+//    // to move the scroll back
+//    [self moveBackItem:_ptInitialScroll];
+    // to show the message label
+    [_lblMsg setHidden:NO];
+    [UILabel animateWithDuration:.5
+                      animations:^{
+                          _lblMsg.alpha = 1;
+                      }
+                      completion:nil];
+
 }
 
 @end

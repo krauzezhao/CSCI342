@@ -22,12 +22,13 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr
                     center:(CGPoint)center
                        ref:(CGPoint)ref
-                     image:(NSString*)image;
+                     item:(ItemIndex)item;
 
 @end
 
 @interface ItemCell : UIView
 
+@property ItemIndex item; // the current item
 ///*** PRIVATE ***///
 @property (strong, nonatomic) UIView* vContent;
 @property (strong, nonatomic) UIView* vBorderNorth;
@@ -39,10 +40,9 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 
 @property (strong, nonatomic) id<ItemCellDelegate> delegate;
 @property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping
-@property (strong, nonatomic) NSString* strImage;
 ///*** END OF PRIVATE ***///
 
-- (void)setImage:(NSString*)image;
+- (void)setItem:(ItemIndex)item number:(int)num;
 
 ///*** PRIVATE ***///
 // init
@@ -50,9 +50,6 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 - (void)initBorders;
 - (void)initLabel;
 - (void)initItem;
-// to check if the image can be dragged
-// Unknown and unavailable items cannot be dragged
-- (BOOL)isDraggable:(NSString*)image;
 // events
 - (void)itemIsBeingDraged:(UIPanGestureRecognizer*)tgr;
 - (void)itemShouldAppear;

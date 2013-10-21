@@ -22,21 +22,31 @@
     return self;
 }
 
-- (void)setImage:(NSString *)image
+- (void)setItem:(ItemIndex)item number:(int)num
 {
-    _strImage = image;
-    _ivItem.image = [UIImage imageNamed:_strImage];
-    //NSLog(@"%@", _strImage);
-    // Unknown items cannot be dragged
-    if ([self isDraggable:image])
+    _item = item;
+    if (num == II_UNKNOWN)
     {
+        _ivItem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
+        _item = II_UNKNOWN;
+    }
+    else if (num == II_UNAVAIL)
+        _ivItem.image =
+            [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_UNAVAIL, ITEM[item]]];
+    else
+    {
+        _ivItem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[item]]];
+        // the number of items
+        _lblNum.text = [NSString stringWithFormat:@"X%d", num];
         // the pan gesture
+        // This item can be dragged
         UIPanGestureRecognizer* pgr =
-        [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(itemIsBeingDragged:)];
+            [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(itemIsBeingDragged:)];
         _ivItem.userInteractionEnabled = YES;
         [_ivItem addGestureRecognizer:pgr];
     }
+
 }
 
 ///*** PRIVATE ***///
@@ -69,8 +79,7 @@
     // the label
     _lblNum = [[UILabel alloc] initWithFrame:rcLabel];
     _lblNum.backgroundColor = [UIColor clearColor];
-    _lblNum.font = [UIFont systemFontOfSize:14];
-    _lblNum.text = @"";
+    _lblNum.font = [UIFont boldSystemFontOfSize:16];
     _lblNum.textAlignment = NSTextAlignmentRight;
     _lblNum.textColor = [UIColor whiteColor];
     [_vContent addSubview:_lblNum];
@@ -91,14 +100,6 @@
 }
 //** END OF INIT **//
 
-- (BOOL)isDraggable:(NSString *)image
-{
-    BOOL bKnown = ![image isEqualToString:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
-    BOOL bAvail = ([image rangeOfString:
-                    [NSString stringWithFormat:@"%s", PREFIX_UNAVAIL]].location == NSNotFound);
-    return bKnown && bAvail;
-}
-
 // events
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer *)pgr
 {
@@ -114,7 +115,7 @@
     [_delegate itemIsBeingDragged:pgr
                            center:_ivItem.center
                               ref:[pgr locationInView:self]
-                            image:_strImage];
+                            item:_item];
 }
 
 - (void)itemShouldAppear

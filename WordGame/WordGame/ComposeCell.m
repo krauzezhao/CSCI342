@@ -39,12 +39,7 @@
         ItemCell* item = [[ItemCell alloc] initWithFrame:rcItem];
         // the item image
         ItemIndex ii = [[numOfItems objectAtIndex:i] intValue];
-        if (ii == II_UNKNOWN)
-            [item setImage:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
-        else if (ii == II_UNAVAIL)
-            [item setImage:[NSString stringWithFormat:@"%s%s", PREFIX_UNAVAIL, ITEM[i + offset]]];
-        else
-            [item setImage:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[i + offset]]];
+        [item setItem:i + offset number:ii];
         // the item delegate
         item.delegate = _delegate;
         // to add the item

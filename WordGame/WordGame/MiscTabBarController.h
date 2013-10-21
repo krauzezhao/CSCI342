@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpellsTabBarController : UITabBarController
+@interface MiscTabBarController : UITabBarController
 
 - (IBAction)homeWasTapped:(id)sender;
 @end

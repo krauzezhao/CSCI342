@@ -12,6 +12,7 @@
 
 static const int NUM_ITEMS_PER_COMPOSECELL = 12;
 static const int NUM_ITEMS_PER_ROW = 4;
+static const int OFFSET_Y = 3;
 
 @interface ComposeCell : UICollectionViewCell
 

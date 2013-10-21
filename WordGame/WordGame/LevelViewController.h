@@ -29,6 +29,4 @@ static const int TAB_LIBRARY = 1;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnLevel;
 @property (weak, nonatomic) IBOutlet UILabel *lblMsg;
 
-- (IBAction)levelWasSelected:(id)sender;
-
 @end

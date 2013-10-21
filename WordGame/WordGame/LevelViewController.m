@@ -91,68 +91,12 @@
     }
     else
         _lblMsg.text = @"No Library Selected.";
-    ///*** END OF LIBRARY ***///
-//    ///*** TO FETCH THE PLAYER ***///
-//    fr = [[NSFetchRequest alloc] init];
-//    ed = [NSEntityDescription entityForName:@"Player"
-//                     inManagedObjectContext:_moc];
-//    [fr setEntity:ed];
-//    err = nil;
-//    NSMutableArray* mutableResults = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
-//    if (err || mutableResults.count == 0)
-//    {
-//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Player Error"
-//                                                     message:nil
-//                                                    delegate:nil
-//                                           cancelButtonTitle:@"OK"
-//                                           otherButtonTitles:nil];
-//        [av show];
-//    } else
-//    {
-//        _player = [mutableResults objectAtIndex:0];
-//        NSLog(@"1");
-//        [_ebExpBar setLevel:[_player.level intValue] exp:[_player.experience intValue]];
-//        NSLog(@"2");
-//    }
-//    ///*** END OF PLAYER ***///
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-// events
-- (IBAction)levelWasSelected:(id)sender
-{
-    // to check if a library is selected
-//    LibraryTableViewController* ltvc =
-//    [self.tabBarController.childViewControllers objectAtIndex:TAB_LIBRARY];
-//    if (![ltvc getSelectedLibrary])
-//    {
-//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"No Library Selected"
-//                                                     message:@"Tap OK to go to the Library Screen"
-//                                                    delegate:nil
-//                                           cancelButtonTitle:@"Cancel"
-//                                           otherButtonTitles:@"OK", nil];
-//        [av show];
-//    } else
-//    {
-//        // to perform the segue
-//        UIButton* btn = (UIButton*)sender;
-//        switch (btn.tag)
-//        {
-//            case LV_MASTER1:
-//                [self performSegueWithIdentifier:@"SEG_MASTER1" sender:nil];
-//                break;
-//            case LV_MASTER2:
-//                [self performSegueWithIdentifier:@"SEG_MASTER2" sender:nil];
-//                break;
-//            case LV_MASTER3:
-//                [self performSegueWithIdentifier:@"SEG_MASTER3" sender:nil];
-//        }
-//    }
 }
 
 // the segue

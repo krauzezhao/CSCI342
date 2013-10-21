@@ -31,26 +31,6 @@
     _tvTitle.delegate = self;
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
-    // the player
-//    NSFetchRequest* fr = [[NSFetchRequest alloc] init];
-//    NSEntityDescription* ed = [NSEntityDescription entityForName:@"Player"
-//                                          inManagedObjectContext:_moc];
-//    [fr setEntity:ed];
-//    NSError* err = nil;
-//    NSMutableArray* results = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
-//    if (err || results.count == 0)
-//    {
-//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Error"
-//                                                     message:@"Player Reading Error"
-//                                                    delegate:nil
-//                                           cancelButtonTitle:@"OK"
-//                                           otherButtonTitles:nil];
-//        [av show];
-//    } else
-//    {
-//        _player = [results objectAtIndex:0];
-//        _items = _player.items;
-//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -128,7 +108,8 @@
             {
                 word.hits = [NSNumber numberWithInt:[word.hits intValue] + 1];
                 // Database is updated when the view disappears;
-                int exp = [_player.experience intValue] + 100;
+                // The experienc points gained is the length of the found word.
+                int exp = [_player.experience intValue] + strWord.length;
                 int level = [_player.level intValue];
                 if (level != MAX_LEVEL)
                 {
