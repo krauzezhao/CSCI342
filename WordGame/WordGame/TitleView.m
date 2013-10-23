@@ -21,9 +21,14 @@
         [self initTimerLabel];
         // the tap gesture for resetting the selected bricks
         UITapGestureRecognizer* tgr =
-        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
+            [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
         tgr.numberOfTapsRequired = 1;
         [self addGestureRecognizer:tgr];
+        // the swipe gesture for usable items
+        UISwipeGestureRecognizer* sgr =
+            [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasSwipedOver)];
+        sgr.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self addGestureRecognizer:sgr];
         // to start the timer
         _timer = [NSTimer scheduledTimerWithTimeInterval:1
                                                   target:self
@@ -234,6 +239,11 @@
 - (void)viewWasTapped
 {
     [_delegate titleViewWasTapped];
+}
+
+- (void)viewWasSwipedOver
+{
+    [_delegate titleViewWasSwipedOver];
 }
 
 // The timer should stop when the view disappears

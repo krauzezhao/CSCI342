@@ -25,7 +25,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="zPI-9t-TGj" kind="modal" id="wOh-sf-era"/>
+                                    <segue destination="zPI-9t-TGj" kind="modal" identifier="SEG_PLAY" id="wOh-sf-era"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zO1-RL-mVy">
@@ -38,7 +38,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="mjt-1h-jNJ" kind="modal" id="lll-de-dIT"/>
+                                    <segue destination="mjt-1h-jNJ" kind="modal" identifier="SEG_MISC" id="lll-de-dIT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-P4-rdP">
@@ -51,7 +51,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="tZJ-pG-EE2" kind="modal" id="463-0a-jGK"/>
+                                    <segue destination="tZJ-pG-EE2" kind="modal" identifier="SEG_LIBRARY" id="463-0a-jGK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -275,10 +275,10 @@
             </objects>
             <point key="canvasLocation" x="1619" y="-660"/>
         </scene>
-        <!--Compose View Controller - Spell-->
+        <!--Compose View Controller - Items-->
         <scene sceneID="JZW-UE-b65">
             <objects>
-                <viewController title="Spell" id="NfM-Xr-aoA" customClass="ComposeViewController" sceneMemberID="viewController">
+                <viewController title="Items" id="NfM-Xr-aoA" customClass="ComposeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="16d-eV-DLr">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -376,7 +376,6 @@
         <!--Navigation Controller-->
         <scene sceneID="AKf-PJ-Kxz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1oZ-hV-C5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="mjt-1h-jNJ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="El8-rm-BAD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GJb-RC-gzW">
@@ -386,13 +385,13 @@
                         <segue destination="xOE-3h-7A2" kind="relationship" relationship="rootViewController" id="1ut-j6-bud"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1oZ-hV-C5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="620" y="94"/>
         </scene>
         <!--Misc Tab Bar Controller-->
         <scene sceneID="C7v-rK-Reb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kpD-Gm-0hX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="xOE-3h-7A2" customClass="MiscTabBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qZh-MX-tCr">
                         <barButtonItem key="leftBarButtonItem" title="Home" id="ecS-cm-jtu">
@@ -412,6 +411,7 @@
                         <segue destination="nmY-Vm-wrV" kind="relationship" relationship="viewControllers" id="Zqa-0h-1Zc"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kpD-Gm-0hX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1065" y="94"/>
         </scene>
@@ -490,7 +490,6 @@
         <!--Table View Controller - Share-->
         <scene sceneID="cls-39-art">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Dr-VV-z1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="nmY-Vm-wrV" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ev6-3c-37x">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
@@ -514,6 +513,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Share" id="7Ys-PB-vwD"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Dr-VV-z1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1619" y="804"/>
         </scene>

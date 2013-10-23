@@ -38,7 +38,7 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 @property (strong, nonatomic) UIImageView* ivItem;
 @property (strong, nonatomic) UILabel* lblNum;
 
-@property (strong, nonatomic) id<ItemCellDelegate> delegate;
+@property (weak, nonatomic) id<ItemCellDelegate> delegate;
 @property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping
 ///*** END OF PRIVATE ***///
 

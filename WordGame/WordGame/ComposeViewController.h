@@ -18,7 +18,8 @@
 
 @interface ComposeViewController : UIViewController <ComposeCollectionViewDelegate,
                                                      ItemCellDelegate,
-                                                     ComposeViewDelegate>
+                                                     ComposeViewDelegate,
+                                                     UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ComposeView *cvCompose;
 @property (weak, nonatomic) IBOutlet UILabel *lblMsg;
@@ -27,13 +28,16 @@
 
 @property (strong, nonatomic) UIImageView* ivDragged;
 @property CGPoint ptInitial; // the originial coordinate of any item
-@property CGPoint ptInitialScroll; // the original coordinate of the scroll
+//@property CGPoint ptInitialScroll; // the original coordinate of the scroll
 @property CGSize szItem; // the size of the dragged item
+@property BOOL bInCompositionArea; // whether the drop is in the composition area
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) Player* player;
-@property (strong, nonatomic) NSMutableArray* items; // the player's items
+@property (weak, nonatomic) NSMutableArray* items; // the player's items
 
 // to move back the dragged item
 - (void)moveBackItem:(CGPoint)ptInitial;
+// to fade in the message label
+- (void)showMessage;
 @end

@@ -10,24 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Item.h"
 
-static const int NUM_HIGHLIGHTS = 20;
-static const int HIGHLIGHT_WIDTH = 5;
-static const int HIGHLIGHT_HEIGHT = 5;
 static const float PERCENTAGE_WIDTH_SLOTAREA = .7; // the slots area
 static const float PERCENTAGE_WIDTH_SLOT = .7;
-static const float PERCENTAGE_HEIGHT_RESULT = .7;
+static const float PERCENTAGE_HEIGHT_RESULT = .6;
 // the composition time
 static const float TIME_COMPOSE = 3;
 // the Compose and Cancel button size
 static const int BUTTON_WIDTH = 70;
 static const int BUTTON_HEIGHT = 30;
 static const int BUTTON_OFFSET = 10; // the offset from the border
-
-typedef struct _Item
-{
-    ItemType type;
-    ItemIndex index;
-}Item;
 
 typedef enum _ItemDropStatus
 {
@@ -45,49 +36,55 @@ typedef enum _ItemDropStatus
 // center: the center of the slot area
 - (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll;
 - (void)composeWasTapped;
+- (void)discardWasTapped;
+- (void)okWasTapped:(ItemIndex)result;
+// when the composition finishes
+- (void)compositionDidFinish;
 
 @end
 
 @interface ComposeView : UIView
 
-@property (strong, nonatomic) id<ComposeViewDelegate> delegate;
+@property (weak, nonatomic) id<ComposeViewDelegate> delegate;
 
 ///*** PRIVATE ***///
-// the 1 x 1 views that highlights this view
-@property (strong, nonatomic) NSMutableArray* highlights;
 // the bottom right
 @property CGPoint ptBottomRight;
 // to determine whether a scroll has been put here
 @property BOOL bHasScroll;
 // the scroll
 @property ItemIndex iiScroll;
-// the items
-// The 1st is the scroll and the rest are items
-//@property (strong, nonatomic) NSMutableArray* items;
+// the result
+@property ItemIndex iiResult;
 // the slot views
 @property (strong, nonatomic) NSMutableArray* slots;
 @property (strong, nonatomic) UIButton* btnCompose;
 @property (strong, nonatomic) UIButton* btnCancel;
 // the composition particle layer
 @property (strong, nonatomic) CAEmitterLayer* el;
+// the view to hold the result item
+@property (strong, nonatomic) UIImageView* ivResult;
 ///*** END OF PRIVATE ***///
 
 // return: whether the item can be dropped here
 - (ItemDropStatus)itemWasDropped:(ItemIndex)item;
+// The user confirms to discard the item.
+- (void)discard;
 
 ///*** PRIVATE ***///
 //** EVENTS **//
 // the hightlight animation
-- (void)highlightShouldBeMoved:(NSTimer*)timer;
 - (void)cancelWasTapped:(id)sender;
 - (void)composeWasTapped:(id)sender;
 // to delay the removal of the particle system after composition
 - (void)particlesShouldBeRemoved;
+// The composition finishes.
+- (void)compositionDidFinish;
 //** END OF EVENTS **//
 // the cancel button when there's a scroll
-- (void)showCancelButton;
+- (void)showCancelButton:(NSString*)title; // cancel or discard
 // the compose button where all items needed are put
-- (void)showComposeButton;
+- (void)showComposeButton:(NSString*)title; // compose or OK
 // the particle effects
 - (void)fireParticles;
 ///*** END OF PRIVATE ***///

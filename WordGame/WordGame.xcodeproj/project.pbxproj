@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9012B69118026372001424AE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9012B69018026372001424AE /* CoreData.framework */; };
-		9012B6941802662D001424AE /* SpellsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9012B6931802662D001424AE /* SpellsTableViewController.m */; };
 		9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9012B69E18026C37001424AE /* LibraryTableViewController.m */; };
 		90D8FBE517FCD8DE00977AD4 /* PlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE417FCD8DE00977AD4 /* PlayView.m */; };
 		90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBE917FCD97D00977AD4 /* LevelViewController.m */; };
@@ -136,6 +135,7 @@
 		A595B6E71813E0ED00B4CE36 /* blue_X.ico in Resources */ = {isa = PBXBuildFile; fileRef = A595B6CD1813E0EC00B4CE36 /* blue_X.ico */; };
 		A595B6E81813E0ED00B4CE36 /* blue_Y.ico in Resources */ = {isa = PBXBuildFile; fileRef = A595B6CE1813E0EC00B4CE36 /* blue_Y.ico */; };
 		A595B6E91813E0ED00B4CE36 /* blue_Z.ico in Resources */ = {isa = PBXBuildFile; fileRef = A595B6CF1813E0EC00B4CE36 /* blue_Z.ico */; };
+		A595E777181692FB008FAE4B /* UsableItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A595E776181692FB008FAE4B /* UsableItemView.m */; };
 		A5963116180FE27900E6C72A /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A5963115180FE27900E6C72A /* Library.m */; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
 		A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */; };
@@ -158,8 +158,6 @@
 
 /* Begin PBXFileReference section */
 		9012B69018026372001424AE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9012B6921802662C001424AE /* SpellsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellsTableViewController.h; sourceTree = "<group>"; };
-		9012B6931802662D001424AE /* SpellsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellsTableViewController.m; sourceTree = "<group>"; };
 		9012B69D18026C37001424AE /* LibraryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryTableViewController.h; sourceTree = "<group>"; };
 		9012B69E18026C37001424AE /* LibraryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryTableViewController.m; sourceTree = "<group>"; };
 		90D8FBE317FCD8DE00977AD4 /* PlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayView.h; sourceTree = "<group>"; };
@@ -309,6 +307,8 @@
 		A595B6CD1813E0EC00B4CE36 /* blue_X.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = blue_X.ico; path = resources/icons/blue/blue_X.ico; sourceTree = "<group>"; };
 		A595B6CE1813E0EC00B4CE36 /* blue_Y.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = blue_Y.ico; path = resources/icons/blue/blue_Y.ico; sourceTree = "<group>"; };
 		A595B6CF1813E0EC00B4CE36 /* blue_Z.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; name = blue_Z.ico; path = resources/icons/blue/blue_Z.ico; sourceTree = "<group>"; };
+		A595E775181692FB008FAE4B /* UsableItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsableItemView.h; sourceTree = "<group>"; };
+		A595E776181692FB008FAE4B /* UsableItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsableItemView.m; sourceTree = "<group>"; };
 		A5963114180FE27900E6C72A /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		A5963115180FE27900E6C72A /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -366,15 +366,6 @@
 			name = "Core Data Model";
 			sourceTree = "<group>";
 		};
-		9012B69518026636001424AE /* Spells */ = {
-			isa = PBXGroup;
-			children = (
-				9012B6921802662C001424AE /* SpellsTableViewController.h */,
-				9012B6931802662D001424AE /* SpellsTableViewController.m */,
-			);
-			name = Spells;
-			sourceTree = "<group>";
-		};
 		9012B69C18026C1A001424AE /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				9012B69C18026C1A001424AE /* Library */,
-				9012B69518026636001424AE /* Spells */,
 				90D8FBE717FCD90C00977AD4 /* Level */,
 				A5C6D5F7180BD42A00E3EDC6 /* PlayTabBarController.h */,
 				A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */,
@@ -677,6 +667,8 @@
 				A5D51AD21807B9D8000E2D1B /* TitleView.m */,
 				A5D51AD51807BC39000E2D1B /* ExpBar.h */,
 				A5D51AD61807BC39000E2D1B /* ExpBar.m */,
+				A595E775181692FB008FAE4B /* UsableItemView.h */,
+				A595E776181692FB008FAE4B /* UsableItemView.m */,
 			);
 			name = "Title View";
 			sourceTree = "<group>";
@@ -905,7 +897,6 @@
 				90D8FBE517FCD8DE00977AD4 /* PlayView.m in Sources */,
 				90D8FBEA17FCD97D00977AD4 /* LevelViewController.m in Sources */,
 				90D8FBED17FCDAAF00977AD4 /* PlayViewController.m in Sources */,
-				9012B6941802662D001424AE /* SpellsTableViewController.m in Sources */,
 				9012B69F18026C37001424AE /* LibraryTableViewController.m in Sources */,
 				A5D51AD31807B9D8000E2D1B /* TitleView.m in Sources */,
 				A5D51AD71807BC39000E2D1B /* ExpBar.m in Sources */,
@@ -925,6 +916,7 @@
 				A58B0670181230E100850648 /* Player.m in Sources */,
 				A58B06731812522F00850648 /* ItemDropModel.m in Sources */,
 				A595B62118139F9A00B4CE36 /* ComposeView.m in Sources */,
+				A595E777181692FB008FAE4B /* UsableItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -98,6 +98,18 @@
     [_selectedLetters removeAllObjects];
 }
 
+- (CGRect)getFrameOfBrick:(int)index
+{
+    // invalid index
+    if (index < 0 || index >= _maBrick.count)
+        return CGRectMake(0, 0, 0, 0);
+    // to return the frame
+    UIImageView* ivBrick = [_maBrick objectAtIndex:index];
+    return ivBrick.frame;
+    for (UIImageView* iv in _maBrick)
+        NSLog(@"%f", iv.frame.origin.x);
+}
+
 ///*** PRIVATE ***///
 - (void)initLetters
 {
@@ -214,7 +226,7 @@
     vBrick.image = [UIImage imageNamed:
                     [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];
     // to add the letter
-    [_delegate letterWasSelected:_maLetters[nIndex]];
+    [_delegate letterWasSelected:_maLetters[nIndex] index:nIndex];
 }
 ///*** END OF PRIVATE ***///
 

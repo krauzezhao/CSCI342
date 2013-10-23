@@ -51,13 +51,15 @@ __unused static const char* LETTER[] = {
 @protocol PlayViewDelegate <NSObject>
 
 @required
-- (void)letterWasSelected:(NSString*)letter;
+// letter: the letter on the brick
+// index: the index of the brick
+- (void)letterWasSelected:(NSString*)letter index:(int)index;
 
 @end
 
 @interface PlayView : UIView
 
-@property (strong, nonatomic) id<PlayViewDelegate> delegate;
+@property (weak, nonatomic) id<PlayViewDelegate> delegate;
 ///*** PRIVATE ***///
 @property Level level;
 @property int nDim; // the dimension of the brick region
@@ -70,6 +72,7 @@ __unused static const char* LETTER[] = {
 - (void)setLevel:(Level)level words:(NSArray*)words;
 - (void)reshuffle; // every time when a word is found or the user wants to play another game
 - (void)reset; // every time when the user cancels the selection
+- (CGRect)getFrameOfBrick:(int)index; // to get the frame of a brick
 ///*** PRIVATE ***///
 - (void)initLetters;
 - (void)layoutBricks;

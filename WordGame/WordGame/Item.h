@@ -120,13 +120,9 @@ static const int FORMULA_NUM_ITEMS[] = {
 // indexed by ScrollIndex
 static const int NUM_USABLE = 4;
 
-typedef enum _UsableIndex
-{
-    UI_WATCH,
-    UI_POWEREDWATCH,
-    UI_KING,
-    UI_MAGNIFIER
-}UsableIndex;
+__unused static const ItemIndex USABLE_INDEX[] = {
+    II_WATCH, II_POWEREDWATCH, II_KING, II_MAGNIFIER
+};
 
 __unused static const char* USABLE[] = {
     "watch.png",

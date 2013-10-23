@@ -15,6 +15,7 @@ static const int TIME = 50;
 @required
 - (void)timerDidFinish;
 - (void)titleViewWasTapped;
+- (void)titleViewWasSwipedOver;
 
 @end
 
@@ -28,7 +29,7 @@ static const int TIME = 50;
 @property NSUInteger nNumHits; // the number of words found
 @property NSUInteger nTime;
 @property (strong, nonatomic) NSTimer* timer;
-@property (strong, nonatomic) id<TitleViewDelegate> delegate;
+@property (weak, nonatomic) id<TitleViewDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
 - (void)addLetter:(NSString*)letter;
@@ -48,6 +49,7 @@ static const int TIME = 50;
 - (void)timerDidTick;
 // tap event
 - (void)viewWasTapped; // used to reset the selected bricks
+- (void)viewWasSwipedOver; // used to show the usable items
 ///*** END OF PRIVATE ***///
 
 @end

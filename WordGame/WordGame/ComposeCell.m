@@ -40,6 +40,7 @@
         // the item image
         ItemIndex ii = [[numOfItems objectAtIndex:i] intValue];
         [item setItem:i + offset number:ii];
+        item.tag = i + offset; // The tag is the item index.
         // the item delegate
         item.delegate = _delegate;
         // to add the item
@@ -51,5 +52,15 @@
 - (BOOL)isSet
 {
     return _nNumItems != 0;
+}
+
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num
+{
+    // to compute the offset
+    ItemCell* cell = [_items objectAtIndex:0];
+    int nOffset = cell.tag;
+    // to find the cell that holds the specified item
+    cell = [_items objectAtIndex:item + nOffset];
+    [cell setItem:item number:num];
 }
 @end

@@ -12,7 +12,6 @@
 #import "ComposeCell.h"
 #import "Constants.h"
 #import "ItemCell.h"
-#import "Player.h"
 
 static const CGFloat PADDING = 10;
 static const int NUM_PAGES = 2;
@@ -30,8 +29,9 @@ static const int NUM_PAGES = 2;
                                                      UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray* items;
-@property (strong, nonatomic) id<ComposeCollectionViewDelegate> ccvdDelegate;
-@property (strong, nonatomic) id<ItemCellDelegate> itemDelegate;
+@property (weak, nonatomic) id<ComposeCollectionViewDelegate> ccvdDelegate;
+@property (weak, nonatomic) id<ItemCellDelegate> itemDelegate;
 
-@property (strong, nonatomic) Player* player;
+// to reset the number of items
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num;
 @end

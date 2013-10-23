@@ -15,27 +15,8 @@
     if (self = [super initWithCoder:aDecoder])
     {
         _bHasScroll = NO;
+        _iiResult = II_NULL;
         _slots = [[NSMutableArray alloc] init];
-        // to init the hightlights
-        _highlights = [[NSMutableArray alloc] init];
-        for (int i = 0; i < NUM_HIGHLIGHTS; i++)
-        {
-            // the view
-            CGRect rc = CGRectMake(i * HIGHLIGHT_WIDTH, 0, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-            UIView* v = [[UIView alloc] initWithFrame:rc];
-            v.backgroundColor = [UIColor colorWithRed:1
-                                                green:1
-                                                 blue:i * 1.0 / NUM_HIGHLIGHTS
-                                                alpha:1.0 / NUM_HIGHLIGHTS * (NUM_HIGHLIGHTS - i)];
-            //[self addSubview:v];
-            [_highlights addObject:v];
-        }
-        // the animation timer
-//        [NSTimer scheduledTimerWithTimeInterval:.005
-//                                         target:self
-//                                       selector:@selector(highlightShouldBeMoved:)
-//                                       userInfo:nil
-//                                        repeats:YES];
     }
     return self;
 }
@@ -101,140 +82,174 @@
         }
         _bHasScroll = YES;
         _iiScroll = item;
-        [self showCancelButton];
-        [self showComposeButton];
+        [self showCancelButton:@"Cancel"];
+        [self showComposeButton:@"Compose"];
         return IDS_SUCCESS;
     }
     return IDS_INVALID;
 }
 
-///*** PRIVATE ***///
-//** EVENTS **//
-- (void)highlightShouldBeMoved:(NSTimer *)timer
+- (void)discard
 {
-    // the bottom right of this view
-    _ptBottomRight.x = self.frame.origin.x + self.frame.size.width;
-    _ptBottomRight.y = self.frame.origin.y + self.frame.size.height;
-    // to get the highlight view
-    //int nIndex = [timer.userInfo intValue];
-    for (int i = 0; i < _highlights.count; i++)
-    {
-        UIView* v = [_highlights objectAtIndex:i];
-        // to turn the highlight at the corner
-        CGFloat fX = v.frame.origin.x;
-        CGFloat fY = v.frame.origin.y;
-        if (fX == 0 && fY == 0) // top left
-            v.frame = CGRectMake(0, HIGHLIGHT_HEIGHT, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-        else if (fX == 0 && fY == _ptBottomRight.y - HIGHLIGHT_HEIGHT) // bottom left
-            v.frame = CGRectMake(HIGHLIGHT_WIDTH, fY, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-        else if (fX == _ptBottomRight.x - HIGHLIGHT_WIDTH && fY == _ptBottomRight.y - HIGHLIGHT_HEIGHT)
-            v.frame = CGRectMake(fX, // bottom right
-                                 fY - HIGHLIGHT_HEIGHT,
-                                 HIGHLIGHT_WIDTH,
-                                 HIGHLIGHT_WIDTH);
-        else if (fX == _ptBottomRight.x - HIGHLIGHT_WIDTH && fY == 0) // top right
-            v.frame = CGRectMake(fX - HIGHLIGHT_WIDTH, fY, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-        else
-        {
-            // to move the highlight
-            if (fY == 0) // top border
-                v.frame = CGRectMake(fX - 1, fY, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-            else if (fX == 0) // left border
-                v.frame = CGRectMake(fX, fY + 1, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-            else if (fY == _ptBottomRight.y - HIGHLIGHT_HEIGHT) // bottom border
-                v.frame = CGRectMake(fX + 1, fY, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-            else if (fX == _ptBottomRight.x - HIGHLIGHT_WIDTH) // right border
-                v.frame = CGRectMake(fX, fY - 1, HIGHLIGHT_WIDTH, HIGHLIGHT_HEIGHT);
-        }
-    }
+    // to hide the result item
+    [_ivResult setHidden:YES];
+    // to hide the buttons
+    [_btnCancel setHidden:YES];
+    [_btnCompose setHidden:YES];
+    // no scrolls
+    _bHasScroll = NO;
 }
 
+///*** PRIVATE ***///
+//** EVENTS **///
 - (void)cancelWasTapped:(id)sender
 {
-    // to remove all views
-    for (int i = 0; i < _slots.count; i++)
+    NSString* strTitle = _btnCancel.titleLabel.text;
+    if ([strTitle isEqualToString:@"Cancel"])
     {
-        UIImageView* iv = [_slots objectAtIndex:i];
-        [UIImageView animateWithDuration:.2
-                              animations:^{
-                                  iv.alpha = 0;
-                              }
-                              completion:^(BOOL finished) {
-                                  [iv removeFromSuperview];
-                              }];
+        // to remove all views
+        for (int i = 0; i < _slots.count; i++)
+        {
+            UIImageView* iv = [_slots objectAtIndex:i];
+            [UIImageView animateWithDuration:.2
+                                  animations:^{
+                                      iv.alpha = 0;
+                                  }
+                                  completion:^(BOOL finished) {
+                                      [iv removeFromSuperview];
+                                  }];
+        }
+        [_slots removeAllObjects];
+        // to hide buttons
+        [_btnCompose setHidden:YES];
+        [_btnCancel setHidden:YES];
+        // the delegate
+        CGPoint ptCenter =
+            CGPointMake((self.frame.origin.x + self.frame.size.width) * PERCENTAGE_WIDTH_SLOTAREA / 2,
+                        (self.frame.origin.y + self.frame.size.height) / 2);
+        [_delegate cancelWasTapped:ptCenter scroll:_iiScroll];
+        // no scrolls now
+        _bHasScroll = NO;
+    } else if ([strTitle isEqualToString:@"Discard"])
+    {
+        if (_btnCancel.alpha <= .7)
+            return; // The button is now being animated
+        [_delegate discardWasTapped];
     }
-    [_slots removeAllObjects];
-    // to hide buttons
-    [_btnCompose setHidden:YES];
-    [_btnCancel setHidden:YES];
-    // the delegate
-    CGPoint ptCenter =
-        CGPointMake((self.frame.origin.x + self.frame.size.width) * PERCENTAGE_WIDTH_SLOTAREA / 2,
-                    (self.frame.origin.y + self.frame.size.height) / 2);
-    [_delegate cancelWasTapped:ptCenter scroll:_iiScroll];
-    // no scrolls now
-    _bHasScroll = NO;
 }
 
 - (void)composeWasTapped:(id)sender
 {
-    // to fade out items
-    for (int i = 0; i < _slots.count; i++)
+    NSString* strTitle = _btnCompose.titleLabel.text;
+    if ([strTitle isEqualToString:@"Compose"])
     {
-        UIImageView* iv = [_slots objectAtIndex:i];
-        [UIImageView animateWithDuration:TIME_COMPOSE
-                              animations:^{
-                                  iv.alpha = 0;
-                              }
-                              completion:^(BOOL finished) {
-                                  [iv removeFromSuperview];
-                                  // to fade in the result
-                                  if (i != _slots.count - 1)
-                                      return;
-                                  // the coordinate of the result
-                                  CGFloat fCenterX = self.frame.origin.x + self.frame.size.width / 2;
-                                  CGFloat fCenterY = self.center.y;
-                                  CGFloat fWidth = self.frame.size.height * PERCENTAGE_HEIGHT_RESULT;
-                                  CGRect rcResult = CGRectMake(fCenterX - fWidth / 2,
-                                                               fCenterY - fWidth / 2,
-                                                               fWidth,
-                                                               fWidth);
-                                  // to fade in the final composition
-                                  UIImageView* ivResult = [[UIImageView alloc] initWithFrame:rcResult];
-                                  ivResult.alpha = 0;
-                                  ivResult.image =
-                                  [UIImage imageNamed:
-                                   [NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[FORMULA_COMPOSITION[_iiScroll]]]];
-                                  // to put this view to the back
-                                  // so that particle effects will be on top of it
-                                  ivResult.layer.zPosition = -10;
-                                  [self addSubview:ivResult];
-                                  [UIImageView animateWithDuration:TIME_COMPOSE
-                                                        animations:^{
-                                                            ivResult.alpha = 1;
-                                                        } completion:nil];
-                              }];
+        // to fade out items
+        for (int i = 0; i < _slots.count; i++)
+        {
+            UIImageView* iv = [_slots objectAtIndex:i];
+            [UIImageView animateWithDuration:TIME_COMPOSE
+                                  animations:^{
+                                      iv.alpha = 0;
+                                  }
+                                  completion:^(BOOL finished) {
+                                      [iv removeFromSuperview];
+                                      // to fade in the result
+                                      if (i != 0)
+                                          return;
+                                      // the coordinate of the result
+                                      CGFloat fCenterX =
+                                        self.frame.origin.x + self.frame.size.width * PERCENTAGE_WIDTH_SLOTAREA * .6;
+                                      CGFloat fCenterY = self.center.y;
+                                      CGFloat fWidth = self.frame.size.height * PERCENTAGE_HEIGHT_RESULT;
+                                      CGRect rcResult = CGRectMake(fCenterX - fWidth / 2,
+                                                                   fCenterY - fWidth / 2,
+                                                                   fWidth,
+                                                                   fWidth);
+                                      if (!_ivResult)
+                                      {
+                                          // to be faded in the final composition
+                                          _ivResult = [[UIImageView alloc] initWithFrame:rcResult];
+                                          // to put this view to the back
+                                          // so that particle effects will be on top of it
+                                          _ivResult.layer.zPosition = -10;
+                                          [self addSubview:_ivResult];
+                                      } else // to reset the result item's frame
+                                          _ivResult.frame = rcResult;
+                                      // the result
+                                      _iiResult = FORMULA_COMPOSITION[_iiScroll];
+                                      _ivResult.alpha = 0;
+                                      _ivResult.image =
+                                      [UIImage imageNamed:
+                                       [NSString stringWithFormat:@"%s%s", PREFIX_AVAIL,
+                                        ITEM[_iiResult]]];
+                                      [_ivResult setHidden:NO];
+                                      [UIImageView animateWithDuration:TIME_COMPOSE
+                                                            animations:^{
+                                                                _ivResult.alpha = 1;
+                                                            } completion:^(BOOL finished){
+                                                                [self compositionDidFinish];
+                                                            }];
+                                  }];
+        }
+        // to hide buttons
+        [_btnCompose setHidden:YES];
+        [_btnCancel setHidden:YES];
+        // the particle effects
+        [self fireParticles];
+    } else if ([strTitle isEqualToString:@"OK"])
+    {
+        if (_btnCompose.alpha <= .7)
+            return; // The button is now being animated.
+        // to hide all things
+        [_ivResult setHidden:YES];
+        [_btnCancel setHidden:YES];
+        [_btnCompose setHidden:YES];
+        [_delegate okWasTapped:_iiResult];
+        // no scrolls now
+        _bHasScroll = NO;
     }
-    // to hide buttons
-    [_btnCompose setHidden:YES];
-    [_btnCancel setHidden:YES];
-    // the particle effects
-    [self fireParticles];
 }
 
 - (void)particlesShouldBeRemoved
 {
     [_el removeFromSuperlayer];
 }
+
+- (void)compositionDidFinish
+{
+    // to hide buttons for later animation
+    _btnCancel.alpha = 0;
+    _btnCompose.alpha = 0;
+    // to change the button title
+    [self showCancelButton:@"Discard"];
+    [self showComposeButton:@"OK"];
+    // to animate these buttons
+    [UIButton animateWithDuration:1
+                       animations:^{
+                           _btnCancel.alpha = 1;
+                           _btnCompose.alpha = 1;
+                       }
+                       completion:nil];
+    // to animate the result
+    [UIImageView animateWithDuration:.7
+                               delay:2
+                             options:UIViewAnimationOptionCurveLinear
+                          animations:^{
+                              _ivResult.frame = CGRectMake(5, 5, 35, 35);
+                          }
+                          completion:^(BOOL finished) {
+                              // to show the item description
+                          }];
+}
 //** END OF EVENTS **//
 
-- (void)showCancelButton
+- (void)showCancelButton:(NSString*)title
 {
     if (!_btnCancel)
     {
         // the position of the cancel button
         CGFloat fX =
-            self.frame.origin.x + self.frame.size.width - HIGHLIGHT_WIDTH - BUTTON_OFFSET - BUTTON_WIDTH;
+            self.frame.origin.x + self.frame.size.width - BUTTON_OFFSET - BUTTON_WIDTH;
         CGFloat fY = self.center.y + BUTTON_OFFSET;
         // to initialise it
         _btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(fX, fY, BUTTON_WIDTH, BUTTON_HEIGHT)];
@@ -249,23 +264,28 @@
                                         stretchableImageWithLeftCapWidth:8
                                                             topCapHeight:0]
                               forState:UIControlStateSelected];
-        [_btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_btnCancel setTitle:title forState:UIControlStateNormal];
         [_btnCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _btnCancel.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         _btnCancel.titleLabel.shadowColor = [UIColor lightGrayColor];
         _btnCancel.titleLabel.shadowOffset = CGSizeMake(0, -1);
         [self addSubview:_btnCancel];
     } else
+    {
         [_btnCancel setHidden:NO];
+        // to change the title because this button can be Cancel or Discard
+        if (![_btnCancel.titleLabel.text isEqualToString:title])
+            [_btnCancel setTitle:title forState:UIControlStateNormal];
+    }
 }
 
-- (void)showComposeButton
+- (void)showComposeButton:(NSString*)title
 {
     if (!_btnCompose)
     {
         // the position of the compose button
         CGFloat fX =
-            self.frame.origin.x + self.frame.size.width - HIGHLIGHT_WIDTH - BUTTON_OFFSET - BUTTON_WIDTH;
+            self.frame.origin.x + self.frame.size.width - BUTTON_OFFSET - BUTTON_WIDTH;
         CGFloat fY = self.center.y - BUTTON_OFFSET - BUTTON_HEIGHT;
         // to initialise it
         _btnCompose = [[UIButton alloc] initWithFrame:CGRectMake(fX, fY, BUTTON_WIDTH, BUTTON_HEIGHT)];
@@ -280,14 +300,19 @@
                                         stretchableImageWithLeftCapWidth:8
                                         topCapHeight:0]
                               forState:UIControlStateSelected];
-        [_btnCompose setTitle:@"Compose" forState:UIControlStateNormal];
+        [_btnCompose setTitle:title forState:UIControlStateNormal];
         [_btnCompose setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         _btnCompose.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         _btnCompose.titleLabel.shadowColor = [UIColor lightGrayColor];
         _btnCompose.titleLabel.shadowOffset = CGSizeMake(0, -1);
         [self addSubview:_btnCompose];
     } else
+    {
         [_btnCompose setHidden:NO];
+        // to change the title because this button can be Compose or OK
+        if (![_btnCompose.titleLabel.text isEqualToString:title])
+            [_btnCompose setTitle:title forState:UIControlStateNormal];
+    }
 }
 
 - (void)fireParticles

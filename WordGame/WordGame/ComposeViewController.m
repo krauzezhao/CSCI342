@@ -33,8 +33,14 @@
     // to initialise the image view used for dragging
     _ivDragged = [[UIImageView alloc] init];
     _ivDragged.contentMode = UIViewContentModeScaleToFill;
+    // not dropped in the composition area
+    _bInCompositionArea = NO;
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     // to get the Player object
     NSFetchRequest* fr = [[NSFetchRequest alloc] init];
     NSEntityDescription* ed = [NSEntityDescription entityForName:@"Player"
@@ -54,8 +60,9 @@
     {
         _player = [results objectAtIndex:0];
         _items = _player.items;
-        _ccvItems.player = _player;
+        _ccvItems.items = _items;
     }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -112,6 +119,17 @@
                           }];
 }
 
+- (void)showMessage
+{
+    [_lblMsg setHidden:NO];
+    _lblMsg.alpha = 0;
+    [UILabel animateWithDuration:.5
+                      animations:^{
+                          _lblMsg.alpha = 1;
+                      }
+                      completion:nil];
+}
+
 // delegates
 - (void)pageWasScrolledTo:(int)page
 {
@@ -122,6 +140,7 @@
 {
     if (pgr.state == UIGestureRecognizerStateBegan)
     {
+        _bInCompositionArea = NO;
         // to compute the offset between 2 different refernces
         CGFloat fOffsetX = ref.x - [pgr locationInView:self.view].x;
         CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
@@ -150,16 +169,17 @@
                               }];
     } else if (pgr.state == UIGestureRecognizerStateEnded)
     {
+        if (!_bInCompositionArea)
+        {
+            [self moveBackItem:_ptInitial];
+            return; // not dropped inside the composition area
+        }
         ItemDropStatus ids = [_cvCompose itemWasDropped:item];
         if (ids != IDS_SUCCESS)
         {
             // to show the message label
             if (ids == IDS_NOSCROLL)
-                [UILabel animateWithDuration:.5
-                                  animations:^{
-                                      _lblMsg.alpha = 1;
-                                  }
-                                  completion:nil];
+                [self showMessage];
             // to move the item back
             [self moveBackItem:_ptInitial];
         } else
@@ -177,43 +197,76 @@
                                       _ivDragged.frame.size.height);
         // to check for intersection between the dragged item and the compose view
         if (CGRectIntersectsRect(_ivDragged.frame, _cvCompose.frame))
+        {
+            _bInCompositionArea = YES;
             [UILabel animateWithDuration:.5
                               animations:^{
                                   _lblMsg.alpha = 0;
                               }
                               completion:nil];
+        }
         else
+        {
+            _bInCompositionArea = NO;
             [UILabel animateWithDuration:.5
                               animations:^{
                                   _lblMsg.alpha = 1;
                               }
                               completion:nil];
+        }
     }
 }
 
 - (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll
 {
-//    // to map the center to the current coordinate reference
-//    CGFloat fCenterX = center.x + _cvCompose.frame.origin.x;
-//    CGFloat fCenterY = center.y + _cvCompose.frame.origin.y;
-//    // the frame of the scroll
-//    CGFloat fX = fCenterX - _szItem.width / 2;
-//    CGFloat fY = fCenterY - _szItem.height / 2;
-//    _ivDragged.frame = CGRectMake(fX, fY, _szItem.width, _szItem.height);
-//    // to show the scroll
-//    _ivDragged.image =
-//        [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[scroll]]];
-//    [_ivDragged setHidden:NO];
-//    // to move the scroll back
-//    [self moveBackItem:_ptInitialScroll];
     // to show the message label
     [_lblMsg setHidden:NO];
-    [UILabel animateWithDuration:.5
-                      animations:^{
-                          _lblMsg.alpha = 1;
-                      }
-                      completion:nil];
+    [self showMessage];
+}
 
+- (void)composeWasTapped
+{
+    
+}
+
+- (void)discardWasTapped
+{
+    UIAlertView* av =
+        [[UIAlertView alloc] initWithTitle:@"Do you really want to discard this item?"
+                                   message:@"Once discarded, you won't get anything back."
+                                  delegate:self
+                         cancelButtonTitle:@"Cancel"
+                         otherButtonTitles:@"Discard", nil];
+    [av show];
+}
+
+- (void)okWasTapped:(ItemIndex)result
+{
+    // to update the items
+    int nNum = [[_items objectAtIndex:result] intValue];
+    if (nNum < 0)
+        nNum = 1;
+    else
+        nNum++;
+    [_ccvItems setNumberOfItems:result num:nNum];
+    // to update the player
+    [_items replaceObjectAtIndex:result withObject:[NSNumber numberWithInt:nNum]];
+    // to show the drag hint
+    [self showMessage];
+}
+
+- (void)compositionDidFinish
+{
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) // Discard
+    {
+        [_cvCompose discard];
+        // to show the message label
+        [self showMessage];
+    }
 }
 
 @end

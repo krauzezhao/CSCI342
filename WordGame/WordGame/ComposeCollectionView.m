@@ -16,8 +16,20 @@
     {
         self.dataSource = self;
         self.delegate = self;
+        _items = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num
+{
+    // the compose cell
+    int nIndex = item / NUM_ITEMS_PER_COMPOSECELL;
+    NSIndexPath* ip = [NSIndexPath indexPathForItem:nIndex inSection:1];
+    ComposeCell* cell = (ComposeCell*)[self cellForItemAtIndexPath:ip];
+    // to set the number
+    [cell setNumberOfItems:item num:num];
+    [self reloadData];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -27,7 +39,6 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    _items = _player.items;
     return ceil(_items.count * 1.0 / NUM_ITEMS_PER_COMPOSECELL);
 }
 

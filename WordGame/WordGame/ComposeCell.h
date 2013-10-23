@@ -19,7 +19,7 @@ static const int OFFSET_Y = 3;
 ///*** PRIVATE ***///
 @property int nNumItems;
 @property (strong, nonatomic) NSMutableArray* items;
-@property (strong, nonatomic) id<ItemCellDelegate> delegate;
+@property (weak, nonatomic) id<ItemCellDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
 // The count of items should be no greater than NUM_ITEMS_PER_COMPOSECELL,
@@ -28,5 +28,7 @@ static const int OFFSET_Y = 3;
 - (void)setItems:(NSMutableArray *)numOfItems offset:(int)offset;
 // whether this cell is set
 - (BOOL)isSet;
+// to reset the number of items
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num;
 
 @end

@@ -70,6 +70,7 @@
     if (psc)
     {
         _moc = [[NSManagedObjectContext alloc] init];
+        [_moc setStalenessInterval:0];
         [_moc setPersistentStoreCoordinator:psc];
     }
     return _moc;
