@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 static const int TIME = 50;
+static const float TIME_FLASH = .5; // the time of one flash when the timer stops
 
 @protocol TitleViewDelegate <NSObject>
 
@@ -26,17 +27,20 @@ static const int TIME = 50;
 @property (strong, nonatomic) UILabel* lblNum; // the number of found words
 @property (strong, nonatomic) UILabel* lblTimer;
 
-@property NSUInteger nNumHits; // the number of words found
 @property NSUInteger nTime;
+@property NSUInteger nTicks; // ticks to flash the timer when the timer stops
 @property (strong, nonatomic) NSTimer* timer;
 @property (weak, nonatomic) id<TitleViewDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
+@property NSUInteger nNumHits; // the number of words found
+
+- (void)startTimer;
+- (void)stopTimerFor:(NSTimeInterval)time;
 - (void)addLetter:(NSString*)letter;
 - (NSString*)getLetters;
 - (void)clearLetters;
 - (void)incrementHits;
-- (NSUInteger)getHits;
 - (void)restart; // when the user wants to play another game
 - (void)stop; // when the user quits the game
 
@@ -47,6 +51,7 @@ static const int TIME = 50;
 - (void)initTimerLabel;
 // timer
 - (void)timerDidTick;
+- (void)timerWasStopped:(NSTimer*)timer;
 // tap event
 - (void)viewWasTapped; // used to reset the selected bricks
 - (void)viewWasSwipedOver; // used to show the usable items

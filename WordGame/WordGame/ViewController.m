@@ -62,27 +62,39 @@
             return;
         }
     }
-//ItemDropModel* idm = [[ItemDropModel alloc] init];
-//for (int i = 0; i < 100; i++)
-//{
-//    int nIndex = [idm dropAnItem];
-//    if (nIndex == II_UNAVAIL)
-//        continue;
-//    NSLog(@"%s", ITEM[nIndex]);
-////    DroppedItem di = [idm dropAnItem];
-////    if (di.type == IT_NULL)
-////        NSLog(@"No Items");
-////    else if (di.type == IT_ITEM)
-////        NSLog(@"ITEM: %s", ITEM[di.index.iiIndex]);
-////    else
-////        NSLog(@"SCROLL: %s", SCROLL[di.index.siIndex]);
-//}
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // the cell
+    CAEmitterCell* ec = [CAEmitterCell emitterCell];
+    ec.birthRate = 2;
+    ec.contents = (id)[[UIImage imageNamed:@"blue_C.ico"] CGImage];
+    ec.lifetime = 5;
+    ec.lifetimeRange = .5;
+    ec.scale = .07;
+    ec.scaleRange = .1;
+    ec.emissionRange = M_PI;
+    ec.velocity = 100;
+    ec.velocityRange = 50;
+    ec.yAcceleration = 98;
+    ec.zAcceleration = 100;
+    ec.spin = 10;
+    ec.spinRange = 2;
+    // to initialise the layers
+    CAEmitterLayer* el = [CAEmitterLayer layer];
+    el.emitterPosition = CGPointMake(0, 0);
+    el.zPosition = -100;
+    el.emitterSize = CGSizeMake(self.view.frame.size.width, 0);
+    el.emitterShape = kCAEmitterLayerSphere;
+    el.emitterCells = @[ec];
+    [self.view.layer addSublayer:el];
 }
 
 @end

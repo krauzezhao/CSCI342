@@ -67,6 +67,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    // to restore all items if not confirmed yet
+    if (_cvCompose.bHasScroll)
+        [self cancelWasTapped:CGPointMake(0, 0) scroll:_cvCompose.iiScroll items:_cvCompose.items];
     // to update the database
     _player.items = _items;
     NSError* err = nil;

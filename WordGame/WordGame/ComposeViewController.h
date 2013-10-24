@@ -31,6 +31,7 @@
 //@property CGPoint ptInitialScroll; // the original coordinate of the scroll
 @property CGSize szItem; // the size of the dragged item
 @property BOOL bInCompositionArea; // whether the drop is in the composition area
+@property BOOL bOK; // whether the user taps OK
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) Player* player;

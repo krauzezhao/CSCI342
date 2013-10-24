@@ -24,6 +24,6 @@
 
 ///*** PRIVATE ***///
 - (NSString*)makeInfoTitle:(NSNumber*)num;
-- (NSString*)makeSubtitle:(NSDate*)date numWords:(NSUInteger)numWords;
+- (NSString*)makeDateString:(NSDate*)date;
 ///*** END OF PRIVATE ***///
 @end

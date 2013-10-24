@@ -92,23 +92,6 @@
     else
         _lblMsg.text = @"No Library Selected.";
     ///*** END OF LIBRARY ***///
-//    ///*** TO FETCH THE PLAYER ***///
-//    fr = [[NSFetchRequest alloc] init];
-//    ed = [NSEntityDescription entityForName:@"Player" inManagedObjectContext:_moc];
-//    [fr setEntity:ed];
-//    err = nil;
-//    results = [_moc executeFetchRequest:fr error:&err];
-//    if (err)
-//    {
-//        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Error"
-//                                                     message:@"Player Reading Error"
-//                                                    delegate:nil
-//                                           cancelButtonTitle:@"OK"
-//                                           otherButtonTitles:nil];
-//        [av show];
-//    } else
-//        _player = [results objectAtIndex:0];
-//    ///*** END OF PLAYER ***///
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,7 +107,6 @@
     PlayViewController* pvc = [segue destinationViewController];
     pvc.delegate = self;
     pvc.lib = _lib;
-    //pvc.player = _player; // not passed by segue or it won't update
     // the segue
     if ([segue.identifier isEqualToString:@"SEG_MASTER1"])
     {

@@ -15,6 +15,7 @@
     if (self = [super initWithCoder:aDecoder])
     {
         _bHasScroll = NO;
+        _iiScroll = II_NULL;
         _iiResult = II_NULL;
         _items = [[NSMutableArray alloc] init];
         _slots = [[NSMutableArray alloc] init];
@@ -331,11 +332,10 @@
 {
     // the cell
     CAEmitterCell* ec = [CAEmitterCell emitterCell];
-    ec.birthRate = 500;
+    ec.birthRate = 800;
     ec.lifetime = 3;
     ec.lifetimeRange = .5;
-    //ec.color = [[UIColor colorWithRed:.8 green:.4 blue:.2 alpha:.1] CGColor];
-    ec.color = [[UIColor colorWithRed:1 green:1 blue:1 alpha:.2] CGColor];
+    ec.color = [[UIColor colorWithRed:1 green:1 blue:1 alpha:.1] CGColor];
     ec.contents = (id)[[UIImage imageNamed:@"particle.png"] CGImage];
     ec.scale = .1;
     ec.scaleRange = .2;

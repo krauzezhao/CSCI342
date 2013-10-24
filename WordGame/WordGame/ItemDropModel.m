@@ -10,11 +10,12 @@
 
 @implementation ItemDropModel
 
-- (id)init
+- (id)init:(int)dropRateFactor
 {
     if (self = [super init])
     {
         srand(time(NULL));
+        _nDropRateFactor = dropRateFactor;
         // to initialise the drop table
         _dropTable = [[NSMutableArray alloc] init];
         int nPrev = 1;
@@ -31,7 +32,7 @@
 - (ItemIndex)dropAnItem
 {
     int nIndex = II_NULL;
-    int n = rand() % 100 + 1;
+    int n = rand() % _nDropRateFactor + 1;
     for (int i = 0; i < NUM_ITEMS; i++)
     {
         int nIndexStart = [[_dropTable objectAtIndex:i] intValue];

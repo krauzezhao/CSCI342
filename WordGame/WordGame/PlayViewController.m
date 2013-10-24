@@ -67,7 +67,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     NSArray* words = [_lib.fkLibWords allObjects];
+    if (words.count == 0) // no words in the library
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"No Words In This Library"
+                                                     message:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
     [_vPlay setLevel:_level words:words];
+    [_tvTitle startTimer];
     // the word trie
     _trie = [[NDMutableTrie alloc] initWithCaseInsensitive:YES];
     for (Word* word in words)
@@ -197,7 +208,7 @@
     if (bFound)
     {
         // to drop an item
-        [self itemWasDropped:[[[ItemDropModel alloc] init] dropAnItem]];
+        [self itemWasDropped:[[[ItemDropModel alloc] init:DROP_RATE_FACTOR[_level]] dropAnItem]];
         // to update the view
         [_vPlay reshuffle];
         [_tvTitle clearLetters];
@@ -209,7 +220,7 @@
                 word.hits = [NSNumber numberWithInt:[word.hits intValue] + 1];
                 // Database is updated when the view disappears;
                 // The experienc points gained is the length of the found word.
-                int exp = [_player.experience intValue] + strWord.length;
+                int exp = [_player.experience intValue] + strWord.length * (_level + 1);
                 int level = [_player.level intValue];
                 if (level != MAX_LEVEL)
                 {
@@ -309,8 +320,10 @@
     switch (item)
     {
         case II_WATCH:
+            [_tvTitle stopTimerFor:5];
             break;
         case II_POWEREDWATCH:
+            [_tvTitle stopTimerFor:15];
             break;
         case II_KING:
             [_vPlay reshuffle];
@@ -330,12 +343,22 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) // No button is tapped
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    else // Yes button is tapped
+    if ([alertView.title isEqualToString:@"Time's Up"])
     {
-        [_vPlay reshuffle];
-        [_tvTitle restart];
+        if (buttonIndex == 0) // "No" button is tapped
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        else // Yes button is tapped
+        {
+            [_vPlay reshuffle];
+            [_tvTitle restart];
+        }
+    } else if ([alertView.title isEqualToString:@"No Words In This Library"])
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if ([alertView.title isEqualToString:@"Game In Progress"])
+    {
+        if (buttonIndex == 1)
+            [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

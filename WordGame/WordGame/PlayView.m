@@ -110,6 +110,46 @@
         NSLog(@"%f", iv.frame.origin.x);
 }
 
+- (void)find
+{
+    [self reset];
+    self.layer.zPosition = 50;
+    for (int i = 0; i < _word.count; i++)
+    {
+        int nIndex = [[_word objectAtIndex:i] intValue];
+        NSString* strLetter = [_maLetters objectAtIndex:nIndex];
+        UIImageView* iv = [_maBrick objectAtIndex:nIndex];
+        iv.layer.zPosition = 50;
+        CGRect rcInit = iv.frame; // the original frame
+        [UIImageView animateWithDuration:.3
+                                   delay:.3 * i
+                                 options:UIViewAnimationOptionCurveLinear
+                              animations:^{
+                                  iv.frame = CGRectMake(rcInit.origin.x - rcInit.size.width * .25,
+                                                        rcInit.origin.y - rcInit.size.height * .25,
+                                                        rcInit.size.width * 1.5,
+                                                        rcInit.size.height * 1.5);
+                              }
+                              completion:^(BOOL finished){
+                                  iv.image =
+                                    [UIImage imageNamed:
+                                     [NSString stringWithFormat:@"%s_%@.ico",
+                                      LETTER[LI_ORANGE], strLetter]];
+                                  if (i == _word.count - 1)
+                                      self.layer.zPosition = 0;
+                                  [UIImageView animateWithDuration:.3
+                                                        animations:^{
+                                                            iv.frame = rcInit;
+                                                        }
+                                                        completion:^(BOOL finished) {
+                                                            iv.image =
+                                                            [UIImage imageNamed:
+                                                             [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_LG], strLetter]];
+                                                        }];
+                              }];
+    }
+}
+
 ///*** PRIVATE ***///
 - (void)initLetters
 {
@@ -225,34 +265,6 @@
             [vBrick addGestureRecognizer:tgr];
             [_maBrick addObject:vBrick];
         }
-}
-
-- (void)find
-{
-    [self reset];
-    for (int i = 0; i < _word.count; i++)
-    {
-        int nIndex = [[_word objectAtIndex:i] intValue];
-        NSString* strLetter = [_maLetters objectAtIndex:nIndex];
-        UIImageView* iv = [_maBrick objectAtIndex:nIndex];
-        CGRect rcInit = iv.frame; // the original frame
-        // to contract the image view for animation
-        iv.frame = CGRectMake(rcInit.origin.x + rcInit.size.width * .45,
-                              rcInit.origin.y + rcInit.size.height * .45,
-                              rcInit.size.width * .1,
-                              rcInit.size.height * .1);
-        iv.image =
-            [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], strLetter]];
-        [UIImageView animateWithDuration:.2
-                                   delay:.2 * i
-                                 options:UIViewAnimationOptionCurveLinear
-                              animations:^{
-                                  iv.frame = rcInit;
-                              }
-                              completion:^(BOOL finished){
-                                  [_delegate letterWasSelected:strLetter index:nIndex];
-                              }];
-    }
 }
 
 // events

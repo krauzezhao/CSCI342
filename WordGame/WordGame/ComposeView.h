@@ -51,14 +51,6 @@ typedef enum _ItemDropStatus
 ///*** PRIVATE ***///
 // the bottom right
 @property CGPoint ptBottomRight;
-// to determine whether a scroll has been put here
-@property BOOL bHasScroll;
-// the scroll
-@property ItemIndex iiScroll;
-// the result
-@property ItemIndex iiResult;
-// to record the dropped non-scroll items
-@property (strong, nonatomic) NSMutableArray* items;
 // the slot views
 @property (strong, nonatomic) NSMutableArray* slots;
 @property (strong, nonatomic) UIButton* btnCompose;
@@ -68,6 +60,15 @@ typedef enum _ItemDropStatus
 // the view to hold the result item
 @property (strong, nonatomic) UIImageView* ivResult;
 ///*** END OF PRIVATE ***///
+
+// to determine whether a scroll has been put here
+@property BOOL bHasScroll;
+// the scroll
+@property ItemIndex iiScroll;
+// the result
+@property ItemIndex iiResult;
+// to record the dropped non-scroll items
+@property (strong, nonatomic) NSMutableArray* items;
 
 // return: whether the item can be dropped here
 - (ItemDropStatus)itemWasDropped:(ItemIndex)item;

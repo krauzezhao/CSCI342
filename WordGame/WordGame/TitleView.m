@@ -29,14 +29,28 @@
             [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasSwipedOver)];
         sgr.direction = UISwipeGestureRecognizerDirectionLeft;
         [self addGestureRecognizer:sgr];
-        // to start the timer
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                                  target:self
-                                                selector:@selector(timerDidTick)
-                                                userInfo:nil
-                                                 repeats:YES];
     }
     return self;
+}
+
+- (void)startTimer
+{
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                              target:self
+                                            selector:@selector(timerDidTick)
+                                            userInfo:nil
+                                             repeats:YES];
+}
+
+- (void)stopTimerFor:(NSTimeInterval)time
+{
+    [_timer invalidate];
+    _nTicks = 0;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:TIME_FLASH
+                                              target:self
+                                            selector:@selector(timerWasStopped:)
+                                            userInfo:[NSNumber numberWithInt:time / TIME_FLASH]
+                                             repeats:YES];
 }
 
 - (void)addLetter:(NSString *)letter
@@ -65,11 +79,6 @@
 {
     _nNumHits++;
     _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
-}
-
-- (NSUInteger)getHits
-{
-    return _nNumHits;
 }
 
 - (void)restart
@@ -236,6 +245,26 @@
     }
 }
 
+- (void)timerWasStopped:(NSTimer*)timer
+{
+    // the total time
+    NSNumber* numTotalTime = (NSNumber*)timer.userInfo;
+    int nTotalTime = [numTotalTime intValue];
+    // to tick
+    if (_nTicks < nTotalTime)
+    {
+        if (_nTicks % 2 == 0)
+            _lblTimer.alpha = 0;
+        else
+            _lblTimer.alpha = 1;
+        _nTicks++;
+    } else
+    {
+        [_timer invalidate];
+        [self startTimer];
+    }
+}
+
 - (void)viewWasTapped
 {
     [_delegate titleViewWasTapped];
@@ -245,9 +274,6 @@
 {
     [_delegate titleViewWasSwipedOver];
 }
-
-// The timer should stop when the view disappears
-//- (void)viewDidDisappear
 ///*** END OF PRIVATE ***///
 
 @end

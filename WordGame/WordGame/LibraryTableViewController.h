@@ -15,5 +15,6 @@
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
 @property (strong, nonatomic) NSMutableArray* libs;
+@property (strong, nonatomic) NSIndexPath* ipSel; // the selected row
 
 @end

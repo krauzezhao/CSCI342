@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _ipSel = nil;
     // the database context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
@@ -41,6 +42,24 @@
     // the result
     NSError* err = nil;
     _libs = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+    [self.tableView reloadData];
+}
+
+// to update the database
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // the database
+    NSError* err = nil;
+    BOOL bSucc = [_moc save:&err];
+    if (err || !bSucc)
+    {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
+                                                     message:nil
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+    }
     [self.tableView reloadData];
 }
 
@@ -78,76 +97,37 @@
     cell.textLabel.text = lib.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Usage: %d", [lib.usage intValue]];
     if ([lib.selected boolValue])
+    {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if (!_ipSel)
+            _ipSel = indexPath;
+    }
     else
         cell.accessoryType = UITableViewCellAccessoryNone;
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 // Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    // to update the library
     Library* lib = [_libs objectAtIndex:indexPath.row];
-    if ([lib.selected boolValue] == NO) // not selected yet
-        lib.selected = [NSNumber numberWithBool:YES];
-    else // already selected
-        lib.selected = [NSNumber numberWithBool:NO];
-    NSError* err = nil;
-    BOOL bSucc = [_moc save:&err];
-    if (err || !bSucc)
+    if (![lib.selected boolValue]) // unselected
     {
-        UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Updating Error"
-                                                     message:nil
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
+        lib.selected = [NSNumber numberWithBool:YES];
+        [_libs replaceObjectAtIndex:indexPath.row withObject:lib];
+        // to uncheck the previously selected row
+        if (_ipSel.row != indexPath.row)
+        {
+            lib = [_libs objectAtIndex:_ipSel.row];
+            lib.selected = [NSNumber numberWithBool:NO];
+            [_libs replaceObjectAtIndex:_ipSel.row withObject:lib];
+            // to save the currently selected index path
+            _ipSel = indexPath;
+        }
+        [tableView reloadData];
     }
-    [self.tableView reloadData];
 }
 
 @end

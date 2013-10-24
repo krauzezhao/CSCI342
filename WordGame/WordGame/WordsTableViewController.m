@@ -83,7 +83,7 @@
     
     Word* word = [_words objectAtIndex:indexPath.row];
     [cell setTitle:word.word];
-    [cell setSubtitle:[NSString stringWithFormat:@"%@ Hits", word.hits]];
+    [cell setSubtitleLeft:[NSString stringWithFormat:@"%@ Hits", word.hits]];
     return cell;
 }
 
@@ -124,22 +124,6 @@
     }   
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -163,10 +147,23 @@
 {
     if (buttonIndex == 1) // OK is tapped
     {
+        // to check for duplicates
+        NSString* strWord = [[alertView textFieldAtIndex:0].text lowercaseString];
+        for (Word* word in _words)
+            if ([word.word isEqualToString:strWord])
+            {
+                UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Duplicate Word"
+                                                             message:@"Case Insensitive"
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+                [av show];
+                return;
+            }
         // the word to be added
         Word* word = [NSEntityDescription insertNewObjectForEntityForName:@"Word"
                                                    inManagedObjectContext:_moc];
-        word.word = [[alertView textFieldAtIndex:0].text lowercaseString];
+        word.word = strWord;
         word.fkWordLib = _lib;
         // to save it
         NSError* err = nil;

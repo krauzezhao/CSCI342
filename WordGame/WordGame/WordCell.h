@@ -18,18 +18,21 @@ static const float PERCENTAGE_WIDTH_TITLE = .7;
 ///*** PRIVATE ***///
 @property (strong, nonatomic) UILabel* lblTitle;
 @property (strong, nonatomic) UILabel* lblInfoTitle;
-@property (strong, nonatomic) UILabel* lblSubtitle;
+@property (strong, nonatomic) UILabel* lblSubtitleLeft;
+@property (strong, nonatomic) UILabel* lblSubtitleRight;
 ///*** END OF PRIVATE ***///
 
 - (void)setTitle:(NSString*)title;
 - (void)setInfoTitle:(NSString*)info;
-- (void)setSubtitle:(NSString*)subtitle;
+- (void)setSubtitleLeft:(NSString*)subtitle;
+- (void)setSubtitleRight:(NSString*)subtitle;
 
 ///*** PRIVATE ***///
 // init
 - (void)initTitle;
 - (void)initInfoTitle;
-- (void)initSubtitle;
+- (void)initSubtitleLeft;
+- (void)initSubtitleRight;
 ///*** END OF PRIVATE ***///
 
 @end

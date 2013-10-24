@@ -92,7 +92,8 @@
     Library* lib = [_maLib objectAtIndex:indexPath.row];
     [cell setTitle:lib.name];
     [cell setInfoTitle:[self makeInfoTitle:lib.usage]];
-    [cell setSubtitle:[self makeSubtitle:lib.date numWords:lib.fkLibWords.count]];
+    [cell setSubtitleLeft:[NSString stringWithFormat:@"%d Words", lib.fkLibWords.count]];
+    [cell setSubtitleRight:[self makeDateString:lib.date]];
     
     return cell;
 }
@@ -204,6 +205,18 @@
         NSString* strName = [alertView textFieldAtIndex:0].text;
         if (strName.length == 0) // no input
             return;
+        // to check if there is a duplicate library
+        for (Library* lib in _maLib)
+            if ([lib.name isEqualToString:strName])
+            {
+                UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Duplicate Name"
+                                                             message:@"Case Sensitive"
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+                [av show];
+                return;
+            }
         // the library to be added
         Library* lib = [NSEntityDescription insertNewObjectForEntityForName:@"Library"
                                                      inManagedObjectContext:_moc];
@@ -237,14 +250,12 @@
     return [NSString stringWithFormat:@"Usage: %d", [num intValue]];
 }
 
-- (NSString*)makeSubtitle:(NSDate *)date numWords:(NSUInteger)numWords
+- (NSString*)makeDateString:(NSDate *)date
 {
     // to format the date
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"dd/mm/yyyy"];
-    NSString* strDate = [df stringFromDate:date];
-    // the return
-    return [NSString stringWithFormat:@"%d Words Created On %@", numWords, strDate];
+    return [df stringFromDate:date];
 }
 ///*** END OF PRIVATE ***///
 @end
