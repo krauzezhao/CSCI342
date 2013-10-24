@@ -116,6 +116,7 @@
     // to initialise the letter array
     _maLetters = [[NSMutableArray alloc] init];
     _selectedLetters = [[NSMutableArray alloc] init];
+    _word = [[NSMutableArray alloc] init];
     // to pick up one random word from the library
     // so that at least one word is presented
     Word* word = [_words objectAtIndex:rand() % _words.count];
@@ -125,6 +126,7 @@
     {
         NSString* strLetter = [NSString stringWithFormat:@"%c", [strWord characterAtIndex:i]];
         [_maLetters addObject:strLetter];
+        [_word addObject:[NSNumber numberWithInt:i]];
     }
     // to add the other letters randomly
     srand(time(NULL));
@@ -141,6 +143,23 @@
         int nIndex1 = rand() % _maLetters.count;
         int nIndex2 = rand() % _maLetters.count;
         [_maLetters exchangeObjectAtIndex:nIndex1 withObjectAtIndex:nIndex2];
+        // to track the word
+        int nIndex1InWord = -1; // the index of nIndex1 in _word
+        int nIndex2InWord = -1;
+        for (int i = 0; i < _word.count; i++)
+        {
+            int nIndex = [[_word objectAtIndex:i] intValue];
+            if (nIndex == nIndex1)
+                nIndex1InWord = i;
+            else if (nIndex == nIndex2)
+                nIndex2InWord = i;
+        }
+        if (nIndex1InWord != -1 && nIndex2InWord == -1)
+            [_word replaceObjectAtIndex:nIndex1InWord withObject:[NSNumber numberWithInt:nIndex2]];
+        else if (nIndex1InWord == -1 && nIndex2InWord != -1)
+            [_word replaceObjectAtIndex:nIndex2InWord withObject:[NSNumber numberWithInt:nIndex1]];
+        else if (nIndex1InWord != -1 && nIndex2InWord != -1)
+            [_word exchangeObjectAtIndex:nIndex1InWord withObjectAtIndex:nIndex2InWord];
     }
 }
 
@@ -206,6 +225,34 @@
             [vBrick addGestureRecognizer:tgr];
             [_maBrick addObject:vBrick];
         }
+}
+
+- (void)find
+{
+    [self reset];
+    for (int i = 0; i < _word.count; i++)
+    {
+        int nIndex = [[_word objectAtIndex:i] intValue];
+        NSString* strLetter = [_maLetters objectAtIndex:nIndex];
+        UIImageView* iv = [_maBrick objectAtIndex:nIndex];
+        CGRect rcInit = iv.frame; // the original frame
+        // to contract the image view for animation
+        iv.frame = CGRectMake(rcInit.origin.x + rcInit.size.width * .45,
+                              rcInit.origin.y + rcInit.size.height * .45,
+                              rcInit.size.width * .1,
+                              rcInit.size.height * .1);
+        iv.image =
+            [UIImage imageNamed:[NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], strLetter]];
+        [UIImageView animateWithDuration:.2
+                                   delay:.2 * i
+                                 options:UIViewAnimationOptionCurveLinear
+                              animations:^{
+                                  iv.frame = rcInit;
+                              }
+                              completion:^(BOOL finished){
+                                  [_delegate letterWasSelected:strLetter index:nIndex];
+                              }];
+    }
 }
 
 // events

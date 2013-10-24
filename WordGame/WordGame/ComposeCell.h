@@ -29,6 +29,6 @@ static const int OFFSET_Y = 3;
 // whether this cell is set
 - (BOOL)isSet;
 // to reset the number of items
-- (void)setNumberOfItems:(ItemIndex)item num:(int)num;
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num animated:(BOOL)animated;
 
 @end

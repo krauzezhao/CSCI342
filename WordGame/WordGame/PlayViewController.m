@@ -79,8 +79,6 @@
     [_tvTitle stop];
     // to update the database
     _player.items = _items;
-    //_player.items = [NSMutableArray arrayWithArray:_items];
-    //[_player setValue:_items forKey:@"items"];
     NSError* err = nil;
     BOOL bSucc = [_moc save:&err];
     if (err || !bSucc)
@@ -315,13 +313,19 @@
         case II_POWEREDWATCH:
             break;
         case II_KING:
-            [_vPlay reset];
+            [_vPlay reshuffle];
             break;
         case II_MAGNIFIER:
+            [_tvTitle clearLetters];
+            [_vPlay find];
             break;
         default:
             return;
     }
+    // to update the number of this item
+    int nNum = [[_items objectAtIndex:item] intValue];
+    nNum--;
+    [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

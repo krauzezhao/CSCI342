@@ -16,6 +16,7 @@
     {
         _bHasScroll = NO;
         _iiResult = II_NULL;
+        _items = [[NSMutableArray alloc] init];
         _slots = [[NSMutableArray alloc] init];
     }
     return self;
@@ -32,9 +33,11 @@
     // to put the item
     if (type == IT_ITEM)
     {
-        if (!_bHasScroll) // no scroll here
+        if (!_bHasScroll) // no scroll here or all needed items here
             return IDS_NOSCROLL;
-        // to check if the dropped item is the item in the formula
+        if (_items.count == _slots.count) // All needed items have been put here
+            return IDS_FULL;
+        // to check if the dropped item is the one in the formula
         BOOL bValid = NO;
         UIImageView* ivSlot = nil;
         for (int i = 0; i < _slots.count; i++)
@@ -44,6 +47,7 @@
             if (iiIndex == item)
             {
                 bValid = YES;
+                [_items addObject:[NSNumber numberWithInt:iiIndex]];
                 break;
             }
         }
@@ -51,7 +55,10 @@
             return IDS_NONFITITEM;
         // to put the item
         ivSlot.image =
-        [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[ivSlot.tag]]];
+            [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[ivSlot.tag]]];
+        // All items needed have been placed
+        if (_items.count == _slots.count)
+            [self showComposeButton:@"Compose"];
         return IDS_SUCCESS;
     } else if (type == IT_SCROLL)
     {
@@ -83,7 +90,6 @@
         _bHasScroll = YES;
         _iiScroll = item;
         [self showCancelButton:@"Cancel"];
-        [self showComposeButton:@"Compose"];
         return IDS_SUCCESS;
     }
     return IDS_INVALID;
@@ -127,14 +133,18 @@
         CGPoint ptCenter =
             CGPointMake((self.frame.origin.x + self.frame.size.width) * PERCENTAGE_WIDTH_SLOTAREA / 2,
                         (self.frame.origin.y + self.frame.size.height) / 2);
-        [_delegate cancelWasTapped:ptCenter scroll:_iiScroll];
+        [_delegate cancelWasTapped:ptCenter scroll:_iiScroll items:_items];
         // no scrolls now
         _bHasScroll = NO;
+        // no items now
+        [_items removeAllObjects];
     } else if ([strTitle isEqualToString:@"Discard"])
     {
         if (_btnCancel.alpha <= .7)
             return; // The button is now being animated
-        [_delegate discardWasTapped];
+        // no items now
+        [_items removeAllObjects];
+        [_delegate discardWasTapped:_iiResult];
     }
 }
 
@@ -207,6 +217,8 @@
         [_delegate okWasTapped:_iiResult];
         // no scrolls now
         _bHasScroll = NO;
+        // no items
+        [_items removeAllObjects];
     }
 }
 

@@ -67,12 +67,14 @@ __unused static const char* LETTER[] = {
 @property (strong, nonatomic) NSMutableArray* maLetters;
 @property (strong, nonatomic) NSArray* words;
 @property (strong, nonatomic) NSMutableArray* selectedLetters;
+@property (strong, nonatomic) NSMutableArray* word; // the word letters' indices
 ///*** END OF PRIVATE ***///
 
 - (void)setLevel:(Level)level words:(NSArray*)words;
 - (void)reshuffle; // every time when a word is found or the user wants to play another game
 - (void)reset; // every time when the user cancels the selection
 - (CGRect)getFrameOfBrick:(int)index; // to get the frame of a brick
+- (void)find; // to find the word
 ///*** PRIVATE ***///
 - (void)initLetters;
 - (void)layoutBricks;

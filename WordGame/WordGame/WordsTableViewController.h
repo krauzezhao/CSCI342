@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
+#import "DefinitionViewController.h"
 #import "Library.h"
 #import "Word.h"
 #import "WordCell.h"

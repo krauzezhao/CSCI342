@@ -18,6 +18,7 @@
         [self initContentView];
         [self initItem];
         [self initLabel];
+        _nTicks = 0;
     }
     return self;
 }
@@ -25,12 +26,13 @@
 - (void)setItem:(ItemIndex)item number:(int)num
 {
     _item = item;
+    _lblNum.text = @"";
     if (num == II_UNKNOWN)
     {
         _ivItem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
         _item = II_UNKNOWN;
     }
-    else if (num == II_UNAVAIL)
+    else if (num == II_UNAVAIL || num == 0)
         _ivItem.image =
             [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_UNAVAIL, ITEM[item]]];
     else
@@ -46,7 +48,16 @@
         _ivItem.userInteractionEnabled = YES;
         [_ivItem addGestureRecognizer:pgr];
     }
+}
 
+- (void)highlight
+{
+    // to highlight the selection
+    _timer = [NSTimer scheduledTimerWithTimeInterval:.1
+                                              target:self
+                                            selector:@selector(itemShouldBeHighlighted)
+                                            userInfo:nil
+                                             repeats:YES];
 }
 
 ///*** PRIVATE ***///
@@ -58,15 +69,7 @@
                                   self.frame.size.width * PERCENTAGE_CONTENTVIEW,
                                   self.frame.size.height * PERCENTAGE_CONTENTVIEW);
     _vContent = [[UIView alloc] initWithFrame:rcContent];
-    //_vContent.backgroundColor = [UIColor grayColor];
     [self addSubview:_vContent];
-}
-- (void)initBorders
-{
-    ///*** NORTH BORDER ***////
-    _vBorderNorth = [[UIView alloc] init];
-    _vBorderNorth.alpha = .5;
-    ///*** END OF NORTH BORDER ***///
 }
 
 - (void)initLabel
@@ -104,13 +107,17 @@
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer *)pgr
 {
     if (pgr.state == UIGestureRecognizerStateEnded)
+    {
         _timer = [NSTimer scheduledTimerWithTimeInterval:TIME_RETURN / 2
                                                   target:self
                                                 selector:@selector(itemShouldAppear)
                                                 userInfo:nil
                                                  repeats:NO];
+    }
     else if (pgr.state == UIGestureRecognizerStateBegan)
+    {
         [_ivItem setHidden:YES];
+    }
     // to trigger the delegate method
     [_delegate itemIsBeingDragged:pgr
                            center:_ivItem.center
@@ -122,6 +129,21 @@
 {
     [_ivItem setHidden:NO];
     [_timer invalidate];
+}
+
+- (void)itemShouldBeHighlighted
+{
+    if (_nTicks++ % 2 == 0)
+    {
+        _ivItem.layer.borderColor = [UIColor colorWithRed:.4 green:1 blue:1 alpha:.8].CGColor;
+        _ivItem.layer.borderWidth = 2;
+    } else
+        _ivItem.layer.borderWidth = 0;
+    if (_nTicks == 10)
+    {
+        _nTicks = 0;
+        [_timer invalidate];
+    }
 }
 ///*** END OF PRIVATE ***///
 

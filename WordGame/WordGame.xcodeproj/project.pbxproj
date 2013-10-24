@@ -40,6 +40,8 @@
 		A58BB61B180E51BC0039E9CE /* Word.m in Sources */ = {isa = PBXBuildFile; fileRef = A58BB61A180E51BC0039E9CE /* Word.m */; };
 		A58D39AE180F46F700128D6C /* NDTrie.m in Sources */ = {isa = PBXBuildFile; fileRef = A58D39AD180F46F700128D6C /* NDTrie.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A58D79B71814A6B400C767E0 /* particle.png in Resources */ = {isa = PBXBuildFile; fileRef = A58D79B61814A6B400C767E0 /* particle.png */; };
+		A5953DEB181889D7001185FF /* ShareCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5953DEA181889D7001185FF /* ShareCollectionViewController.m */; };
+		A5953DEE1818C68B001185FF /* DefinitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5953DED1818C68B001185FF /* DefinitionViewController.m */; };
 		A595B62118139F9A00B4CE36 /* ComposeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A595B62018139F9900B4CE36 /* ComposeView.m */; };
 		A595B62F1813E05800B4CE36 /* cancel_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A595B62B1813E05800B4CE36 /* cancel_pressed.png */; };
 		A595B6301813E05800B4CE36 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A595B62C1813E05800B4CE36 /* cancel.png */; };
@@ -211,6 +213,10 @@
 		A58D39AC180F46F700128D6C /* NDTrie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTrie.h; sourceTree = "<group>"; };
 		A58D39AD180F46F700128D6C /* NDTrie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTrie.m; sourceTree = "<group>"; };
 		A58D79B61814A6B400C767E0 /* particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particle.png; path = resources/icons/particle.png; sourceTree = "<group>"; };
+		A5953DE9181889D7001185FF /* ShareCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareCollectionViewController.h; sourceTree = "<group>"; };
+		A5953DEA181889D7001185FF /* ShareCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareCollectionViewController.m; sourceTree = "<group>"; };
+		A5953DEC1818C68B001185FF /* DefinitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionViewController.h; sourceTree = "<group>"; };
+		A5953DED1818C68B001185FF /* DefinitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinitionViewController.m; sourceTree = "<group>"; };
 		A595B61F18139F9900B4CE36 /* ComposeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeView.h; sourceTree = "<group>"; };
 		A595B62018139F9900B4CE36 /* ComposeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeView.m; sourceTree = "<group>"; };
 		A595B62B1813E05800B4CE36 /* cancel_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel_pressed.png; path = resources/buttons/cancel_pressed.png; sourceTree = "<group>"; };
@@ -441,7 +447,7 @@
 			children = (
 				A58B066D18122AB300850648 /* Item.h */,
 				90D8FBEE17FCDD6A00977AD4 /* Constants.h */,
-				A5C6D5FD180BD59500E3EDC6 /* Spells */,
+				A5C6D5FD180BD59500E3EDC6 /* Misc */,
 				A5CA06CC180B4EE900E31CF9 /* Libraries */,
 				A5D51AD8180A0324000E2D1B /* Resources */,
 				9012B68F1802634D001424AE /* Core Data Model */,
@@ -513,6 +519,15 @@
 				A58B5C4B1810B11500965261 /* ItemCell.m */,
 			);
 			name = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		A5953DE8181889AB001185FF /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				A5953DE9181889D7001185FF /* ShareCollectionViewController.h */,
+				A5953DEA181889D7001185FF /* ShareCollectionViewController.m */,
+			);
+			name = Share;
 			sourceTree = "<group>";
 		};
 		A595B6221813DFE700B4CE36 /* buttons */ = {
@@ -637,14 +652,15 @@
 			name = unselected;
 			sourceTree = "<group>";
 		};
-		A5C6D5FD180BD59500E3EDC6 /* Spells */ = {
+		A5C6D5FD180BD59500E3EDC6 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				A5953DE8181889AB001185FF /* Share */,
 				A58B5C3C1810918700965261 /* Compose */,
 				A5C6D5FE180BD5AC00E3EDC6 /* MiscTabBarController.h */,
 				A5C6D5FF180BD5AC00E3EDC6 /* MiscTabBarController.m */,
 			);
-			name = Spells;
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		A5CA06CC180B4EE900E31CF9 /* Libraries */ = {
@@ -656,6 +672,8 @@
 				A5C6D605180BDC6100E3EDC6 /* WordsTableViewController.m */,
 				A58BB607180E1EEE0039E9CE /* WordCell.h */,
 				A58BB608180E1EEE0039E9CE /* WordCell.m */,
+				A5953DEC1818C68B001185FF /* DefinitionViewController.h */,
+				A5953DED1818C68B001185FF /* DefinitionViewController.m */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -917,6 +935,8 @@
 				A58B06731812522F00850648 /* ItemDropModel.m in Sources */,
 				A595B62118139F9A00B4CE36 /* ComposeView.m in Sources */,
 				A595E777181692FB008FAE4B /* UsableItemView.m in Sources */,
+				A5953DEB181889D7001185FF /* ShareCollectionViewController.m in Sources */,
+				A5953DEE1818C68B001185FF /* DefinitionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

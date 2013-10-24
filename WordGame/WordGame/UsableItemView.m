@@ -21,6 +21,8 @@
         _nTicks = 0;
         // the item image view
         _ivItems = [[NSMutableArray alloc] init];
+        // the labels
+        _lblNum = [[NSMutableArray alloc] init];
         // the swipe gesture to hide the view
         UISwipeGestureRecognizer* sgr =
             [[UISwipeGestureRecognizer alloc] initWithTarget:self
@@ -63,7 +65,7 @@
             [_lblNum addObject:lbl];
             // the number of items
             int nNum = [[numOfItems objectAtIndex:i] intValue];
-            iv.tag = nNum; // image view tag
+            iv.tag = nNum; // The image view tag is the number of the item.
             if (nNum > 0) // available
             {
                 iv.image =
@@ -111,8 +113,21 @@
         return;
     // Unknown items cannot be selected
     UIImageView* iv = [_ivItems objectAtIndex:nIndex];
-    if (iv.tag == II_UNKNOWN)
+    if (iv.tag == II_UNKNOWN || iv.tag == 0)
         return;
+    // to update the number
+    int nNum = iv.tag;
+    nNum--;
+    iv.tag = nNum;
+    UILabel* lbl = [_lblNum objectAtIndex:nIndex];
+    if (nNum == 0)
+    {
+        lbl.text = @"";
+        iv.image =
+            [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_UNAVAIL, USABLE[nIndex]]];
+    }
+    else if (nNum > 0)
+        lbl.text = [NSString stringWithFormat:@"X%d", nNum];
     // to highlight the selection
     _timer = [NSTimer scheduledTimerWithTimeInterval:.1
                                               target:self

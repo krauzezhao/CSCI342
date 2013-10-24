@@ -31,7 +31,9 @@ static const int NUM_PAGES = 2;
 @property (strong, nonatomic) NSMutableArray* items;
 @property (weak, nonatomic) id<ComposeCollectionViewDelegate> ccvdDelegate;
 @property (weak, nonatomic) id<ItemCellDelegate> itemDelegate;
+// to store cells so that invisible ones can be accessed
+@property (strong, nonatomic) NSMutableArray* cells;
 
 // to reset the number of items
-- (void)setNumberOfItems:(ItemIndex)item num:(int)num;
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num animated:(BOOL)animated;
 @end

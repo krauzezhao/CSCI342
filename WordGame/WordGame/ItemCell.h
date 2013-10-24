@@ -11,7 +11,6 @@
 #import "Item.h"
 
 static const float PERCENTAGE_CONTENTVIEW = .8;
-static const int BORDER_WIDTH = 10;
 static const float PERCENTAGE_HEIGHT_LABEL = .3;
 static const int PADDING_IMAGE = 5;
 static const double TIME_RETURN = .6; // the time the item needs to return when dropped
@@ -22,7 +21,7 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr
                     center:(CGPoint)center
                        ref:(CGPoint)ref
-                     item:(ItemIndex)item;
+                      item:(ItemIndex)item;
 
 @end
 
@@ -31,28 +30,26 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 @property ItemIndex item; // the current item
 ///*** PRIVATE ***///
 @property (strong, nonatomic) UIView* vContent;
-@property (strong, nonatomic) UIView* vBorderNorth;
-@property (strong, nonatomic) UIView* vBorderSouth;
-@property (strong, nonatomic) UIView* vBorderWest;
-@property (strong, nonatomic) UIView* vBorderEast;
 @property (strong, nonatomic) UIImageView* ivItem;
 @property (strong, nonatomic) UILabel* lblNum;
 
 @property (weak, nonatomic) id<ItemCellDelegate> delegate;
-@property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping
+@property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping and the highlighting
+@property int nTicks; // the tick for the highlighting
 ///*** END OF PRIVATE ***///
 
 - (void)setItem:(ItemIndex)item number:(int)num;
+- (void)highlight; // to highlight the item
 
 ///*** PRIVATE ***///
 // init
 - (void)initContentView;
-- (void)initBorders;
 - (void)initLabel;
 - (void)initItem;
 // events
-- (void)itemIsBeingDraged:(UIPanGestureRecognizer*)tgr;
+- (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr;
 - (void)itemShouldAppear;
+- (void)itemShouldBeHighlighted;
 ///*** END OF PRIVATE ***///
 
 @end

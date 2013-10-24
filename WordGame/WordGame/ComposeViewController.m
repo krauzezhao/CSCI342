@@ -167,11 +167,21 @@
                                   // to record the size of the image
                                   _szItem = _ivDragged.frame.size;
                               }];
+        // to decrement the number of the items
+        int nNum = [[_items objectAtIndex:item] intValue];
+        nNum--;
+        [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
+        [_ccvItems setNumberOfItems:item num:nNum animated:NO];
     } else if (pgr.state == UIGestureRecognizerStateEnded)
     {
         if (!_bInCompositionArea)
         {
             [self moveBackItem:_ptInitial];
+            // to increment the number of the items
+            int nNum = [[_items objectAtIndex:item] intValue];
+            nNum++;
+            [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
+            [_ccvItems setNumberOfItems:item num:nNum animated:NO];
             return; // not dropped inside the composition area
         }
         ItemDropStatus ids = [_cvCompose itemWasDropped:item];
@@ -182,7 +192,12 @@
                 [self showMessage];
             // to move the item back
             [self moveBackItem:_ptInitial];
-        } else
+            // to increment the number of the items
+            int nNum = [[_items objectAtIndex:item] intValue];
+            nNum++;
+            [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
+            [_ccvItems setNumberOfItems:item num:nNum animated:NO];
+        } else // ready to be composed
         {
             [_lblMsg setHidden:YES];
             [_ivDragged setHidden:YES];
@@ -217,8 +232,23 @@
     }
 }
 
-- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll
+- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll items:(NSMutableArray*)items
 {
+    ///*** to restore the number of items ***///
+    // the scroll
+    int nNum = [[_items objectAtIndex:scroll] intValue];
+    nNum++;
+    [_items replaceObjectAtIndex:scroll withObject:[NSNumber numberWithInt:nNum]];
+    [_ccvItems setNumberOfItems:scroll num:nNum animated:NO];
+    // the items
+    for (NSNumber* index in items)
+    {
+        nNum = [[_items objectAtIndex:[index intValue]] intValue];
+        nNum++;
+        [_items replaceObjectAtIndex:[index intValue] withObject:[NSNumber numberWithInt:nNum]];
+        [_ccvItems setNumberOfItems:[index intValue] num:nNum animated:NO];
+    }
+    ///*** end ***///
     // to show the message label
     [_lblMsg setHidden:NO];
     [self showMessage];
@@ -229,7 +259,7 @@
     
 }
 
-- (void)discardWasTapped
+- (void)discardWasTapped:(ItemIndex)result
 {
     UIAlertView* av =
         [[UIAlertView alloc] initWithTitle:@"Do you really want to discard this item?"
@@ -248,7 +278,7 @@
         nNum = 1;
     else
         nNum++;
-    [_ccvItems setNumberOfItems:result num:nNum];
+    [_ccvItems setNumberOfItems:result num:nNum animated:YES];
     // to update the player
     [_items replaceObjectAtIndex:result withObject:[NSNumber numberWithInt:nNum]];
     // to show the drag hint

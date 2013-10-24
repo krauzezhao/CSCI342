@@ -54,13 +54,16 @@
     return _nNumItems != 0;
 }
 
-- (void)setNumberOfItems:(ItemIndex)item num:(int)num
+- (void)setNumberOfItems:(ItemIndex)item num:(int)num animated:(BOOL)animated
 {
     // to compute the offset
     ItemCell* cell = [_items objectAtIndex:0];
     int nOffset = cell.tag;
     // to find the cell that holds the specified item
-    cell = [_items objectAtIndex:item + nOffset];
+    cell = [_items objectAtIndex:item - nOffset];
     [cell setItem:item number:num];
+    // to highlight the item
+    if (animated)
+        [cell highlight];
 }
 @end

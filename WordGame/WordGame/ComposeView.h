@@ -27,6 +27,7 @@ typedef enum _ItemDropStatus
     IDS_NONSCROLL, // an item when there's no scroll
     IDS_ANOTHERSCROLL, // already a scroll
     IDS_NONFITITEM, // The item is not in the formula.
+    IDS_FULL, // All needed items have been put here.
     IDS_INVALID // any other situations
 }ItemDropStatus;
 
@@ -34,9 +35,9 @@ typedef enum _ItemDropStatus
 
 @required
 // center: the center of the slot area
-- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll;
+- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll items:(NSMutableArray*)items;
 - (void)composeWasTapped;
-- (void)discardWasTapped;
+- (void)discardWasTapped:(ItemIndex)result;
 - (void)okWasTapped:(ItemIndex)result;
 // when the composition finishes
 - (void)compositionDidFinish;
@@ -56,6 +57,8 @@ typedef enum _ItemDropStatus
 @property ItemIndex iiScroll;
 // the result
 @property ItemIndex iiResult;
+// to record the dropped non-scroll items
+@property (strong, nonatomic) NSMutableArray* items;
 // the slot views
 @property (strong, nonatomic) NSMutableArray* slots;
 @property (strong, nonatomic) UIButton* btnCompose;
