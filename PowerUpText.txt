@@ -1,0 +1,62 @@
+/**
+ * Contains Descriptions of Powerup spells
+ * @author Quang Nhan
+ *
+ */
+ 
+ SCROLLS:
+    (watch)
+    Scroll Of Winter Ice: This is the formula to combined with ingredients to produce a powerup that gives the player a one time ability to freeze time for (number of seconds).
+        ingredients: BroadSword of the Barbarian, Dagger of the Dwarvin Rogue, Jewels of the Captive Princess, Broom of the Sacrificed Witch.
+    
+    (power watch:)
+    Scroll of the Arctic Ice: This is a powerful formula that is used to combine with rare ingredients to conjure a powerful powerup that gives the player a one time ability to freeze time for 15 seconds.
+        ingredients: Winter Ice, Corge of the Time Machine, Torch of the Pitted Cave.
+    
+    (king)
+    Scroll of Shuffling Deck: This is the formula used to create a powerup that gives the player a one time ability to reshuffle the grid to give them a fresh perspective.
+        ingredients: Crown of the High Priest, Sceptor of the Dark Sorceress, Mass Grave of the Battle Scar.
+    
+    (Magnifier)
+    Scroll of The Magnified Eye: This is the formula used to create a powerup that gives the player a one time ability to highlight letters  allowing the player to easily select and form a word from their library 
+        ingredients: Eyeglassof the Leaned, 
+    
+ INGREDIENTS:
+    1. Crown of the High Priest (crown.png): Once the symbol of unity and religion, now it is used in rituals to summon celestial spirits to assist in formulation of powerful spells
+    
+    2. Torch of the Pitted Cave (handle): Many heroes of the past would not had had the chance to tell their story if they had not have this torch to find their way back out whilst battling demons underground.
+    
+    3. Broadsword of the Lost Barbarian(hourhand): Vicious northen barbarians who had conquered unknown territories had each carried this huge weapon.
+    
+    4. Corge of the Time Machine (powerup): Engineers of the future had learned to adapt to living in the current time due to loosing this item to a devious burglar who smuggled this rare item into the underground market for a handsome sum of gold.
+    
+    5. Jewels of the Captive Princess(quartz): A not so pretty princess had promised to give to her rescuer anything he wanted, instead of asking for her hand, he only wanted this 2kg pink diamond.
+    
+    6. Sceptor of the Dark Sorceress (Sceptre): Evil and seductive, these unrighteous sorceress used these weapons to wield kings and men to their dark heart desires.
+    
+    7. Dagger of the Dwarvin Rogue(minHand): Seathed in their belt for securities and jobs, these dagger had only seen the light when deemed necessary.
+    
+    8. Mass Grave of the Battle Scar (throne): This item carries an eerie scent of blood and gore, repulsive but necessary to formulate spells that redefine the environment.
+    
+    9. Winter Ice (Watch): Formed from the 4 common ingredients gives a unique effect, when combined with a certain rare incredient, it can create a rare unique powerful spell that can gives the player more time to find more words.
+    
+    10. Broom of the Sacrificed Witch(sechand): The dark age had brought about the fear of witchcraft bringing about the crackdown on people who practice it. What remains of these individuals are their brooms left untouched until now.
+    
+    11. Eyeglass of the Learned (convex lens): Politicians who woo nations with their speech each had worn this eyeware to influence their followers subconsciously. 
+
+POWERUPS:
+ (Watch)
+    Winter Ice: This powerUp gives the player a one time ability to freeze the countdown time for 5 seconds.
+ 
+
+ (PowerdWatch)
+    Arctic Ice: This powerful powerUp gives the player a one time ability to freeze countdown time for 15 seconds.
+ 
+ (King)
+    Shuffling Deck: This powerUp gives the player a one time ability to reshuffle the puzzle to give a fresh view of the game.
+ 
+ (Magnifier)
+    Magnified Eye: This powerUp gives the player a one time ability to highlight the letters of the words.
+
+ 
+ 
