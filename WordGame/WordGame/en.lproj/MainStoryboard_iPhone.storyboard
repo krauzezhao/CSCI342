@@ -628,108 +628,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LOGO.png" width="300" height="300"/>
+        <image name="LOGO.png" width="160" height="167"/>
         <image name="developers.png" width="32" height="32"/>
         <image name="game.png" width="32" height="32"/>
         <image name="items.png" width="32" height="32"/>
         <image name="library.png" width="32" height="32"/>
     </resources>
-    <classes>
-        <class className="ComposeCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCell.h"/>
-        </class>
-        <class className="ComposeCollectionView" superclassName="UICollectionView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCollectionView.h"/>
-        </class>
-        <class className="ComposeView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeView.h"/>
-        </class>
-        <class className="ComposeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ccvItems" candidateClass="ComposeCollectionView"/>
-                <relationship kind="outlet" name="cvCompose" candidateClass="ComposeView"/>
-                <relationship kind="outlet" name="lblMsg" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pcPage" candidateClass="UIPageControl"/>
-            </relationships>
-        </class>
-        <class className="DefinitionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DefinitionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tvDefinition" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="ExpBar" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpBar.h"/>
-        </class>
-        <class className="LevelViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LevelViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ebExpBar" candidateClass="ExpBar"/>
-                <relationship kind="outlet" name="lblMsg" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="btnLevel" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="LibrariesTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibrariesTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addWasTapped:"/>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="LibraryTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibraryTableViewController.h"/>
-        </class>
-        <class className="MiscTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MiscTabBarController.h"/>
-            <relationships>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PlayTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayTabBarController.h"/>
-            <relationships>
-                <relationship kind="action" name="homeWasTapped:"/>
-            </relationships>
-        </class>
-        <class className="PlayView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayView.h"/>
-        </class>
-        <class className="PlayViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tvTitle" candidateClass="TitleView"/>
-                <relationship kind="outlet" name="vPlay" candidateClass="PlayView"/>
-            </relationships>
-        </class>
-        <class className="TitleView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitleView.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-        </class>
-        <class className="WordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordCell.h"/>
-        </class>
-        <class className="WordsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addWasTapped:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
