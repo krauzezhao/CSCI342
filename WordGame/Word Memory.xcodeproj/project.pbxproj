@@ -164,6 +164,12 @@
 		A595E777181692FB008FAE4B /* UsableItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A595E776181692FB008FAE4B /* UsableItemView.m */; };
 		A5963116180FE27900E6C72A /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = A5963115180FE27900E6C72A /* Library.m */; };
 		A59B9EB6181F118E004480DF /* ItemDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A59B9EB5181F118E004480DF /* ItemDescriptionView.m */; };
+		A59B9EC2181F48DC004480DF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9EC1181F48DC004480DF /* Icon.png */; };
+		A59B9EC4181F48E0004480DF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9EC3181F48E0004480DF /* Icon@2x.png */; };
+		A59B9EC7181F49B9004480DF /* game.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9EC6181F49B9004480DF /* game.png */; };
+		A59B9EC9181F4B49004480DF /* library.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9EC8181F4B49004480DF /* library.png */; };
+		A59B9ECB181F4C98004480DF /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9ECA181F4C98004480DF /* items.png */; };
+		A59B9ECD181F4D44004480DF /* developers.png in Resources */ = {isa = PBXBuildFile; fileRef = A59B9ECC181F4D44004480DF /* developers.png */; };
 		A5C6D5DA180B740400E3EDC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5D8180B740400E3EDC6 /* Model.xcdatamodeld */; };
 		A5C6D5F9180BD42B00E3EDC6 /* PlayTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */; };
 		A5C6D600180BD5AC00E3EDC6 /* MiscTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5C6D5FF180BD5AC00E3EDC6 /* MiscTabBarController.m */; };
@@ -195,14 +201,14 @@
 		90D8FBEC17FCDAAE00977AD4 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
 		90D8FBEE17FCDD6A00977AD4 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		90D8FBEF17FCE21000977AD4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		90DF0BFF17FB812A00C0EEE9 /* WordGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90DF0BFF17FB812A00C0EEE9 /* Word Memory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Memory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90DF0C0217FB812A00C0EEE9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		90DF0C0417FB812A00C0EEE9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		90DF0C0617FB812A00C0EEE9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		90DF0C0A17FB812A00C0EEE9 /* WordGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WordGame-Info.plist"; sourceTree = "<group>"; };
+		90DF0C0A17FB812A00C0EEE9 /* Word Memory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Word Memory-Info.plist"; sourceTree = "<group>"; };
 		90DF0C0C17FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C0E17FB812A00C0EEE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		90DF0C1017FB812A00C0EEE9 /* WordGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WordGame-Prefix.pch"; sourceTree = "<group>"; };
+		90DF0C1017FB812A00C0EEE9 /* Word Memory-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Word Memory-Prefix.pch"; sourceTree = "<group>"; };
 		90DF0C1117FB812A00C0EEE9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		90DF0C1217FB812A00C0EEE9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		90DF0C1417FB812A00C0EEE9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -211,9 +217,9 @@
 		90DF0C1B17FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		90DF0C2017FB812A00C0EEE9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		90DF0C2117FB812A00C0EEE9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		90DF0C2817FB812A00C0EEE9 /* WordGameTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordGameTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90DF0C2817FB812A00C0EEE9 /* Word MemoryTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Word MemoryTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90DF0C2917FB812A00C0EEE9 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		90DF0C3117FB812A00C0EEE9 /* WordGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WordGameTests-Info.plist"; sourceTree = "<group>"; };
+		90DF0C3117FB812A00C0EEE9 /* Word MemoryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Word MemoryTests-Info.plist"; sourceTree = "<group>"; };
 		90DF0C3317FB812A00C0EEE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		90DF0C3517FB812A00C0EEE9 /* WordGameTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordGameTests.h; sourceTree = "<group>"; };
 		90DF0C3617FB812A00C0EEE9 /* WordGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordGameTests.m; sourceTree = "<group>"; };
@@ -367,6 +373,12 @@
 		A5963115180FE27900E6C72A /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		A59B9EB4181F118E004480DF /* ItemDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDescriptionView.h; sourceTree = "<group>"; };
 		A59B9EB5181F118E004480DF /* ItemDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDescriptionView.m; sourceTree = "<group>"; };
+		A59B9EC1181F48DC004480DF /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		A59B9EC3181F48E0004480DF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		A59B9EC6181F49B9004480DF /* game.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = game.png; path = resources/icons/game.png; sourceTree = "<group>"; };
+		A59B9EC8181F4B49004480DF /* library.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = library.png; path = resources/icons/library.png; sourceTree = "<group>"; };
+		A59B9ECA181F4C98004480DF /* items.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = items.png; path = resources/icons/items.png; sourceTree = "<group>"; };
+		A59B9ECC181F4D44004480DF /* developers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = developers.png; path = resources/icons/developers.png; sourceTree = "<group>"; };
 		A5C6D5D9180B740400E3EDC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A5C6D5F7180BD42A00E3EDC6 /* PlayTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayTabBarController.h; sourceTree = "<group>"; };
 		A5C6D5F8180BD42B00E3EDC6 /* PlayTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayTabBarController.m; sourceTree = "<group>"; };
@@ -473,8 +485,8 @@
 		90DF0C0017FB812A00C0EEE9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90DF0BFF17FB812A00C0EEE9 /* WordGame.app */,
-				90DF0C2817FB812A00C0EEE9 /* WordGameTests.octest */,
+				90DF0BFF17FB812A00C0EEE9 /* Word Memory.app */,
+				90DF0C2817FB812A00C0EEE9 /* Word MemoryTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -515,10 +527,10 @@
 		90DF0C0917FB812A00C0EEE9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				90DF0C0A17FB812A00C0EEE9 /* WordGame-Info.plist */,
+				90DF0C0A17FB812A00C0EEE9 /* Word Memory-Info.plist */,
 				90DF0C0B17FB812A00C0EEE9 /* InfoPlist.strings */,
 				90DF0C0E17FB812A00C0EEE9 /* main.m */,
-				90DF0C1017FB812A00C0EEE9 /* WordGame-Prefix.pch */,
+				90DF0C1017FB812A00C0EEE9 /* Word Memory-Prefix.pch */,
 				90DF0C1417FB812A00C0EEE9 /* Default.png */,
 				90DF0C1617FB812A00C0EEE9 /* Default@2x.png */,
 				90DF0C1817FB812A00C0EEE9 /* Default-568h@2x.png */,
@@ -539,7 +551,7 @@
 		90DF0C3017FB812A00C0EEE9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				90DF0C3117FB812A00C0EEE9 /* WordGameTests-Info.plist */,
+				90DF0C3117FB812A00C0EEE9 /* Word MemoryTests-Info.plist */,
 				90DF0C3217FB812A00C0EEE9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -727,6 +739,19 @@
 			name = unselected;
 			sourceTree = "<group>";
 		};
+		A59B9EC5181F49A4004480DF /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				A59B9ECC181F4D44004480DF /* developers.png */,
+				A59B9ECA181F4C98004480DF /* items.png */,
+				A59B9EC8181F4B49004480DF /* library.png */,
+				A59B9EC6181F49B9004480DF /* game.png */,
+				A59B9EC3181F48E0004480DF /* Icon@2x.png */,
+				A59B9EC1181F48DC004480DF /* Icon.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
 		A5C6D5FD180BD59500E3EDC6 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,6 +793,7 @@
 		A5D51AD8180A0324000E2D1B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A59B9EC5181F49A4004480DF /* icons */,
 				A58A93931819D406007593B4 /* found */,
 				A58D79B61814A6B400C767E0 /* particle.png */,
 				A595B6B51813E0D800B4CE36 /* unselected */,
@@ -781,9 +807,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		90DF0BFE17FB812900C0EEE9 /* WordGame */ = {
+		90DF0BFE17FB812900C0EEE9 /* Word Memory */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90DF0C3A17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "WordGame" */;
+			buildConfigurationList = 90DF0C3A17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "Word Memory" */;
 			buildPhases = (
 				90DF0BFB17FB812900C0EEE9 /* Sources */,
 				90DF0BFC17FB812900C0EEE9 /* Frameworks */,
@@ -793,14 +819,14 @@
 			);
 			dependencies = (
 			);
-			name = WordGame;
+			name = "Word Memory";
 			productName = WordGame;
-			productReference = 90DF0BFF17FB812A00C0EEE9 /* WordGame.app */;
+			productReference = 90DF0BFF17FB812A00C0EEE9 /* Word Memory.app */;
 			productType = "com.apple.product-type.application";
 		};
-		90DF0C2717FB812A00C0EEE9 /* WordGameTests */ = {
+		90DF0C2717FB812A00C0EEE9 /* Word MemoryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 90DF0C3D17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "WordGameTests" */;
+			buildConfigurationList = 90DF0C3D17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "Word MemoryTests" */;
 			buildPhases = (
 				90DF0C2317FB812A00C0EEE9 /* Sources */,
 				90DF0C2417FB812A00C0EEE9 /* Frameworks */,
@@ -812,9 +838,9 @@
 			dependencies = (
 				90DF0C2E17FB812A00C0EEE9 /* PBXTargetDependency */,
 			);
-			name = WordGameTests;
+			name = "Word MemoryTests";
 			productName = WordGameTests;
-			productReference = 90DF0C2817FB812A00C0EEE9 /* WordGameTests.octest */;
+			productReference = 90DF0C2817FB812A00C0EEE9 /* Word MemoryTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -826,7 +852,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Hong Zhao";
 			};
-			buildConfigurationList = 90DF0BFA17FB812900C0EEE9 /* Build configuration list for PBXProject "WordGame" */;
+			buildConfigurationList = 90DF0BFA17FB812900C0EEE9 /* Build configuration list for PBXProject "Word Memory" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -838,8 +864,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				90DF0BFE17FB812900C0EEE9 /* WordGame */,
-				90DF0C2717FB812A00C0EEE9 /* WordGameTests */,
+				90DF0BFE17FB812900C0EEE9 /* Word Memory */,
+				90DF0C2717FB812A00C0EEE9 /* Word MemoryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -975,6 +1001,12 @@
 				A58A93C51819D42C007593B4 /* lg_X.ico in Resources */,
 				A58A93C61819D42C007593B4 /* lg_Y.ico in Resources */,
 				A58A93C71819D42C007593B4 /* lg_Z.ico in Resources */,
+				A59B9EC2181F48DC004480DF /* Icon.png in Resources */,
+				A59B9EC4181F48E0004480DF /* Icon@2x.png in Resources */,
+				A59B9EC7181F49B9004480DF /* game.png in Resources */,
+				A59B9EC9181F4B49004480DF /* library.png in Resources */,
+				A59B9ECB181F4C98004480DF /* items.png in Resources */,
+				A59B9ECD181F4D44004480DF /* developers.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,7 +1085,7 @@
 /* Begin PBXTargetDependency section */
 		90DF0C2E17FB812A00C0EEE9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 90DF0BFE17FB812900C0EEE9 /* WordGame */;
+			target = 90DF0BFE17FB812900C0EEE9 /* Word Memory */;
 			targetProxy = 90DF0C2D17FB812A00C0EEE9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1113,6 +1145,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Word Memory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1138,6 +1171,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "Word Memory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1148,9 +1182,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
-				INFOPLIST_FILE = "WordGame/WordGame-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "WordGame/Word Memory-Prefix.pch";
+				INFOPLIST_FILE = "WordGame/Word Memory-Info.plist";
+				PRODUCT_NAME = "Word Memory";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1160,9 +1194,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
-				INFOPLIST_FILE = "WordGame/WordGame-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "WordGame/Word Memory-Prefix.pch";
+				INFOPLIST_FILE = "WordGame/Word Memory-Info.plist";
+				PRODUCT_NAME = "Word Memory";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1178,8 +1212,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
-				INFOPLIST_FILE = "WordGameTests/WordGameTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "WordGameTests/Word MemoryTests-Info.plist";
+				PRODUCT_NAME = "Word MemoryTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1195,8 +1229,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WordGame/WordGame-Prefix.pch";
-				INFOPLIST_FILE = "WordGameTests/WordGameTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "WordGameTests/Word MemoryTests-Info.plist";
+				PRODUCT_NAME = "Word MemoryTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1205,7 +1239,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90DF0BFA17FB812900C0EEE9 /* Build configuration list for PBXProject "WordGame" */ = {
+		90DF0BFA17FB812900C0EEE9 /* Build configuration list for PBXProject "Word Memory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90DF0C3817FB812A00C0EEE9 /* Debug */,
@@ -1214,7 +1248,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90DF0C3A17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "WordGame" */ = {
+		90DF0C3A17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "Word Memory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90DF0C3B17FB812A00C0EEE9 /* Debug */,
@@ -1223,7 +1257,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		90DF0C3D17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "WordGameTests" */ = {
+		90DF0C3D17FB812A00C0EEE9 /* Build configuration list for PBXNativeTarget "Word MemoryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90DF0C3E17FB812A00C0EEE9 /* Debug */,

@@ -112,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="2090" y="-1373"/>
         </scene>
-        <!--Level View Controller - Level-->
+        <!--Level View Controller - Game-->
         <scene sceneID="ErK-QX-hLQ">
             <objects>
                 <viewController id="NPX-D4-Aye" customClass="LevelViewController" sceneMemberID="viewController">
@@ -194,7 +194,7 @@
                             <constraint firstItem="4PU-oc-B2W" firstAttribute="leading" secondItem="LeL-Ue-qyc" secondAttribute="leading" type="default" id="yws-Y0-icQ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Level" id="dfN-c1-aGP"/>
+                    <tabBarItem key="tabBarItem" title="Game" image="game.png" id="dfN-c1-aGP"/>
                     <connections>
                         <outlet property="ebExpBar" destination="lG0-Kc-HAd" id="isX-q8-yAZ"/>
                         <outlet property="lblMsg" destination="jzG-6l-ab9" id="QKG-dg-4EY"/>
@@ -269,7 +269,7 @@
                             <outlet property="delegate" destination="2Su-m2-ARz" id="uX9-ZR-4LP"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Library" id="ENc-3c-FE0"/>
+                    <tabBarItem key="tabBarItem" title="Library" image="library.png" id="ENc-3c-FE0"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gV7-7D-Yis" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -345,7 +345,7 @@
                             <constraint firstItem="KV3-DE-JgH" firstAttribute="centerX" secondItem="uck-Hq-x7S" secondAttribute="centerX" type="default" id="v19-5h-YET"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Compose" id="Gou-cw-FfD"/>
+                    <tabBarItem key="tabBarItem" title="Compose" image="items.png" id="Gou-cw-FfD"/>
                     <connections>
                         <outlet property="ccvItems" destination="uck-Hq-x7S" id="IsN-dw-SMp"/>
                         <outlet property="cvCompose" destination="R39-m3-Si6" id="csP-aK-Ob2"/>
@@ -375,14 +375,30 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hong ZHAO (3985714)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-nT-bXM">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Quang Nhan (4297428)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFJ-i2-QHf">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="iqz-Ho-CrX" firstAttribute="trailing" secondItem="Ofq-nT-bXM" secondAttribute="trailing" type="default" id="8Dz-fV-2gH"/>
                             <constraint firstItem="iqz-Ho-CrX" firstAttribute="top" secondItem="qtY-3s-4tW" secondAttribute="top" constant="29" id="Lhf-SB-SPa"/>
-                            <constraint firstItem="iqz-Ho-CrX" firstAttribute="centerX" secondItem="qtY-3s-4tW" secondAttribute="centerX" type="default" id="LxC-Qg-uSA"/>
+                            <constraint firstItem="Ofq-nT-bXM" firstAttribute="centerX" secondItem="qtY-3s-4tW" secondAttribute="centerX" type="default" id="Qoe-9L-mdl"/>
+                            <constraint firstItem="Ofq-nT-bXM" firstAttribute="top" secondItem="qtY-3s-4tW" secondAttribute="top" constant="78" id="TnP-gb-2pZ"/>
+                            <constraint firstItem="AFJ-i2-QHf" firstAttribute="top" secondItem="qtY-3s-4tW" secondAttribute="top" constant="116" id="ib7-1a-qkt"/>
+                            <constraint firstItem="AFJ-i2-QHf" firstAttribute="trailing" secondItem="Ofq-nT-bXM" secondAttribute="trailing" type="default" id="mr9-2J-Ieg"/>
+                            <constraint firstItem="Ofq-nT-bXM" firstAttribute="leading" secondItem="iqz-Ho-CrX" secondAttribute="leading" type="default" id="qDP-kv-dG7"/>
+                            <constraint firstItem="AFJ-i2-QHf" firstAttribute="leading" secondItem="Ofq-nT-bXM" secondAttribute="leading" type="default" id="sEc-Pi-wCD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Developers" id="Dco-81-gKf"/>
+                    <tabBarItem key="tabBarItem" title="Developers" image="developers.png" id="Dco-81-gKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNO-yX-eoP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -603,6 +619,12 @@
             <point key="canvasLocation" x="2134" y="1522"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="developers.png" width="32" height="32"/>
+        <image name="game.png" width="32" height="32"/>
+        <image name="items.png" width="32" height="32"/>
+        <image name="library.png" width="32" height="32"/>
+    </resources>
     <classes>
         <class className="ComposeCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCell.h"/>
