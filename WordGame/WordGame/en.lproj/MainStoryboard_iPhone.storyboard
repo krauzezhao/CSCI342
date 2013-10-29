@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8c-Xp-jg4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8c-Xp-jg4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -54,16 +54,24 @@
                                     <segue destination="tZJ-pG-EE2" kind="modal" identifier="SEG_LIBRARY" id="463-0a-jGK"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="LOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="EzF-hg-OXW">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="153" id="InM-zs-gPd"/>
+                                    <constraint firstAttribute="width" constant="175" id="k8d-nf-yCA"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zO1-RL-mVy" firstAttribute="trailing" secondItem="zTn-c0-siR" secondAttribute="trailing" type="default" id="3sq-oD-68T"/>
                             <constraint firstItem="zO1-RL-mVy" firstAttribute="leading" secondItem="zTn-c0-siR" secondAttribute="leading" type="default" id="4H5-E5-bUn"/>
                             <constraint firstItem="zO1-RL-mVy" firstAttribute="trailing" secondItem="1r5-P4-rdP" secondAttribute="trailing" type="default" id="4jX-1K-Kb1"/>
+                            <constraint firstItem="EzF-hg-OXW" firstAttribute="centerX" secondItem="STi-ra-wPq" secondAttribute="centerX" type="default" id="9BI-54-dWi"/>
+                            <constraint firstAttribute="bottom" secondItem="EzF-hg-OXW" secondAttribute="bottom" constant="48" id="M7o-MT-VMg"/>
                             <constraint firstItem="zTn-c0-siR" firstAttribute="top" secondItem="STi-ra-wPq" secondAttribute="top" constant="63" id="Mhs-z5-EkN"/>
                             <constraint firstItem="1r5-P4-rdP" firstAttribute="top" secondItem="STi-ra-wPq" secondAttribute="top" constant="214" id="NCq-LC-q60"/>
-                            <constraint firstItem="zO1-RL-mVy" firstAttribute="centerX" secondItem="STi-ra-wPq" secondAttribute="centerX" type="default" id="TPE-BK-cC5"/>
                             <constraint firstItem="1r5-P4-rdP" firstAttribute="leading" secondItem="zO1-RL-mVy" secondAttribute="leading" type="default" id="TVe-Qh-9Dn"/>
+                            <constraint firstItem="EzF-hg-OXW" firstAttribute="centerX" secondItem="1r5-P4-rdP" secondAttribute="centerX" type="default" id="c5y-sd-QuS"/>
                             <constraint firstItem="zO1-RL-mVy" firstAttribute="top" secondItem="STi-ra-wPq" secondAttribute="top" constant="135" id="fXf-fU-Z7e"/>
                         </constraints>
                     </view>
@@ -620,6 +628,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LOGO.png" width="300" height="300"/>
         <image name="developers.png" width="32" height="32"/>
         <image name="game.png" width="32" height="32"/>
         <image name="items.png" width="32" height="32"/>
