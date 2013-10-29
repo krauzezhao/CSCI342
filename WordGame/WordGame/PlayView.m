@@ -214,13 +214,15 @@
     for (int i = 0; i < _nDim; i++)
         for (int j = 0; j < _nDim; j++)
         {
+            // the image file name
+            NSString* strImage = [NSString stringWithFormat:
+                                  @"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]];
+            // the brick
             UIImageView* vBrick = [[UIImageView alloc] init];
             vBrick.contentMode = UIViewContentModeScaleToFill;
-            vBrick.image =
-            [UIImage imageNamed:
-             [NSString stringWithFormat:
-              @"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]]];
+            vBrick.image = [UIImage imageNamed:strImage];
             vBrick.tag = i * _nDim + j;
+            [vBrick setAccessibilityIdentifier:strImage];
             [vBrick setTranslatesAutoresizingMaskIntoConstraints:NO];
             [self addSubview:vBrick];
             // constraints
@@ -278,12 +280,17 @@
             nIndex = i;
             break;
         }
-    // to change status
     UIImageView* vBrick = [_maBrick objectAtIndex:nIndex];
+    // an already selected letter
+    NSString* strImage = vBrick.accessibilityIdentifier;
+    if ([strImage rangeOfString:[NSString stringWithFormat:@"%s", LETTER[LI_ORANGE]]].location != NSNotFound)
+        return;
+    // to change status
     [_selectedLetters addObject:[_maBrick objectAtIndex:nIndex]];
     // to change appearance
-    vBrick.image = [UIImage imageNamed:
-                    [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]]];
+    strImage = [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]];
+    vBrick.image = [UIImage imageNamed:strImage];
+    vBrick.accessibilityIdentifier = strImage;
     // to add the letter
     [_delegate letterWasSelected:_maLetters[nIndex] index:nIndex];
 }
