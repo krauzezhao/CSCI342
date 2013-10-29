@@ -35,12 +35,9 @@ typedef enum _ItemDropStatus
 
 @required
 // center: the center of the slot area
-- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll items:(NSMutableArray*)items;
-- (void)composeWasTapped;
+- (void)cancelWasTapped:(ItemIndex)scroll items:(NSMutableArray*)items;
 - (void)discardWasTapped:(ItemIndex)result;
 - (void)okWasTapped:(ItemIndex)result;
-// when the composition finishes
-- (void)compositionDidFinish;
 
 @end
 
@@ -59,6 +56,10 @@ typedef enum _ItemDropStatus
 @property (strong, nonatomic) CAEmitterLayer* el;
 // the view to hold the result item
 @property (strong, nonatomic) UIImageView* ivResult;
+// the label to hold the name of the item
+@property (strong, nonatomic) UILabel* lblName;
+// the text view to hold the description of the item
+@property (strong, nonatomic) UITextView* tvDescription;
 ///*** END OF PRIVATE ***///
 
 // to determine whether a scroll has been put here
@@ -75,10 +76,10 @@ typedef enum _ItemDropStatus
 // The user confirms to discard the item.
 - (void)discard;
 
+- (void)cancelWasTapped:(id)sender;
+
 ///*** PRIVATE ***///
 //** EVENTS **//
-// the hightlight animation
-- (void)cancelWasTapped:(id)sender;
 - (void)composeWasTapped:(id)sender;
 // to delay the removal of the particle system after composition
 - (void)particlesShouldBeRemoved;
@@ -91,5 +92,7 @@ typedef enum _ItemDropStatus
 - (void)showComposeButton:(NSString*)title; // compose or OK
 // the particle effects
 - (void)fireParticles;
+// to show the item descrition
+- (void)showDescription;
 ///*** END OF PRIVATE ***///
 @end

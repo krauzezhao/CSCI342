@@ -22,6 +22,11 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
                     center:(CGPoint)center
                        ref:(CGPoint)ref
                       item:(ItemIndex)item;
+// to show the item description
+- (void)itemWasTapped:(UITapGestureRecognizer*)tgr
+               center:(CGPoint)center
+                  ref:(CGPoint)ref
+                 item:(ItemIndex)item;
 
 @end
 
@@ -32,7 +37,7 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 @property (strong, nonatomic) UIView* vContent;
 @property (strong, nonatomic) UIImageView* ivItem;
 @property (strong, nonatomic) UILabel* lblNum;
-
+@property BOOL bUnavail; // whether the item is available
 @property (weak, nonatomic) id<ItemCellDelegate> delegate;
 @property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping and the highlighting
 @property int nTicks; // the tick for the highlighting
@@ -48,6 +53,7 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 - (void)initItem;
 // events
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr;
+- (void)itemWasTapped:(UITapGestureRecognizer*)tgr;
 - (void)itemShouldAppear;
 - (void)itemShouldBeHighlighted;
 ///*** END OF PRIVATE ***///

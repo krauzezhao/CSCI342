@@ -87,15 +87,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -147,8 +138,20 @@
 {
     if (buttonIndex == 1) // OK is tapped
     {
-        // to check for duplicates
         NSString* strWord = [[alertView textFieldAtIndex:0].text lowercaseString];
+        // to check for non-letters
+        NSString* strTest = [strWord stringByTrimmingCharactersInSet:[NSCharacterSet letterCharacterSet]];
+        if (![strTest isEqualToString:@""])
+        {
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Non Letters Detected"
+                                                         message:nil
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+            return;
+        }
+        // to check for duplicates
         for (Word* word in _words)
             if ([word.word isEqualToString:strWord])
             {

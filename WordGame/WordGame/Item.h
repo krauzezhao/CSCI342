@@ -72,28 +72,6 @@ static const int DROPRATE_ITEM[] = {
 __unused static const char* ITEM_UNKNOWN = {"unknown.png"};
 
 // scrolls
-//static const int NUM_SCROLLS = 4;
-//
-//typedef enum _ScrollIndex
-//{
-//    SI_WATCH,
-//    SI_POWEREDWATCH,
-//    SI_KING,
-//    SI_MAGNIFIER
-//}ScrollIndex;
-//
-//__unused static const char* SCROLL[] = {
-//    "scroll_watch.png",
-//    "scroll_poweredwatch.png",
-//    "scroll_king.png",
-//    "scroll_magnifier.png"
-//};
-//
-//// measured in 100
-//static const int DROPRATE_SCROLL[] = {
-//    3, 4, 8, 2
-//};
-
 // the formula
 // indexed by ScrollIndex
 // sorted by ItemIndex
@@ -129,6 +107,52 @@ __unused static const char* USABLE[] = {
     "poweredwatch.png",
     "king.png",
     "magnifier.png"
+};
+
+// item names
+// indexed by the item index
+__unused static const char* ITEM_NAME[] = {
+    "Scroll Of Winter Ice",
+    "Scroll of the Arctic Ice",
+    "Scroll of Shuffling Deck",
+    "Scroll of The Magnified Eye",
+    "Shuffling Deck",
+    "Magnified Eye",
+    "Arctic Ice",
+    "Eyeglass of the Learned",
+    "Crown of the High Priest",
+    "Torch of the Pitted Cave",
+    "Broadsword of Barbarians",
+    "Dagger of the Dwarvin Rogue",
+    "Corge of the Time Machine",
+    "Jewels of the Princess",
+    "Sceptor of the Sorceress",
+    "Broom of the Witch",
+    "Mass Grave of the Scar",
+    "Winter Ice"
+};
+
+// item descriptions
+// indexed by the item index
+__unused static const char* ITEM_DESCRIPTION[] = {
+    "This is the formula to combined with ingredients to produce a powerup that gives the player a one time ability to freeze time for (number of seconds).",
+    "This is a powerful formula that is used to combine with rare ingredients to conjure a powerful powerup that gives the player a one time ability to adds (number of seconds) to the countdown and freezes it for (number of seconds).",
+    "This is the formula used to create a powerup that gives the player a one time ability to reshuffle the grid to give them a fresh perspective.",
+    "This is the formula used to create a powerup that gives the player a one time ability to highlight letters  allowing the player to easily select and form a word from their library",
+    "This powerup gives the player a one time ability to reshuffle the puzzle to give a fresh view of the game.",
+    "This powerup gives the player a one time ability to highlight the letters of the words.",
+    "This powerful powerUp gives the player a one time ability to increase the time by (number) seconds and freezes (number) seconds to the countdown time.",
+    "Politicians who woo nations with their speech each had worn this eyeware to influence their followers subconsciously.",
+    "Once the symbol of unity and religion, now it is used in rituals to summon celestial spirits to assist in formulation of powerful spells.",
+    "Many heroes of the past would not had had the chance to tell their story if they had not have this torch to find their way back out whilst battling demons underground.",
+    "Vicious northen barbarians who had conquered unknown territories had each carried this huge weapon.",
+    "Seathed in their belt for securities and jobs, these dagger had only seen the light when deemed necessary.",
+    "Engineers of the future had learned to adapt to living in the current time due to loosing this item to a devious burglar who smuggled this rare item into the underground market for a handsome sum of gold.",
+    "A not so pretty princess had promised to give to her rescuer anything he wanted, instead of asking for her hand, he only wanted this 2kg pink diamond.",
+    "Evil and seductive, these unrighteous sorceress used these weapons to wield kings and men to their dark heart desires.",
+    "The dark age had brought about the fear of witchcraft bringing about the crackdown on people who practice it. What remains of these individuals are their brooms left untouched until now.",
+    "This item carries an eerie scent of blood and gore, repulsive but necessary to formulate spells that redefine the environment.",
+    "Formed from the 4 common ingredients gives a unique effect, when combined with a certain rare incredient, it can create a rare unique powerful spell that can gives the player more time to find more words."
 };
 
 #endif

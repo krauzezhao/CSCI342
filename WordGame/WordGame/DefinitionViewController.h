@@ -13,7 +13,8 @@ __unused static const char* WEBSERVICE =
 
 @interface DefinitionViewController : UIViewController <NSURLConnectionDelegate,
                                                         NSURLConnectionDataDelegate,
-                                                        NSXMLParserDelegate>
+                                                        NSXMLParserDelegate,
+                                                        UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *tvDefinition;
 

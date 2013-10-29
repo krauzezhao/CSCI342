@@ -58,7 +58,7 @@
     {
         UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Connection Failed"
                                                      message:nil
-                                                    delegate:nil
+                                                    delegate:self
                                            cancelButtonTitle:@"OK"
                                            otherButtonTitles:nil];
         [av show];
@@ -84,7 +84,7 @@
 {
     UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Connection Failed"
                                                  message:nil
-                                                delegate:nil
+                                                delegate:self
                                        cancelButtonTitle:@"OK"
                                        otherButtonTitles:nil];
     [av show];
@@ -95,7 +95,7 @@
 {
     UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Corrupted"
                                                  message:[NSString stringWithFormat:@"%@", parseError]
-                                                delegate:nil
+                                                delegate:self
                                        cancelButtonTitle:@"OK"
                                        otherButtonTitles:nil];
     [av show];
@@ -126,6 +126,11 @@
     if (_tvDefinition.text.length < _strWord.length)
         _tvDefinition.text = @"No Such A Word";
     [_aivWaiting stopAnimating];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

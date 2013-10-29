@@ -33,6 +33,8 @@
     // to initialise the image view used for dragging
     _ivDragged = [[UIImageView alloc] init];
     _ivDragged.contentMode = UIViewContentModeScaleToFill;
+    // the description view
+    _idvItem = [[ItemDescriptionView alloc] init];
     // not dropped in the composition area
     _bInCompositionArea = NO;
     // the db context
@@ -69,7 +71,7 @@
 {
     // to restore all items if not confirmed yet
     if (_cvCompose.bHasScroll)
-        [self cancelWasTapped:CGPointMake(0, 0) scroll:_cvCompose.iiScroll items:_cvCompose.items];
+        [_cvCompose cancelWasTapped:nil];
     // to update the database
     _player.items = _items;
     NSError* err = nil;
@@ -133,9 +135,21 @@
                       completion:nil];
 }
 
+- (void)itemDescriptionShouldFadeOut
+{
+    [UIView animateWithDuration:.3
+                     animations:^{
+                         _idvItem.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         [_idvItem removeFromSuperview];
+                     }];
+}
+
 // delegates
 - (void)pageWasScrolledTo:(int)page
 {
+    [_idvItem removeFromSuperview];
     _pcPage.currentPage = page;
 }
 
@@ -235,7 +249,43 @@
     }
 }
 
-- (void)cancelWasTapped:(CGPoint)center scroll:(ItemIndex)scroll items:(NSMutableArray*)items
+- (void)itemWasTapped:(UITapGestureRecognizer*)tgr center:(CGPoint)center ref:(CGPoint)ref item:(ItemIndex)item
+{
+    [_timer invalidate];
+    // to compute the center of the item cell relative to the super view
+    CGFloat fOffsetX = ref.x - [tgr locationInView:self.view].x;
+    CGFloat fOffsetY = ref.y - [tgr locationInView:self.view].y;
+    CGFloat fCenterX = center.x - fOffsetX;
+    CGFloat fCenterY = center.y - fOffsetY;
+    // to determine the description view's position
+    // The default is to align the top left of the description view to the center of the tapped item
+    CGFloat fWidth = self.view.frame.size.width * PERCENTAGE_WIDTH_DESCRIPTIONVIEW;
+    CGFloat fHeight = self.view.frame.size.height * PERCENTAGE_HEIGHT_DESCRIPTIONVIEW;
+    CGRect rcDescription = CGRectMake(fCenterX, fCenterY, fWidth, fHeight);
+    if (fCenterX + fWidth > self.view.frame.size.width)
+    { // The right of the description view should be aligned to fCenterX
+        rcDescription.origin = CGPointMake(fCenterX - fWidth, fCenterY);
+    }
+    if (fCenterY + fHeight > self.view.frame.size.height)
+    { // The bottom of the description view should be aligned to fCenterY
+        rcDescription.origin = CGPointMake(rcDescription.origin.x, fCenterY - fHeight);
+    }
+    // the description view
+    if (_idvItem)
+        [_idvItem removeFromSuperview];
+    _idvItem.alpha = .8;
+    _idvItem.frame = rcDescription;
+    [_idvItem setItem:item];
+    [self.view addSubview:_idvItem];
+    // This view disappears in 5 seconds
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                              target:self
+                                            selector:@selector(itemDescriptionShouldFadeOut)
+                                            userInfo:nil
+                                             repeats:NO];
+}
+
+- (void)cancelWasTapped:(ItemIndex)scroll items:(NSMutableArray*)items
 {
     ///*** to restore the number of items ***///
     // the scroll
@@ -255,11 +305,6 @@
     // to show the message label
     [_lblMsg setHidden:NO];
     [self showMessage];
-}
-
-- (void)composeWasTapped
-{
-    
 }
 
 - (void)discardWasTapped:(ItemIndex)result
@@ -286,10 +331,6 @@
     [_items replaceObjectAtIndex:result withObject:[NSNumber numberWithInt:nNum]];
     // to show the drag hint
     [self showMessage];
-}
-
-- (void)compositionDidFinish
-{
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

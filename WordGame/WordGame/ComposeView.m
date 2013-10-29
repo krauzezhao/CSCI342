@@ -100,6 +100,9 @@
 {
     // to hide the result item
     [_ivResult setHidden:YES];
+    // to hide the descriptions
+    [_lblName setHidden:YES];
+    [_tvDescription setHidden:YES];
     // to hide the buttons
     [_btnCancel setHidden:YES];
     [_btnCompose setHidden:YES];
@@ -131,10 +134,7 @@
         [_btnCompose setHidden:YES];
         [_btnCancel setHidden:YES];
         // the delegate
-        CGPoint ptCenter =
-            CGPointMake((self.frame.origin.x + self.frame.size.width) * PERCENTAGE_WIDTH_SLOTAREA / 2,
-                        (self.frame.origin.y + self.frame.size.height) / 2);
-        [_delegate cancelWasTapped:ptCenter scroll:_iiScroll items:_items];
+        [_delegate cancelWasTapped:_iiScroll items:_items];
         // no scrolls now
         _bHasScroll = NO;
         // no items now
@@ -213,6 +213,8 @@
             return; // The button is now being animated.
         // to hide all things
         [_ivResult setHidden:YES];
+        [_lblName setHidden:YES];
+        [_tvDescription setHidden:YES];
         [_btnCancel setHidden:YES];
         [_btnCompose setHidden:YES];
         [_delegate okWasTapped:_iiResult];
@@ -251,7 +253,7 @@
                               _ivResult.frame = CGRectMake(5, 5, 35, 35);
                           }
                           completion:^(BOOL finished) {
-                              // to show the item description
+                              [self showDescription];
                           }];
 }
 //** END OF EVENTS **//
@@ -362,6 +364,47 @@
     ba.delegate = self;
     ba.removedOnCompletion = YES;
     [_el addAnimation:ba forKey:nil];
+}
+
+- (void)showDescription
+{
+    ///*** NAME ***///
+    if (!_lblName)
+    {
+        // the frame
+        CGFloat fX = _ivResult.frame.origin.x + _ivResult.frame.size.width + 5;
+        CGFloat fY = _ivResult.frame.origin.y;
+        CGFloat fWidth = self.frame.size.width * PERCENTAGE_WIDTH_SLOTAREA - fX;
+        CGFloat fHeight = _ivResult.frame.size.height;
+        // the label
+        _lblName = [[UILabel alloc] initWithFrame:CGRectMake(fX, fY, fWidth, fHeight)];
+        _lblName.backgroundColor = [UIColor clearColor];
+        _lblName.font = [UIFont boldSystemFontOfSize:12];
+        _lblName.textColor = [UIColor yellowColor];
+        [self addSubview:_lblName];
+    }
+    [_lblName setHidden:NO];
+    _lblName.text = [NSString stringWithFormat:@"%s", ITEM_NAME[_iiResult]];
+    ///*** END OF NAME ***///
+    ///*** DESCRIPTION ***///
+    if (!_tvDescription)
+    {
+        // the frame
+        CGFloat fX = _ivResult.frame.origin.x;
+        CGFloat fY = _ivResult.frame.origin.y + _ivResult.frame.size.height + 5;
+        CGFloat fWidth = self.frame.size.width * PERCENTAGE_WIDTH_SLOTAREA;
+        CGFloat fHeight = self.frame.size.height - _ivResult.frame.size.height - 5;
+        // the text view
+        _tvDescription = [[UITextView alloc] initWithFrame:CGRectMake(fX, fY, fWidth, fHeight)];
+        _tvDescription.backgroundColor = [UIColor clearColor];
+        _tvDescription.editable = NO;
+        _tvDescription.scrollEnabled = YES;
+        _tvDescription.textColor = [UIColor whiteColor];
+        [self addSubview:_tvDescription];
+    }
+    [_tvDescription setHidden:NO];
+    _tvDescription.text = [NSString stringWithFormat:@"%s", ITEM_DESCRIPTION[_iiResult]];
+    ///*** END OF DESCRIPTION ***///
 }
 
 // delegates

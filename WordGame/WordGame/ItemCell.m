@@ -19,6 +19,7 @@
         [self initItem];
         [self initLabel];
         _nTicks = 0;
+        _bUnavail = YES;
     }
     return self;
 }
@@ -27,6 +28,7 @@
 {
     _item = item;
     _lblNum.text = @"";
+    _ivItem.tag = num; // The tag is the number of the item.
     if (num == II_UNKNOWN)
     {
         _ivItem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s", ITEM_UNKNOWN]];
@@ -40,6 +42,7 @@
         _ivItem.image = [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[item]]];
         // the number of items
         _lblNum.text = [NSString stringWithFormat:@"X%d", num];
+        _bUnavail = NO;
         // the pan gesture
         // This item can be dragged
         UIPanGestureRecognizer* pgr =
@@ -47,6 +50,12 @@
                                                     action:@selector(itemIsBeingDragged:)];
         _ivItem.userInteractionEnabled = YES;
         [_ivItem addGestureRecognizer:pgr];
+        // the tap gesture to show the item description
+        UITapGestureRecognizer* tgr =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(itemWasTapped:)];
+        tgr.numberOfTapsRequired = 1;
+        [_ivItem addGestureRecognizer:tgr];
     }
 }
 
@@ -116,13 +125,27 @@
     }
     else if (pgr.state == UIGestureRecognizerStateBegan)
     {
+        if (_ivItem.tag <= 0)
+        {
+            _bUnavail = YES;
+            return; // The tag is the number of this item.
+        }
         [_ivItem setHidden:YES];
     }
     // to trigger the delegate method
-    [_delegate itemIsBeingDragged:pgr
-                           center:_ivItem.center
-                              ref:[pgr locationInView:self]
-                            item:_item];
+    if (!_bUnavail)
+        [_delegate itemIsBeingDragged:pgr
+                               center:_ivItem.center
+                                  ref:[pgr locationInView:self]
+                                 item:_item];
+}
+
+- (void)itemWasTapped:(UITapGestureRecognizer *)tgr
+{
+    [_delegate itemWasTapped:tgr
+                      center:_ivItem.center
+                         ref:[tgr locationInView:self]
+                        item:_item];
 }
 
 - (void)itemShouldAppear
