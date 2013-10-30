@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _ipSel = nil;
+    _selectedRow = nil;
     // the database context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
@@ -99,8 +99,8 @@
     if ([lib.selected boolValue])
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        if (!_ipSel)
-            _ipSel = indexPath;
+        if (!_selectedRow)
+            _selectedRow = indexPath;
     }
     else
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -118,13 +118,13 @@
         lib.selected = [NSNumber numberWithBool:YES];
         [_libs replaceObjectAtIndex:indexPath.row withObject:lib];
         // to uncheck the previously selected row
-        if (_ipSel.row != indexPath.row)
+        if (_selectedRow.row != indexPath.row)
         {
-            lib = [_libs objectAtIndex:_ipSel.row];
+            lib = [_libs objectAtIndex:_selectedRow.row];
             lib.selected = [NSNumber numberWithBool:NO];
-            [_libs replaceObjectAtIndex:_ipSel.row withObject:lib];
+            [_libs replaceObjectAtIndex:_selectedRow.row withObject:lib];
             // to save the currently selected index path
-            _ipSel = indexPath;
+            _selectedRow = indexPath;
         }
         [tableView reloadData];
     }

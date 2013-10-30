@@ -25,18 +25,18 @@ static const float PERCENTAGE_HEIGHT_DESCRIPTIONVIEW = .4;
                                                      ComposeViewDelegate,
                                                      UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet ComposeView *cvCompose;
-@property (weak, nonatomic) IBOutlet UILabel *lblMsg;
-@property (weak, nonatomic) IBOutlet ComposeCollectionView *ccvItems;
-@property (weak, nonatomic) IBOutlet UIPageControl *pcPage;
+@property (weak, nonatomic) IBOutlet ComposeView *composeView;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet ComposeCollectionView *itemsView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
-@property (strong, nonatomic) UIImageView* ivDragged;
-@property (strong, nonatomic) ItemDescriptionView* idvItem;
-@property CGPoint ptInitial; // the originial coordinate of any item
+@property (strong, nonatomic) UIImageView* draggedItemView;
+@property (strong, nonatomic) ItemDescriptionView* itemDescriptionView;
+@property CGPoint initialPoint; // the originial coordinate of any item
 //@property CGPoint ptInitialScroll; // the original coordinate of the scroll
-@property CGSize szItem; // the size of the dragged item
-@property BOOL bInCompositionArea; // whether the drop is in the composition area
-@property BOOL bOK; // whether the user taps OK
+@property CGSize itemSize; // the size of the dragged item
+@property BOOL isInCompositionArea; // whether the drop is in the composition area
+@property BOOL isOK; // whether the user taps OK
 @property (strong, nonatomic) NSTimer* timer; // the timer to fade out the item description
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;

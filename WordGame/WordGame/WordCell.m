@@ -32,37 +32,37 @@
 
 - (void)setTitle:(NSString *)title
 {
-    _lblTitle.text = title;
+    _titleLabel.text = title;
 }
 
 - (void)setInfoTitle:(NSString *)info
 {
-    _lblInfoTitle.text = info;
+    _infoTitleLabel.text = info;
 }
 
 - (void)setSubtitleLeft:(NSString *)subtitle
 {
     if (!subtitle)
-        [_lblSubtitleLeft removeFromSuperview];
-    _lblSubtitleLeft.text = subtitle;
+        [_leftSubtitleLabel removeFromSuperview];
+    _leftSubtitleLabel.text = subtitle;
 }
 
 - (void)setSubtitleRight:(NSString *)subtitle
 {
     if (!subtitle)
-        [_lblSubtitleRight removeFromSuperview];
-    _lblSubtitleRight.text = subtitle;
+        [_rightSubtitleLabel removeFromSuperview];
+    _rightSubtitleLabel.text = subtitle;
 }
 
 ///*** PRIVATE ***///
 // init
 - (void)initTitle
 {
-    _lblTitle = [[UILabel alloc] init];
-    [_lblTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.contentView addSubview:_lblTitle];
+    _titleLabel = [[UILabel alloc] init];
+    [_titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_titleLabel];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblTitle
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_titleLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.contentView
@@ -70,7 +70,7 @@
                                                          multiplier:1
                                                            constant:PADDING_HORIZONTAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTitle
+    lc = [NSLayoutConstraint constraintWithItem:_titleLabel
                                       attribute:NSLayoutAttributeTop
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -78,7 +78,7 @@
                                      multiplier:1
                                        constant:PADDING_VERTICAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTitle
+    lc = [NSLayoutConstraint constraintWithItem:_titleLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -86,7 +86,7 @@
                                      multiplier:PERCENTAGE_WIDTH_TITLE
                                        constant:0];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTitle
+    lc = [NSLayoutConstraint constraintWithItem:_titleLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -98,14 +98,14 @@
 
 - (void)initInfoTitle
 {
-    _lblInfoTitle = [[UILabel alloc] init];
-    _lblInfoTitle.font = [UIFont systemFontOfSize:12];
-    _lblInfoTitle.textAlignment = NSTextAlignmentRight;
-    _lblInfoTitle.textColor = [UIColor grayColor];
-    [_lblInfoTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.contentView addSubview:_lblInfoTitle];
+    _infoTitleLabel = [[UILabel alloc] init];
+    _infoTitleLabel.font = [UIFont systemFontOfSize:12];
+    _infoTitleLabel.textAlignment = NSTextAlignmentRight;
+    _infoTitleLabel.textColor = [UIColor grayColor];
+    [_infoTitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_infoTitleLabel];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblInfoTitle
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_infoTitleLabel
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.contentView
@@ -113,7 +113,7 @@
                                                          multiplier:1
                                                            constant:0 - PADDING_HORIZONTAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblInfoTitle
+    lc = [NSLayoutConstraint constraintWithItem:_infoTitleLabel
                                       attribute:NSLayoutAttributeTop
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -121,7 +121,7 @@
                                      multiplier:1
                                        constant:PADDING_VERTICAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblInfoTitle
+    lc = [NSLayoutConstraint constraintWithItem:_infoTitleLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -129,7 +129,7 @@
                                      multiplier:1 - PERCENTAGE_WIDTH_TITLE
                                        constant:0];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblInfoTitle
+    lc = [NSLayoutConstraint constraintWithItem:_infoTitleLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -142,13 +142,13 @@
 
 - (void)initSubtitleLeft
 {
-    _lblSubtitleLeft = [[UILabel alloc] init];
-    _lblSubtitleLeft.font = [UIFont systemFontOfSize:12];
-    _lblSubtitleLeft.textColor = [UIColor grayColor];
-    [_lblSubtitleLeft setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.contentView addSubview:_lblSubtitleLeft];
+    _leftSubtitleLabel = [[UILabel alloc] init];
+    _leftSubtitleLabel.font = [UIFont systemFontOfSize:12];
+    _leftSubtitleLabel.textColor = [UIColor grayColor];
+    [_leftSubtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_leftSubtitleLabel];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleLeft
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_leftSubtitleLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.contentView
@@ -156,7 +156,7 @@
                                                          multiplier:1
                                                            constant:PADDING_HORIZONTAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleLeft
+    lc = [NSLayoutConstraint constraintWithItem:_leftSubtitleLabel
                                       attribute:NSLayoutAttributeBottom
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -164,7 +164,7 @@
                                      multiplier:1
                                        constant:PADDING_VERTICAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleLeft
+    lc = [NSLayoutConstraint constraintWithItem:_leftSubtitleLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -172,7 +172,7 @@
                                      multiplier:.5
                                        constant:0];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleLeft
+    lc = [NSLayoutConstraint constraintWithItem:_leftSubtitleLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -184,14 +184,14 @@
 
 - (void)initSubtitleRight
 {
-    _lblSubtitleRight = [[UILabel alloc] init];
-    _lblSubtitleRight.font = [UIFont systemFontOfSize:12];
-    _lblSubtitleRight.textAlignment = NSTextAlignmentRight;
-    _lblSubtitleRight.textColor = [UIColor grayColor];
-    [_lblSubtitleRight setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.contentView addSubview:_lblSubtitleRight];
+    _rightSubtitleLabel = [[UILabel alloc] init];
+    _rightSubtitleLabel.font = [UIFont systemFontOfSize:12];
+    _rightSubtitleLabel.textAlignment = NSTextAlignmentRight;
+    _rightSubtitleLabel.textColor = [UIColor grayColor];
+    [_rightSubtitleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_rightSubtitleLabel];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleRight
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_rightSubtitleLabel
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.contentView
@@ -199,7 +199,7 @@
                                                          multiplier:1
                                                            constant:0 - PADDING_HORIZONTAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleRight
+    lc = [NSLayoutConstraint constraintWithItem:_rightSubtitleLabel
                                       attribute:NSLayoutAttributeBottom
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -207,7 +207,7 @@
                                      multiplier:1
                                        constant:PADDING_VERTICAL];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleRight
+    lc = [NSLayoutConstraint constraintWithItem:_rightSubtitleLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView
@@ -215,7 +215,7 @@
                                      multiplier:.5
                                        constant:0];
     [self.contentView addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblSubtitleRight
+    lc = [NSLayoutConstraint constraintWithItem:_rightSubtitleLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self.contentView

@@ -63,8 +63,8 @@ __unused static const char* LETTER[] = {
 ///*** PRIVATE ***///
 @property Level level;
 @property int nDim; // the dimension of the brick region
-@property (strong, nonatomic) NSMutableArray* maBrick;
-@property (strong, nonatomic) NSMutableArray* maLetters;
+@property (strong, nonatomic) NSMutableArray* bricks;
+@property (strong, nonatomic) NSMutableArray* letters;
 @property (strong, nonatomic) NSArray* words;
 @property (strong, nonatomic) NSMutableArray* selectedLetters;
 @property (strong, nonatomic) NSMutableArray* word; // the word letters' indices

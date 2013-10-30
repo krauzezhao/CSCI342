@@ -28,8 +28,8 @@
     [super viewDidLoad];
     _bricks = [[NSMutableArray alloc] init];
 	// Do any additional setup after loading the view.
-    _vPlay.delegate = self;
-    _tvTitle.delegate = self;
+    _playView.delegate = self;
+    _titleView.delegate = self;
     // rotation animation init
     _droppedItems = [[NSMutableArray alloc] init];
     _tickCounts = [[NSMutableArray alloc] init];
@@ -77,8 +77,8 @@
         [av show];
         return;
     }
-    [_vPlay setLevel:_level words:words];
-    [_tvTitle startTimer];
+    [_playView setLevel:_level words:words];
+    [_titleView startTimer];
     // the word trie
     _trie = [[NDMutableTrie alloc] initWithCaseInsensitive:YES];
     for (Word* word in words)
@@ -87,8 +87,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [_tvTitle stop];
+    [_titleView stop];
     // to update the database
+    _lib.usage = [NSNumber numberWithInt:[_lib.usage intValue] + 1];
     _player.items = _items;
     NSError* err = nil;
     BOOL bSucc = [_moc save:&err];
@@ -120,10 +121,10 @@
     srand(time(NULL));
     int nIndex = [[_bricks objectAtIndex:rand() % _bricks.count] intValue];
     // the frame of the brick
-    CGRect rcBrick = [_vPlay getFrameOfBrick:nIndex];
+    CGRect rcBrick = [_playView getFrameOfBrick:nIndex];
     // to convert the frame to the current reference
     rcBrick = CGRectMake(self.view.frame.origin.x + rcBrick.origin.x,
-                         _tvTitle.frame.size.height + rcBrick.origin.y,
+                         _titleView.frame.size.height + rcBrick.origin.y,
                          rcBrick.size.width * 1.5,
                          rcBrick.size.width * 1.5);
     // the animated image view
@@ -201,18 +202,18 @@
     // to add the brick index into the array
     [_bricks addObject:[NSNumber numberWithInt:index]];
     // to update the word in the title view
-    [_tvTitle addLetter:letter];
+    [_titleView addLetter:letter];
     // the word so far
-    NSString* strWord = [[_tvTitle getLetters] lowercaseString];
+    NSString* strWord = [[_titleView getLetters] lowercaseString];
     BOOL bFound = [_trie containsObjectForKeyWithPrefix:strWord];
     if (bFound)
     {
         // to drop an item
         [self itemWasDropped:[[[ItemDropModel alloc] init:DROP_RATE_FACTOR[_level]] dropAnItem]];
         // to update the view
-        [_vPlay reshuffle];
-        [_tvTitle clearLetters];
-        [_tvTitle incrementHits];
+        [_playView reshuffle];
+        [_titleView clearLetters];
+        [_titleView incrementHits];
         // to update the hits of the word
         for (Word* word in _lib.fkLibWords)
             if ([word.word isEqualToString:strWord])
@@ -262,20 +263,20 @@
 
 - (void)titleViewWasTapped
 {
-    [_vPlay reset];
-    [_tvTitle clearLetters];
+    [_playView reset];
+    [_titleView clearLetters];
 }
 - (void)titleViewWasSwipedOver
 {
-    if (!_vUsableItems)
+    if (!_usableItemView)
     {
-        CGRect rc = CGRectMake(_tvTitle.frame.origin.x + _tvTitle.frame.size.width,
-                               _tvTitle.frame.origin.y,
-                               _tvTitle.frame.size.width,
-                               _tvTitle.frame.size.height);
-        _vUsableItems = [[UsableItemView alloc] initWithFrame:rc];
-        _vUsableItems.delegate = self;
-        [self.view addSubview:_vUsableItems];
+        CGRect rc = CGRectMake(_titleView.frame.origin.x + _titleView.frame.size.width,
+                               _titleView.frame.origin.y,
+                               _titleView.frame.size.width,
+                               _titleView.frame.size.height);
+        _usableItemView = [[UsableItemView alloc] initWithFrame:rc];
+        _usableItemView.delegate = self;
+        [self.view addSubview:_usableItemView];
     }
     // the number of usable items
     NSMutableArray* items = [[NSMutableArray alloc] init];
@@ -285,19 +286,19 @@
         [items addObject:num];
     }
     // to show the view
-    [_vUsableItems initItems:items];
+    [_usableItemView initItems:items];
     [UIView animateWithDuration:.8
                      animations:^{
-                         CGRect rc = CGRectMake(_tvTitle.frame.origin.x - 35,
-                                                _tvTitle.frame.origin.y,
-                                                _tvTitle.frame.size.width,
-                                                _tvTitle.frame.size.height);
-                         _vUsableItems.frame = rc;
+                         CGRect rc = CGRectMake(_titleView.frame.origin.x - 35,
+                                                _titleView.frame.origin.y,
+                                                _titleView.frame.size.width,
+                                                _titleView.frame.size.height);
+                         _usableItemView.frame = rc;
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:.3
                                           animations:^{
-                                              _vUsableItems.frame = _tvTitle.frame;
+                                              _usableItemView.frame = _titleView.frame;
                                           }];
                      }];
 }
@@ -307,11 +308,11 @@
     // to hide the view
     [UIView animateWithDuration:.8
                      animations:^{
-                         CGRect rc = CGRectMake(_tvTitle.frame.origin.x + _tvTitle.frame.size.width,
-                                                _tvTitle.frame.origin.y,
-                                                _tvTitle.frame.size.width,
-                                                _tvTitle.frame.size.height);
-                         _vUsableItems.frame = rc;
+                         CGRect rc = CGRectMake(_titleView.frame.origin.x + _titleView.frame.size.width,
+                                                _titleView.frame.origin.y,
+                                                _titleView.frame.size.width,
+                                                _titleView.frame.size.height);
+                         _usableItemView.frame = rc;
                      }];
 }
 
@@ -320,17 +321,17 @@
     switch (item)
     {
         case II_WATCH:
-            [_tvTitle stopTimerFor:5];
+            [_titleView stopTimerFor:5];
             break;
         case II_POWEREDWATCH:
-            [_tvTitle stopTimerFor:15];
+            [_titleView stopTimerFor:15];
             break;
         case II_KING:
-            [_vPlay reshuffle];
+            [_playView reshuffle];
             break;
         case II_MAGNIFIER:
-            [_tvTitle clearLetters];
-            [_vPlay find];
+            [_titleView clearLetters];
+            [_playView find];
             break;
         default:
             return;
@@ -349,8 +350,8 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
         else // Yes button is tapped
         {
-            [_vPlay reshuffle];
-            [_tvTitle restart];
+            [_playView reshuffle];
+            [_titleView restart];
         }
     } else if ([alertView.title isEqualToString:@"No Words In This Library"])
     {

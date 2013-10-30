@@ -15,12 +15,12 @@ static const int PADDING = 5;
 @interface ExpBar : UIView
 
 ///*** PRIVATE ***///
-@property (strong, nonatomic) UILabel* lblLevel;
-@property (strong, nonatomic) UILabel* lblExpPoints;
-@property (strong, nonatomic) UIProgressView* pvExp;
+@property (strong, nonatomic) UILabel* levelLabel;
+@property (strong, nonatomic) UILabel* experienceLabel;
+@property (strong, nonatomic) UIProgressView* experienceProgressBar;
 @property (strong, nonatomic) NSTimer* timer; // to do the experience animation
-@property int nLevel; // the level of the player
-@property int nCurExp; // for animation use
+@property int level; // the level of the player
+@property int currentExperience; // for animation use
 ///*** END OF PRIVATE ***///
 
 - (void)setLevel:(int)level exp:(int)points;

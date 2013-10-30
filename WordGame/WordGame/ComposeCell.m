@@ -15,21 +15,21 @@
     if (self = [super initWithCoder:aDecoder])
     {
         self.backgroundColor = [UIColor clearColor];
-        _nNumItems = 0;
+        _numberOfItems = 0;
     }
     return self;
 }
 
 - (void)setItems:(NSMutableArray *)numOfItems offset:(int)offset
 {
-    if (_nNumItems != 0)
+    if (_numberOfItems != 0)
         return; // to avoid a second set
     // the width of one item
     CGFloat fWidth = self.frame.size.width / NUM_ITEMS_PER_ROW;
     // the item array
-    _nNumItems = numOfItems.count;
-    _items = [[NSMutableArray alloc] initWithCapacity:_nNumItems];
-    for (int i = 0; i < _nNumItems; i++)
+    _numberOfItems = numOfItems.count;
+    _items = [[NSMutableArray alloc] initWithCapacity:_numberOfItems];
+    for (int i = 0; i < _numberOfItems; i++)
     {
         // the coordinate of the item
         int nRow = i / NUM_ITEMS_PER_ROW;
@@ -51,7 +51,7 @@
 
 - (BOOL)isSet
 {
-    return _nNumItems != 0;
+    return _numberOfItems != 0;
 }
 
 - (void)setNumberOfItems:(ItemIndex)item num:(int)num animated:(BOOL)animated

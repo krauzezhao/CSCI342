@@ -16,13 +16,13 @@ __unused static const char* WEBSERVICE =
                                                         NSXMLParserDelegate,
                                                         UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *tvDefinition;
+@property (weak, nonatomic) IBOutlet UITextView *definitionTextView;
 
 // the view to wait for network done
-@property (strong, nonatomic) UIActivityIndicatorView* aivWaiting;
+@property (strong, nonatomic) UIActivityIndicatorView* waitingIndicator;
 
-@property (strong, nonatomic) NSString* strWord; // the word to be defined
-@property (strong, nonatomic) NSString* strCurElement; // the current element during xml parsing
+@property (strong, nonatomic) NSString* word; // the word to be defined
+@property (strong, nonatomic) NSString* currentElement; // the current element during xml parsing
 @property (strong, nonatomic) NSMutableData* xmlData; // the xml data
 
 @end

@@ -27,18 +27,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _strCurElement = nil;
+    _currentElement = nil;
     _xmlData = [NSMutableData dataWithCapacity:0];
     // to wait for the web service done
-    _aivWaiting =
+    _waitingIndicator =
         [[UIActivityIndicatorView alloc]
             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    _aivWaiting.frame = CGRectMake(0, 0, 200, 200);
-    _aivWaiting.center = self.view.center;
-    [self.view addSubview:_aivWaiting];
-    [_aivWaiting startAnimating];
+    _waitingIndicator.frame = CGRectMake(0, 0, 200, 200);
+    _waitingIndicator.center = self.view.center;
+    [self.view addSubview:_waitingIndicator];
+    [_waitingIndicator startAnimating];
     // the web service
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%s%@", WEBSERVICE, _strWord]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%s%@", WEBSERVICE, _word]];
     NSURLRequest* req = [NSURLRequest requestWithURL:url];
     [NSURLConnection connectionWithRequest:req delegate:self];
 }
@@ -103,29 +103,29 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    _strCurElement = elementName;
+    _currentElement = elementName;
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    if (_strCurElement && [_strCurElement isEqualToString:@"WordDefinition"])
+    if (_currentElement && [_currentElement isEqualToString:@"WordDefinition"])
     {
         NSString* str = [string stringByReplacingOccurrencesOfString:@"{" withString:@""];
         str = [str stringByReplacingOccurrencesOfString:@"}" withString:@""];
-        _tvDefinition.text = str;
+        _definitionTextView.text = str;
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-    _strCurElement = nil;
+    _currentElement = nil;
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    if (_tvDefinition.text.length < _strWord.length)
-        _tvDefinition.text = @"No Such A Word";
-    [_aivWaiting stopAnimating];
+    if (_definitionTextView.text.length < _word.length)
+        _definitionTextView.text = @"No Such A Word";
+    [_waitingIndicator stopAnimating];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

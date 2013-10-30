@@ -52,7 +52,7 @@
                                           inManagedObjectContext:_moc];
     [fr setEntity:ed];
     NSError* err = nil;
-    _maLib = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
+    _libs = [[_moc executeFetchRequest:fr error:&err] mutableCopy];
     if (err)
     {
         UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Data Error"
@@ -76,7 +76,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _maLib.count;
+    return _libs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,7 +89,7 @@
         cell = [[WordCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                reuseIdentifier:CellIdentifier];
     
-    Library* lib = [_maLib objectAtIndex:indexPath.row];
+    Library* lib = [_libs objectAtIndex:indexPath.row];
     [cell setTitle:lib.name];
     [cell setInfoTitle:[self makeInfoTitle:lib.usage]];
     [cell setSubtitleLeft:[NSString stringWithFormat:@"%d Words", lib.fkLibWords.count]];
@@ -118,7 +118,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        Library* lib = [_maLib objectAtIndex:indexPath.row];
+        Library* lib = [_libs objectAtIndex:indexPath.row];
         // to delete the data
         for (Word* word in lib.fkLibWords)
             [_moc deleteObject:word];
@@ -135,7 +135,7 @@
             [av show];
             return;
         }
-        [_maLib removeObjectAtIndex:indexPath.row];
+        [_libs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }  
 }
@@ -169,7 +169,7 @@
     {
         // the selected data
         NSIndexPath* ip = [self.tableView indexPathForSelectedRow];
-        Library* lib = [_maLib objectAtIndex:ip.row];
+        Library* lib = [_libs objectAtIndex:ip.row];
         // the destination view
         WordsTableViewController* wtvc = [segue destinationViewController];
         wtvc.title = lib.name;
@@ -206,7 +206,7 @@
         if (strName.length == 0) // no input
             return;
         // to check if there is a duplicate library
-        for (Library* lib in _maLib)
+        for (Library* lib in _libs)
             if ([lib.name isEqualToString:strName])
             {
                 UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"Duplicate Name"
@@ -237,7 +237,7 @@
             [av show];
             return;
         }
-        [_maLib insertObject:lib atIndex:0];
+        [_libs insertObject:lib atIndex:0];
         // to insert one row at the top
         NSIndexPath* insertion = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView insertRowsAtIndexPaths:@[insertion] withRowAnimation:YES];

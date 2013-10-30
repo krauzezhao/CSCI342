@@ -135,8 +135,8 @@ __unused static const char* ITEM_NAME[] = {
 // item descriptions
 // indexed by the item index
 __unused static const char* ITEM_DESCRIPTION[] = {
-    "This is the formula to combined with ingredients to produce a powerup that gives the player a one time ability to freeze time for (number of seconds).",
-    "This is a powerful formula that is used to combine with rare ingredients to conjure a powerful powerup that gives the player a one time ability to adds (number of seconds) to the countdown and freezes it for (number of seconds).",
+    "This is the formula to combined with ingredients to produce a powerup that gives the player a one time ability to freeze time for 5 seconds.",
+    "This is a powerful formula that is used to combine with rare ingredients to conjure a powerful powerup that gives the player a one time ability to adds (number of seconds) to the countdown and freezes it for 15 seconds.",
     "This is the formula used to create a powerup that gives the player a one time ability to reshuffle the grid to give them a fresh perspective.",
     "This is the formula used to create a powerup that gives the player a one time ability to highlight letters  allowing the player to easily select and form a word from their library",
     "This powerup gives the player a one time ability to reshuffle the puzzle to give a fresh view of the game.",

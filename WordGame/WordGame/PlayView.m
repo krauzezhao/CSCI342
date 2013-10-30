@@ -33,7 +33,7 @@
 - (void)reshuffle
 {
     [self initLetters];
-    for (UIImageView* vBrick in _maBrick)
+    for (UIImageView* vBrick in _bricks)
     {
         [UIImageView animateWithDuration:.3
                               animations:^{
@@ -47,7 +47,7 @@
                               completion:^(BOOL finished){
                                   vBrick.image =
                                   [UIImage imageNamed:
-                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[vBrick.tag]]];
+                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _letters[vBrick.tag]]];
                               }];
         [UIImageView animateWithDuration:.3
                               animations:^{
@@ -78,9 +78,11 @@
                                                             fHeight * .1);
                               }
                               completion:^(BOOL finished){
-                                  vBrick.image =
-                                  [UIImage imageNamed:
-                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _maLetters[vBrick.tag]]];
+                                  NSString* strImage =
+                                    [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE],
+                                     _letters[vBrick.tag]];
+                                  vBrick.image = [UIImage imageNamed:strImage];
+                                  vBrick.accessibilityIdentifier = strImage;
                               }];
         [UIImageView animateWithDuration:.2
                               animations:^{
@@ -101,12 +103,12 @@
 - (CGRect)getFrameOfBrick:(int)index
 {
     // invalid index
-    if (index < 0 || index >= _maBrick.count)
+    if (index < 0 || index >= _bricks.count)
         return CGRectMake(0, 0, 0, 0);
     // to return the frame
-    UIImageView* ivBrick = [_maBrick objectAtIndex:index];
+    UIImageView* ivBrick = [_bricks objectAtIndex:index];
     return ivBrick.frame;
-    for (UIImageView* iv in _maBrick)
+    for (UIImageView* iv in _bricks)
         NSLog(@"%f", iv.frame.origin.x);
 }
 
@@ -117,8 +119,8 @@
     for (int i = 0; i < _word.count; i++)
     {
         int nIndex = [[_word objectAtIndex:i] intValue];
-        NSString* strLetter = [_maLetters objectAtIndex:nIndex];
-        UIImageView* iv = [_maBrick objectAtIndex:nIndex];
+        NSString* strLetter = [_letters objectAtIndex:nIndex];
+        UIImageView* iv = [_bricks objectAtIndex:nIndex];
         iv.layer.zPosition = 50;
         CGRect rcInit = iv.frame; // the original frame
         [UIImageView animateWithDuration:.3
@@ -154,7 +156,7 @@
 - (void)initLetters
 {
     // to initialise the letter array
-    _maLetters = [[NSMutableArray alloc] init];
+    _letters = [[NSMutableArray alloc] init];
     _selectedLetters = [[NSMutableArray alloc] init];
     _word = [[NSMutableArray alloc] init];
     // to pick up one random word from the library
@@ -165,24 +167,24 @@
     for (int i = 0; i < strWord.length; i++)
     {
         NSString* strLetter = [NSString stringWithFormat:@"%c", [strWord characterAtIndex:i]];
-        [_maLetters addObject:strLetter];
+        [_letters addObject:strLetter];
         [_word addObject:[NSNumber numberWithInt:i]];
     }
     // to add the other letters randomly
     srand(time(NULL));
     int nNumLetters = _nDim * _nDim;
-    for (int i = _maLetters.count - 1; i < nNumLetters; i++)
+    for (int i = _letters.count - 1; i < nNumLetters; i++)
     {
         char letter = rand() % ('Z' + 1 - 'A') + 'A';
         NSString* strLetter = [NSString stringWithFormat:@"%c", letter];
-        [_maLetters addObject:strLetter];
+        [_letters addObject:strLetter];
     }
     // to permute the letter array
     for (int i = 0; i < NUM_SWAPS[_level]; i++)
     {
-        int nIndex1 = rand() % _maLetters.count;
-        int nIndex2 = rand() % _maLetters.count;
-        [_maLetters exchangeObjectAtIndex:nIndex1 withObjectAtIndex:nIndex2];
+        int nIndex1 = rand() % _letters.count;
+        int nIndex2 = rand() % _letters.count;
+        [_letters exchangeObjectAtIndex:nIndex1 withObjectAtIndex:nIndex2];
         // to track the word
         int nIndex1InWord = -1; // the index of nIndex1 in _word
         int nIndex2InWord = -1;
@@ -206,7 +208,7 @@
 - (void)layoutBricks
 {
     int nNumBricks = _nDim * _nDim;
-    _maBrick = [[NSMutableArray alloc] initWithCapacity:nNumBricks];
+    _bricks = [[NSMutableArray alloc] initWithCapacity:nNumBricks];
     // the width and height of every brick
     CGFloat fWidth = (self.frame.size.width - 2 * SPACE) * 1.0 / _nDim;
     CGFloat fHeight = (self.frame.size.height - 2 * SPACE) * 1.0 / _nDim;
@@ -216,7 +218,7 @@
         {
             // the image file name
             NSString* strImage = [NSString stringWithFormat:
-                                  @"%s_%@.ico", LETTER[LI_BLUE],[_maLetters objectAtIndex:i * _nDim + j]];
+                                  @"%s_%@.ico", LETTER[LI_BLUE],[_letters objectAtIndex:i * _nDim + j]];
             // the brick
             UIImageView* vBrick = [[UIImageView alloc] init];
             vBrick.contentMode = UIViewContentModeScaleToFill;
@@ -265,7 +267,7 @@
             [tgr setNumberOfTapsRequired:1];
             vBrick.userInteractionEnabled = YES;
             [vBrick addGestureRecognizer:tgr];
-            [_maBrick addObject:vBrick];
+            [_bricks addObject:vBrick];
         }
 }
 
@@ -274,25 +276,25 @@
 {
     // the tapped brick
     int nIndex = -1;
-    for (int i = 0; i < _maBrick.count; i++)
-        if ([_maBrick objectAtIndex:i] == tgr.view)
+    for (int i = 0; i < _bricks.count; i++)
+        if ([_bricks objectAtIndex:i] == tgr.view)
         {
             nIndex = i;
             break;
         }
-    UIImageView* vBrick = [_maBrick objectAtIndex:nIndex];
+    UIImageView* vBrick = [_bricks objectAtIndex:nIndex];
     // an already selected letter
     NSString* strImage = vBrick.accessibilityIdentifier;
     if ([strImage rangeOfString:[NSString stringWithFormat:@"%s", LETTER[LI_ORANGE]]].location != NSNotFound)
         return;
     // to change status
-    [_selectedLetters addObject:[_maBrick objectAtIndex:nIndex]];
+    [_selectedLetters addObject:[_bricks objectAtIndex:nIndex]];
     // to change appearance
-    strImage = [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _maLetters[nIndex]];
+    strImage = [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_ORANGE], _letters[nIndex]];
     vBrick.image = [UIImage imageNamed:strImage];
     vBrick.accessibilityIdentifier = strImage;
     // to add the letter
-    [_delegate letterWasSelected:_maLetters[nIndex] index:nIndex];
+    [_delegate letterWasSelected:_letters[nIndex] index:nIndex];
 }
 ///*** END OF PRIVATE ***///
 

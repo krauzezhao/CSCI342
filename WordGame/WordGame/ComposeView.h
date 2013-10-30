@@ -50,24 +50,24 @@ typedef enum _ItemDropStatus
 @property CGPoint ptBottomRight;
 // the slot views
 @property (strong, nonatomic) NSMutableArray* slots;
-@property (strong, nonatomic) UIButton* btnCompose;
-@property (strong, nonatomic) UIButton* btnCancel;
+@property (strong, nonatomic) UIButton* composeButton;
+@property (strong, nonatomic) UIButton* cancelButton;
 // the composition particle layer
-@property (strong, nonatomic) CAEmitterLayer* el;
+@property (strong, nonatomic) CAEmitterLayer* emitterLayer;
 // the view to hold the result item
-@property (strong, nonatomic) UIImageView* ivResult;
+@property (strong, nonatomic) UIImageView* resultImageView;
 // the label to hold the name of the item
-@property (strong, nonatomic) UILabel* lblName;
+@property (strong, nonatomic) UILabel* nameLabel;
 // the text view to hold the description of the item
-@property (strong, nonatomic) UITextView* tvDescription;
+@property (strong, nonatomic) UITextView* descriptionTextView;
 ///*** END OF PRIVATE ***///
 
 // to determine whether a scroll has been put here
-@property BOOL bHasScroll;
+@property BOOL hasScroll;
 // the scroll
-@property ItemIndex iiScroll;
+@property ItemIndex scroll;
 // the result
-@property ItemIndex iiResult;
+@property ItemIndex result;
 // to record the dropped non-scroll items
 @property (strong, nonatomic) NSMutableArray* items;
 

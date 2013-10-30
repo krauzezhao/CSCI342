@@ -53,7 +53,7 @@
         Word* word = [_words objectAtIndex:ip.row];
         // the destination
         DefinitionViewController* dvc = segue.destinationViewController;
-        dvc.strWord = word.word;
+        dvc.word = word.word;
     }
 }
 

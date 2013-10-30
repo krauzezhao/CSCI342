@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8c-Xp-jg4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8c-Xp-jg4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -112,8 +112,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="BLq-10-wfA"/>
                     <connections>
-                        <outlet property="tvTitle" destination="rEw-Oe-Cgs" id="vEU-1m-og7"/>
-                        <outlet property="vPlay" destination="WU5-2R-Q3o" id="36g-gB-2BU"/>
+                        <outlet property="playView" destination="WU5-2R-Q3o" id="QXP-6f-92Q"/>
+                        <outlet property="titleView" destination="rEw-Oe-Cgs" id="ekc-pf-2rI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffR-Of-HWm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -204,11 +204,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Game" image="game.png" id="dfN-c1-aGP"/>
                     <connections>
-                        <outlet property="ebExpBar" destination="lG0-Kc-HAd" id="isX-q8-yAZ"/>
-                        <outlet property="lblMsg" destination="jzG-6l-ab9" id="QKG-dg-4EY"/>
-                        <outletCollection property="btnLevel" destination="LeL-Ue-qyc" id="2vH-Pe-i7k"/>
-                        <outletCollection property="btnLevel" destination="4PU-oc-B2W" id="rUp-9M-d25"/>
-                        <outletCollection property="btnLevel" destination="1eb-67-aFR" id="Mma-0e-S5J"/>
+                        <outlet property="experienceBar" destination="lG0-Kc-HAd" id="LnF-yE-Wa1"/>
+                        <outlet property="messageLabel" destination="jzG-6l-ab9" id="SnL-3N-1xH"/>
+                        <outletCollection property="levelButton" destination="LeL-Ue-qyc" id="dJR-bv-ZQf"/>
+                        <outletCollection property="levelButton" destination="4PU-oc-B2W" id="iL0-Oh-dNJ"/>
+                        <outletCollection property="levelButton" destination="1eb-67-aFR" id="Wac-JJ-cgh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGQ-1B-YDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,10 +355,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Compose" image="items.png" id="Gou-cw-FfD"/>
                     <connections>
-                        <outlet property="ccvItems" destination="uck-Hq-x7S" id="IsN-dw-SMp"/>
-                        <outlet property="cvCompose" destination="R39-m3-Si6" id="csP-aK-Ob2"/>
-                        <outlet property="lblMsg" destination="cf9-ha-JC7" id="5FS-uZ-a7z"/>
-                        <outlet property="pcPage" destination="KV3-DE-JgH" id="RhM-ri-iHH"/>
+                        <outlet property="composeView" destination="R39-m3-Si6" id="Yjy-HC-Hdm"/>
+                        <outlet property="itemsView" destination="uck-Hq-x7S" id="NBG-8u-yK2"/>
+                        <outlet property="messageLabel" destination="cf9-ha-JC7" id="ldp-JV-vNj"/>
+                        <outlet property="pageControl" destination="KV3-DE-JgH" id="M4s-we-exW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3N7-g7-2XG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -619,7 +619,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Aonaware Service" id="ENh-L1-gBa"/>
                     <connections>
-                        <outlet property="tvDefinition" destination="UIG-VH-t6m" id="H68-M8-ZeS"/>
+                        <outlet property="definitionTextView" destination="UIG-VH-t6m" id="8sA-tY-eFL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDZ-0i-kdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -634,6 +634,102 @@
         <image name="items.png" width="32" height="32"/>
         <image name="library.png" width="32" height="32"/>
     </resources>
+    <classes>
+        <class className="ComposeCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCell.h"/>
+        </class>
+        <class className="ComposeCollectionView" superclassName="UICollectionView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeCollectionView.h"/>
+        </class>
+        <class className="ComposeView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeView.h"/>
+        </class>
+        <class className="ComposeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ComposeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="composeView" candidateClass="ComposeView"/>
+                <relationship kind="outlet" name="itemsView" candidateClass="ComposeCollectionView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
+            </relationships>
+        </class>
+        <class className="DefinitionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DefinitionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="definitionTextView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="ExpBar" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpBar.h"/>
+        </class>
+        <class className="LevelViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LevelViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="experienceBar" candidateClass="ExpBar"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outletCollection" name="levelButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="LibrariesTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibrariesTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addWasTapped:"/>
+                <relationship kind="action" name="homeWasTapped:"/>
+            </relationships>
+        </class>
+        <class className="LibraryTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LibraryTableViewController.h"/>
+        </class>
+        <class className="MiscTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MiscTabBarController.h"/>
+            <relationships>
+                <relationship kind="action" name="homeWasTapped:"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PlayTabBarController" superclassName="UITabBarController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayTabBarController.h"/>
+            <relationships>
+                <relationship kind="action" name="homeWasTapped:"/>
+            </relationships>
+        </class>
+        <class className="PlayView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayView.h"/>
+        </class>
+        <class className="PlayViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="playView" candidateClass="PlayView"/>
+                <relationship kind="outlet" name="titleView" candidateClass="TitleView"/>
+            </relationships>
+        </class>
+        <class className="TitleView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TitleView.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+        </class>
+        <class className="WordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordCell.h"/>
+        </class>
+        <class className="WordsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordsTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addWasTapped:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

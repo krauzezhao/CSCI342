@@ -18,11 +18,11 @@
         // GUI
         self.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
         // the timer-related info
-        _nTicks = 0;
+        _ticks = 0;
         // the item image view
-        _ivItems = [[NSMutableArray alloc] init];
+        _itemViews = [[NSMutableArray alloc] init];
         // the labels
-        _lblNum = [[NSMutableArray alloc] init];
+        _numberLabels = [[NSMutableArray alloc] init];
         // the swipe gesture to hide the view
         UISwipeGestureRecognizer* sgr =
             [[UISwipeGestureRecognizer alloc] initWithTarget:self
@@ -36,7 +36,7 @@
 // init
 - (void)initItems:(NSMutableArray*)numOfItems
 {
-    if (_ivItems.count == 0)
+    if (_itemViews.count == 0)
     {
         // the size of the item area
         CGFloat fWidthUnit = self.frame.size.width / NUM_USABLE;
@@ -62,7 +62,7 @@
             lbl.textColor = [UIColor whiteColor];
             lbl.layer.zPosition = 10; // to keep the label at the top
             [self addSubview:lbl];
-            [_lblNum addObject:lbl];
+            [_numberLabels addObject:lbl];
             // the number of items
             int nNum = [[numOfItems objectAtIndex:i] intValue];
             iv.tag = nNum; // The image view tag is the number of the item.
@@ -87,7 +87,7 @@
             [iv addGestureRecognizer:tgr];
             // to add the image view
             [self addSubview:iv];
-            [_ivItems addObject:iv];
+            [_itemViews addObject:iv];
         }
     }
 }
@@ -103,8 +103,8 @@
 {
     // to get the index of the tapped item
     int nIndex = -1;
-    for (int i = 0; i < _ivItems.count; i++)
-        if (tgr.view == [_ivItems objectAtIndex:i])
+    for (int i = 0; i < _itemViews.count; i++)
+        if (tgr.view == [_itemViews objectAtIndex:i])
         {
             nIndex = i;
             break;
@@ -112,14 +112,14 @@
     if (nIndex == -1)
         return;
     // Unknown items cannot be selected
-    UIImageView* iv = [_ivItems objectAtIndex:nIndex];
+    UIImageView* iv = [_itemViews objectAtIndex:nIndex];
     if (iv.tag == II_UNKNOWN || iv.tag == 0)
         return;
     // to update the number
     int nNum = iv.tag;
     nNum--;
     iv.tag = nNum;
-    UILabel* lbl = [_lblNum objectAtIndex:nIndex];
+    UILabel* lbl = [_numberLabels objectAtIndex:nIndex];
     if (nNum == 0)
     {
         lbl.text = @"";
@@ -140,15 +140,15 @@
 - (void)itemShouldBeHighlighted:(NSTimer *)timer
 {
     UIImageView* iv = (UIImageView*)timer.userInfo;
-    if (_nTicks++ % 2 == 0)
+    if (_ticks++ % 2 == 0)
     {
         iv.layer.borderColor = [UIColor colorWithRed:.4 green:1 blue:1 alpha:.8].CGColor;
         iv.layer.borderWidth = 2;
     } else
         iv.layer.borderWidth = 0;
-    if (_nTicks == NUM_BORDER_FLASH)
+    if (_ticks == NUM_BORDER_FLASH)
     {
-        _nTicks = 0;
+        _ticks = 0;
         [_timer invalidate];
         // to hide the view
         [self viewWasSwipedOver];

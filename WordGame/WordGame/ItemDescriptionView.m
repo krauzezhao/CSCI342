@@ -23,12 +23,12 @@
 
 - (void)setItem:(ItemIndex)item
 {
-    if (!_lblName)
+    if (!_nameLabel)
         [self initNameLabel];
-    if (!_tvDescription)
+    if (!_descriptionTextView)
         [self initDescriptionTextView];
-    _lblName.text = [NSString stringWithFormat:@"%s", ITEM_NAME[item]];
-    _tvDescription.text = [NSString stringWithFormat:@"%s", ITEM_DESCRIPTION[item]];
+    _nameLabel.text = [NSString stringWithFormat:@"%s", ITEM_NAME[item]];
+    _descriptionTextView.text = [NSString stringWithFormat:@"%s", ITEM_DESCRIPTION[item]];
 }
 
 ///*** PRIVATE ***///
@@ -36,14 +36,14 @@
 - (void)initNameLabel
 {
     // the label
-    _lblName = [[UILabel alloc] init];
-    _lblName.backgroundColor = [UIColor clearColor];
-    _lblName.font = [UIFont boldSystemFontOfSize:12];
-    _lblName.textColor = [UIColor yellowColor];
-    [_lblName setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_lblName];
+    _nameLabel = [[UILabel alloc] init];
+    _nameLabel.backgroundColor = [UIColor clearColor];
+    _nameLabel.font = [UIFont boldSystemFontOfSize:12];
+    _nameLabel.textColor = [UIColor yellowColor];
+    [_nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_nameLabel];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblName
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_nameLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self
@@ -51,7 +51,7 @@
                                                          multiplier:1
                                                            constant:IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblName
+    lc = [NSLayoutConstraint constraintWithItem:_nameLabel
                                       attribute:NSLayoutAttributeTop
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -59,7 +59,7 @@
                                      multiplier:1
                                        constant:IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblName
+    lc = [NSLayoutConstraint constraintWithItem:_nameLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -67,7 +67,7 @@
                                      multiplier:1
                                        constant:0 - 2 * IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblName
+    lc = [NSLayoutConstraint constraintWithItem:_nameLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -80,15 +80,15 @@
 - (void)initDescriptionTextView
 {
     // the text view
-    _tvDescription = [[UITextView alloc] init];
-    _tvDescription.backgroundColor = [UIColor clearColor];
-    _tvDescription.editable = NO;
-    _tvDescription.scrollEnabled = YES;
-    _tvDescription.textColor = [UIColor whiteColor];
-    [_tvDescription setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_tvDescription];
+    _descriptionTextView = [[UITextView alloc] init];
+    _descriptionTextView.backgroundColor = [UIColor clearColor];
+    _descriptionTextView.editable = NO;
+    _descriptionTextView.scrollEnabled = YES;
+    _descriptionTextView.textColor = [UIColor whiteColor];
+    [_descriptionTextView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_descriptionTextView];
     // constraints
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_tvDescription
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_descriptionTextView
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self
@@ -96,15 +96,15 @@
                                                          multiplier:1
                                                            constant:IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_tvDescription
+    lc = [NSLayoutConstraint constraintWithItem:_descriptionTextView
                                       attribute:NSLayoutAttributeTop
                                       relatedBy:NSLayoutRelationEqual
-                                         toItem:_lblName
+                                         toItem:_nameLabel
                                       attribute:NSLayoutAttributeBottom
                                      multiplier:1
                                        constant:IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_tvDescription
+    lc = [NSLayoutConstraint constraintWithItem:_descriptionTextView
                                       attribute:NSLayoutAttributeRight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -112,7 +112,7 @@
                                      multiplier:1
                                        constant:0 - IDV_PADDING];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_tvDescription
+    lc = [NSLayoutConstraint constraintWithItem:_descriptionTextView
                                       attribute:NSLayoutAttributeBottom
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self

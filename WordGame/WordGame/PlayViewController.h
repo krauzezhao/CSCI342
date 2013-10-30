@@ -55,10 +55,10 @@ static const int NUM_ROTATIONS = 100; // 100 rotations at 360 degrees/sec
 // rotation animation timers
 @property (strong, nonatomic) NSMutableArray* timers;
 // the usable item view
-@property (strong, nonatomic) UsableItemView* vUsableItems;
+@property (strong, nonatomic) UsableItemView* usableItemView;
 
-@property (weak, nonatomic) IBOutlet PlayView *vPlay;
-@property (weak, nonatomic) IBOutlet TitleView *tvTitle;
+@property (weak, nonatomic) IBOutlet PlayView *playView;
+@property (weak, nonatomic) IBOutlet TitleView *titleView;
 
 // to animate a drop
 - (void)animateDrop:(ItemIndex)item;

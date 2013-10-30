@@ -34,9 +34,9 @@ static const double TIME_RETURN = .6; // the time the item needs to return when 
 
 @property ItemIndex item; // the current item
 ///*** PRIVATE ***///
-@property (strong, nonatomic) UIView* vContent;
-@property (strong, nonatomic) UIImageView* ivItem;
-@property (strong, nonatomic) UILabel* lblNum;
+@property (strong, nonatomic) UIView* contentView;
+@property (strong, nonatomic) UIImageView* itemImageView;
+@property (strong, nonatomic) UILabel* numberLabel;
 @property BOOL bUnavail; // whether the item is available
 @property (weak, nonatomic) id<ItemCellDelegate> delegate;
 @property (strong, nonatomic) NSTimer* timer; // to show the item upon dropping and the highlighting

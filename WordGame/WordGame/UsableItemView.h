@@ -24,10 +24,10 @@ static const int NUM_BORDER_FLASH = 4;
 @interface UsableItemView : UIView
 
 ///*** PRIVATE ***///
-@property (strong, nonatomic) NSMutableArray* ivItems; // image views to hold item image
-@property (strong, nonatomic) NSMutableArray* lblNum; // labels to show the number of items
+@property (strong, nonatomic) NSMutableArray* itemViews; // image views to hold item image
+@property (strong, nonatomic) NSMutableArray* numberLabels; // labels to show the number of items
 @property (strong, nonatomic) NSTimer* timer; // the timer to do the border animation
-@property int nTicks; // a counter to record the number of timer invocation
+@property int ticks; // a counter to record the number of timer invocation
 ///*** END OF PRIVATE ***///
 
 @property (weak, nonatomic) id<UsableItemViewDelegate> delegate;

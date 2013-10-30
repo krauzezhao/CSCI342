@@ -16,10 +16,10 @@ static const float PERCENTAGE_WIDTH_TITLE = .7;
 @interface WordCell : UITableViewCell
 
 ///*** PRIVATE ***///
-@property (strong, nonatomic) UILabel* lblTitle;
-@property (strong, nonatomic) UILabel* lblInfoTitle;
-@property (strong, nonatomic) UILabel* lblSubtitleLeft;
-@property (strong, nonatomic) UILabel* lblSubtitleRight;
+@property (strong, nonatomic) UILabel* titleLabel;
+@property (strong, nonatomic) UILabel* infoTitleLabel;
+@property (strong, nonatomic) UILabel* leftSubtitleLabel;
+@property (strong, nonatomic) UILabel* rightSubtitleLabel;
 ///*** END OF PRIVATE ***///
 
 - (void)setTitle:(NSString*)title;

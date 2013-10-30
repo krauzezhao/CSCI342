@@ -17,7 +17,7 @@ static const int OFFSET_Y = 3;
 @interface ComposeCell : UICollectionViewCell
 
 ///*** PRIVATE ***///
-@property int nNumItems;
+@property int numberOfItems;
 @property (strong, nonatomic) NSMutableArray* items;
 @property (weak, nonatomic) id<ItemCellDelegate> delegate;
 ///*** END OF PRIVATE ***///

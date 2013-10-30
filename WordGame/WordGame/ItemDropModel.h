@@ -19,7 +19,7 @@ static const int DROP_RATE_FACTOR[] = {
 
 ///*** PRIVATE ***///
 // the drop rate factor
-@property int nDropRateFactor;
+@property int dropRateFactor;
 // to record the random number range within which a particular item can drop
 @property (strong, nonatomic) NSMutableArray* dropTable;
 ///*** END OF PRIVATE ***///

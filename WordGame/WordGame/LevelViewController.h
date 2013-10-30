@@ -23,10 +23,10 @@ static const int TAB_LIBRARY = 1;
 @property (strong, nonatomic) Library* lib;
 @property (strong, nonatomic) Player* player;
 // the experience before a game
-@property (strong, nonatomic) NSNumber* numExp;
+@property (strong, nonatomic) NSNumber* experience;
 
-@property (weak, nonatomic) IBOutlet ExpBar *ebExpBar;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnLevel;
-@property (weak, nonatomic) IBOutlet UILabel *lblMsg;
+@property (weak, nonatomic) IBOutlet ExpBar *experienceBar;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *levelButton;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end

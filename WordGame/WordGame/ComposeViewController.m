@@ -27,16 +27,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _ccvItems.ccvdDelegate = self;
-    _ccvItems.itemDelegate = self;
-    _cvCompose.delegate = self;
+    _itemsView.composeCollectionViewDelegate = self;
+    _itemsView.itemDelegate = self;
+    _composeView.delegate = self;
     // to initialise the image view used for dragging
-    _ivDragged = [[UIImageView alloc] init];
-    _ivDragged.contentMode = UIViewContentModeScaleToFill;
+    _draggedItemView = [[UIImageView alloc] init];
+    _draggedItemView.contentMode = UIViewContentModeScaleToFill;
     // the description view
-    _idvItem = [[ItemDescriptionView alloc] init];
+    _itemDescriptionView = [[ItemDescriptionView alloc] init];
     // not dropped in the composition area
-    _bInCompositionArea = NO;
+    _isInCompositionArea = NO;
     // the db context
     _moc = [(AppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
 }
@@ -62,7 +62,7 @@
     {
         _player = [results objectAtIndex:0];
         _items = _player.items;
-        _ccvItems.items = _items;
+        _itemsView.items = _items;
     }
 
 }
@@ -70,8 +70,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     // to restore all items if not confirmed yet
-    if (_cvCompose.bHasScroll)
-        [_cvCompose cancelWasTapped:nil];
+    if (_composeView.hasScroll)
+        [_composeView cancelWasTapped:nil];
     // to update the database
     _player.items = _items;
     NSError* err = nil;
@@ -99,9 +99,9 @@
     // to move the item back
     [UIImageView animateWithDuration:TIME_RETURN / 2
                           animations:^{
-                              CGFloat fWidth = _ivDragged.frame.size.width;
-                              CGFloat fHeight = _ivDragged.frame.size.height;
-                              _ivDragged.frame = CGRectMake(ptInitial.x - fWidth / 2,
+                              CGFloat fWidth = _draggedItemView.frame.size.width;
+                              CGFloat fHeight = _draggedItemView.frame.size.height;
+                              _draggedItemView.frame = CGRectMake(ptInitial.x - fWidth / 2,
                                                             ptInitial.y - fHeight / 2,
                                                             fWidth,
                                                             fHeight);
@@ -110,27 +110,27 @@
                           completion:^(BOOL finished){
                               [UIImageView animateWithDuration:TIME_RETURN / 2
                                                     animations:^{
-                                                        CGFloat fWidth = _ivDragged.frame.size.width;
-                                                        CGFloat fHeight = _ivDragged.frame.size.height;
-                                                        _ivDragged.frame =
+                                                        CGFloat fWidth = _draggedItemView.frame.size.width;
+                                                        CGFloat fHeight = _draggedItemView.frame.size.height;
+                                                        _draggedItemView.frame =
                                                         CGRectMake(ptInitial.x - fWidth * .05,
                                                                    ptInitial.y - fHeight * .05,
                                                                    fWidth * .1,
                                                                    fHeight * .1);
                                                     }
                                                     completion:^(BOOL finished){
-                                                        [_ivDragged setHidden:YES];
+                                                        [_draggedItemView setHidden:YES];
                                                     }];
                           }];
 }
 
 - (void)showMessage
 {
-    [_lblMsg setHidden:NO];
-    _lblMsg.alpha = 0;
+    [_messageLabel setHidden:NO];
+    _messageLabel.alpha = 0;
     [UILabel animateWithDuration:.5
                       animations:^{
-                          _lblMsg.alpha = 1;
+                          _messageLabel.alpha = 1;
                       }
                       completion:nil];
 }
@@ -139,110 +139,110 @@
 {
     [UIView animateWithDuration:.3
                      animations:^{
-                         _idvItem.alpha = 0;
+                         _itemDescriptionView.alpha = 0;
                      }
                      completion:^(BOOL finished) {
-                         [_idvItem removeFromSuperview];
+                         [_itemDescriptionView removeFromSuperview];
                      }];
 }
 
 // delegates
 - (void)pageWasScrolledTo:(int)page
 {
-    [_idvItem removeFromSuperview];
-    _pcPage.currentPage = page;
+    [_itemDescriptionView removeFromSuperview];
+    _pageControl.currentPage = page;
 }
 
 - (void)itemIsBeingDragged:(UIPanGestureRecognizer*)pgr center:(CGPoint)center ref:(CGPoint)ref  item:(ItemIndex)item
 {
     if (pgr.state == UIGestureRecognizerStateBegan)
     {
-        _bInCompositionArea = NO;
+        _isInCompositionArea = NO;
         // to compute the offset between 2 different refernces
         CGFloat fOffsetX = ref.x - [pgr locationInView:self.view].x;
         CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
-        _ptInitial.x = center.x - fOffsetX;
-        _ptInitial.y = center.y - fOffsetY;
+        _initialPoint.x = center.x - fOffsetX;
+        _initialPoint.y = center.y - fOffsetY;
         // to init the drag
-        _ivDragged.frame = CGRectMake(_ptInitial.x - .5, _ptInitial.y - .5, 1, 1);
-        _ivDragged.image =
+        _draggedItemView.frame = CGRectMake(_initialPoint.x - .5, _initialPoint.y - .5, 1, 1);
+        _draggedItemView.image =
             [UIImage imageNamed:[NSString stringWithFormat:@"%s%s", PREFIX_AVAIL, ITEM[item]]];
-        [_ivDragged setHidden:NO];
-        [self.view addSubview:_ivDragged];
+        [_draggedItemView setHidden:NO];
+        [self.view addSubview:_draggedItemView];
         [UIImageView animateWithDuration:.2
                               animations:^{
-                                  CGFloat fX = _ivDragged.frame.origin.x;
-                                  CGFloat fY = _ivDragged.frame.origin.y;
-                                  CGFloat fWidth = _ivDragged.frame.size.width;
-                                  CGFloat fHeight = _ivDragged.frame.size.height;
-                                  _ivDragged.frame = CGRectMake(fX - fWidth * 40,
+                                  CGFloat fX = _draggedItemView.frame.origin.x;
+                                  CGFloat fY = _draggedItemView.frame.origin.y;
+                                  CGFloat fWidth = _draggedItemView.frame.size.width;
+                                  CGFloat fHeight = _draggedItemView.frame.size.height;
+                                  _draggedItemView.frame = CGRectMake(fX - fWidth * 40,
                                                                 fY - fHeight * 40,
                                                                 fWidth * 80,
                                                                 fHeight * 80);
                               }
                               completion:^(BOOL finished){
                                   // to record the size of the image
-                                  _szItem = _ivDragged.frame.size;
+                                  _itemSize = _draggedItemView.frame.size;
                               }];
         // to decrement the number of the items
         int nNum = [[_items objectAtIndex:item] intValue];
         nNum--;
         [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
-        [_ccvItems setNumberOfItems:item num:nNum animated:NO];
+        [_itemsView setNumberOfItems:item num:nNum animated:NO];
     } else if (pgr.state == UIGestureRecognizerStateEnded)
     {
-        if (!_bInCompositionArea)
+        if (!_isInCompositionArea)
         {
-            [self moveBackItem:_ptInitial];
+            [self moveBackItem:_initialPoint];
             // to increment the number of the items
             int nNum = [[_items objectAtIndex:item] intValue];
             nNum++;
             [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
-            [_ccvItems setNumberOfItems:item num:nNum animated:NO];
+            [_itemsView setNumberOfItems:item num:nNum animated:NO];
             return; // not dropped inside the composition area
         }
-        ItemDropStatus ids = [_cvCompose itemWasDropped:item];
+        ItemDropStatus ids = [_composeView itemWasDropped:item];
         if (ids != IDS_SUCCESS)
         {
             // to show the message label
             if (ids == IDS_NOSCROLL)
                 [self showMessage];
             // to move the item back
-            [self moveBackItem:_ptInitial];
+            [self moveBackItem:_initialPoint];
             // to increment the number of the items
             int nNum = [[_items objectAtIndex:item] intValue];
             nNum++;
             [_items replaceObjectAtIndex:item withObject:[NSNumber numberWithInt:nNum]];
-            [_ccvItems setNumberOfItems:item num:nNum animated:NO];
+            [_itemsView setNumberOfItems:item num:nNum animated:NO];
         } else // ready to be composed
         {
-            [_lblMsg setHidden:YES];
-            [_ivDragged setHidden:YES];
+            [_messageLabel setHidden:YES];
+            [_draggedItemView setHidden:YES];
         }
     } else
     {
         // to move the item
         CGPoint ptCur = [pgr locationInView:self.view];
-        _ivDragged.frame = CGRectMake(ptCur.x - _ivDragged.frame.size.width / 2,
-                                      ptCur.y - _ivDragged.frame.size.height / 2,
-                                      _ivDragged.frame.size.width,
-                                      _ivDragged.frame.size.height);
+        _draggedItemView.frame = CGRectMake(ptCur.x - _draggedItemView.frame.size.width / 2,
+                                      ptCur.y - _draggedItemView.frame.size.height / 2,
+                                      _draggedItemView.frame.size.width,
+                                      _draggedItemView.frame.size.height);
         // to check for intersection between the dragged item and the compose view
-        if (CGRectIntersectsRect(_ivDragged.frame, _cvCompose.frame))
+        if (CGRectIntersectsRect(_draggedItemView.frame, _composeView.frame))
         {
-            _bInCompositionArea = YES;
+            _isInCompositionArea = YES;
             [UILabel animateWithDuration:.5
                               animations:^{
-                                  _lblMsg.alpha = 0;
+                                  _messageLabel.alpha = 0;
                               }
                               completion:nil];
         }
         else
         {
-            _bInCompositionArea = NO;
+            _isInCompositionArea = NO;
             [UILabel animateWithDuration:.5
                               animations:^{
-                                  _lblMsg.alpha = 1;
+                                  _messageLabel.alpha = 1;
                               }
                               completion:nil];
         }
@@ -271,12 +271,12 @@
         rcDescription.origin = CGPointMake(rcDescription.origin.x, fCenterY - fHeight);
     }
     // the description view
-    if (_idvItem)
-        [_idvItem removeFromSuperview];
-    _idvItem.alpha = .8;
-    _idvItem.frame = rcDescription;
-    [_idvItem setItem:item];
-    [self.view addSubview:_idvItem];
+    if (_itemDescriptionView)
+        [_itemDescriptionView removeFromSuperview];
+    _itemDescriptionView.alpha = .8;
+    _itemDescriptionView.frame = rcDescription;
+    [_itemDescriptionView setItem:item];
+    [self.view addSubview:_itemDescriptionView];
     // This view disappears in 5 seconds
     _timer = [NSTimer scheduledTimerWithTimeInterval:5
                                               target:self
@@ -292,18 +292,18 @@
     int nNum = [[_items objectAtIndex:scroll] intValue];
     nNum++;
     [_items replaceObjectAtIndex:scroll withObject:[NSNumber numberWithInt:nNum]];
-    [_ccvItems setNumberOfItems:scroll num:nNum animated:NO];
+    [_itemsView setNumberOfItems:scroll num:nNum animated:NO];
     // the items
     for (NSNumber* index in items)
     {
         nNum = [[_items objectAtIndex:[index intValue]] intValue];
         nNum++;
         [_items replaceObjectAtIndex:[index intValue] withObject:[NSNumber numberWithInt:nNum]];
-        [_ccvItems setNumberOfItems:[index intValue] num:nNum animated:NO];
+        [_itemsView setNumberOfItems:[index intValue] num:nNum animated:NO];
     }
     ///*** end ***///
     // to show the message label
-    [_lblMsg setHidden:NO];
+    [_messageLabel setHidden:NO];
     [self showMessage];
 }
 
@@ -326,7 +326,7 @@
         nNum = 1;
     else
         nNum++;
-    [_ccvItems setNumberOfItems:result num:nNum animated:YES];
+    [_itemsView setNumberOfItems:result num:nNum animated:YES];
     // to update the player
     [_items replaceObjectAtIndex:result withObject:[NSNumber numberWithInt:nNum]];
     // to show the drag hint
@@ -337,7 +337,7 @@
 {
     if (buttonIndex == 1) // Discard
     {
-        [_cvCompose discard];
+        [_composeView discard];
         // to show the message label
         [self showMessage];
     }

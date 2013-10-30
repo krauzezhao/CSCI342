@@ -16,7 +16,7 @@
 @interface LibrariesTableViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext* moc;
-@property (strong, nonatomic) NSMutableArray* maLib; // the libraries
+@property (strong, nonatomic) NSMutableArray* libs; // the libraries
 
 // navigation bar item events
 - (IBAction)homeWasTapped:(id)sender;

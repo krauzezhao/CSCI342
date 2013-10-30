@@ -49,8 +49,8 @@
     } else
     {
         _player = [mutableResults objectAtIndex:0];
-        _numExp = _player.experience; // deep copy
-        [_ebExpBar setLevel:[_player.level intValue] exp:[_numExp intValue]];
+        _experience = _player.experience; // deep copy
+        [_experienceBar setLevel:[_player.level intValue] exp:[_experience intValue]];
     }
     ///*** END OF PLAYER ***///
 }
@@ -84,13 +84,13 @@
     {
         // the message label
         _lib = [results objectAtIndex:0];
-        _lblMsg.text = [NSString stringWithFormat:@"Current Library: %@", _lib.name];
+        _messageLabel.text = [NSString stringWithFormat:@"Current Library: %@", _lib.name];
         // to enable the buttons
-        for (UIButton* btn in _btnLevel)
+        for (UIButton* btn in _levelButton)
             [btn setEnabled:YES];
     }
     else
-        _lblMsg.text = @"No Library Selected.";
+        _messageLabel.text = @"No Library Selected.";
     ///*** END OF LIBRARY ***///
 }
 
@@ -134,8 +134,8 @@
 
 - (void)playViewWasPoppedUp
 {
-    [_ebExpBar animateExp:_numExp endExp:_player.experience];
-    _numExp = _player.experience;
+    [_experienceBar animateExp:_experience endExp:_player.experience];
+    _experience = _player.experience;
 }
 
 @end

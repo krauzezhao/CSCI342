@@ -14,8 +14,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _nNumHits = 0;
-        _nTime = TIME;
+        _numberOfHits = 0;
+        _time = TIME;
         [self initWordLabel];
         [self initNumLabel];
         [self initTimerLabel];
@@ -45,7 +45,7 @@
 - (void)stopTimerFor:(NSTimeInterval)time
 {
     [_timer invalidate];
-    _nTicks = 0;
+    _ticks = 0;
     _timer = [NSTimer scheduledTimerWithTimeInterval:TIME_FLASH
                                               target:self
                                             selector:@selector(timerWasStopped:)
@@ -55,40 +55,40 @@
 
 - (void)addLetter:(NSString *)letter
 {
-    _lblWord.text = [NSString stringWithFormat:@"%@%@", _lblWord.text, letter];
+    _wordLabel.text = [NSString stringWithFormat:@"%@%@", _wordLabel.text, letter];
 }
 
 - (NSString*)getLetters
 {
-    return _lblWord.text;
+    return _wordLabel.text;
 }
 
 - (void)clearLetters
 {
     [UILabel animateWithDuration:.5
                       animations:^{
-                          _lblWord.alpha = 0;
+                          _wordLabel.alpha = 0;
                       }
                       completion:^(BOOL finished){
-                          _lblWord.alpha = 1;
-                          _lblWord.text = @"";
+                          _wordLabel.alpha = 1;
+                          _wordLabel.text = @"";
                       }];
 }
 
 - (void)incrementHits
 {
-    _nNumHits++;
-    _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
+    _numberOfHits++;
+    _numberLabel.text = [NSString stringWithFormat:@"%d Found", _numberOfHits];
 }
 
 - (void)restart
 {
-    _nNumHits = 0;
-    _nTime = TIME;
+    _numberOfHits = 0;
+    _time = TIME;
     // the labels
-    _lblWord.text = @"";
-    _lblNum.text = @"0 Found";
-    _lblTimer.text = @"50 Sec";
+    _wordLabel.text = @"";
+    _numberLabel.text = @"0 Found";
+    _timerLabel.text = @"50 Sec";
     // to restart the timer
     // to start the timer
     _timer = [NSTimer scheduledTimerWithTimeInterval:1
@@ -107,14 +107,14 @@
 //** INIT **//
 - (void)initWordLabel
 {
-    _lblWord = [[UILabel alloc] init];
-    _lblWord.textAlignment = NSTextAlignmentCenter;
-    _lblWord.backgroundColor = [UIColor clearColor];
-    _lblWord.text = @"";
-    _lblWord.textColor = [UIColor whiteColor];
-    [_lblWord setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_lblWord];
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblWord
+    _wordLabel = [[UILabel alloc] init];
+    _wordLabel.textAlignment = NSTextAlignmentCenter;
+    _wordLabel.backgroundColor = [UIColor clearColor];
+    _wordLabel.text = @"";
+    _wordLabel.textColor = [UIColor whiteColor];
+    [_wordLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_wordLabel];
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_wordLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self
@@ -122,7 +122,7 @@
                                                          multiplier:1
                                                            constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblWord
+    lc = [NSLayoutConstraint constraintWithItem:_wordLabel
                                       attribute:NSLayoutAttributeTop
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -130,7 +130,7 @@
                                      multiplier:1
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblWord
+    lc = [NSLayoutConstraint constraintWithItem:_wordLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -138,7 +138,7 @@
                                      multiplier:.5
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblWord
+    lc = [NSLayoutConstraint constraintWithItem:_wordLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -150,14 +150,14 @@
 
 - (void)initNumLabel
 {
-    _lblNum = [[UILabel alloc] init];
-    _lblNum.textAlignment = NSTextAlignmentCenter;
-    _lblNum.backgroundColor = [UIColor clearColor];
-    _lblNum.text = [NSString stringWithFormat:@"%d Found", _nNumHits];
-    _lblNum.textColor = [UIColor whiteColor];
-    [_lblNum setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_lblNum];
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblNum
+    _numberLabel = [[UILabel alloc] init];
+    _numberLabel.textAlignment = NSTextAlignmentCenter;
+    _numberLabel.backgroundColor = [UIColor clearColor];
+    _numberLabel.text = [NSString stringWithFormat:@"%d Found", _numberOfHits];
+    _numberLabel.textColor = [UIColor whiteColor];
+    [_numberLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_numberLabel];
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_numberLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self
@@ -165,7 +165,7 @@
                                                          multiplier:1
                                                            constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblNum
+    lc = [NSLayoutConstraint constraintWithItem:_numberLabel
                                       attribute:NSLayoutAttributeBottom
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -173,7 +173,7 @@
                                      multiplier:1
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblNum
+    lc = [NSLayoutConstraint constraintWithItem:_numberLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -181,7 +181,7 @@
                                      multiplier:.5
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblNum
+    lc = [NSLayoutConstraint constraintWithItem:_numberLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -193,14 +193,14 @@
 
 - (void)initTimerLabel
 {
-    _lblTimer = [[UILabel alloc] init];
-    _lblTimer.textAlignment = NSTextAlignmentCenter;
-    _lblTimer.backgroundColor = [UIColor clearColor];
-    _lblTimer.text = [NSString stringWithFormat:@"%d Sec", _nTime];
-    _lblTimer.textColor = [UIColor whiteColor];
-    [_lblTimer setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self addSubview:_lblTimer];
-    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_lblTimer
+    _timerLabel = [[UILabel alloc] init];
+    _timerLabel.textAlignment = NSTextAlignmentCenter;
+    _timerLabel.backgroundColor = [UIColor clearColor];
+    _timerLabel.text = [NSString stringWithFormat:@"%d Sec", _time];
+    _timerLabel.textColor = [UIColor whiteColor];
+    [_timerLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:_timerLabel];
+    NSLayoutConstraint* lc = [NSLayoutConstraint constraintWithItem:_timerLabel
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self
@@ -208,7 +208,7 @@
                                                          multiplier:1
                                                            constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTimer
+    lc = [NSLayoutConstraint constraintWithItem:_timerLabel
                                       attribute:NSLayoutAttributeBottom
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -216,7 +216,7 @@
                                      multiplier:1
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTimer
+    lc = [NSLayoutConstraint constraintWithItem:_timerLabel
                                       attribute:NSLayoutAttributeHeight
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -224,7 +224,7 @@
                                      multiplier:.5
                                        constant:0];
     [self addConstraint:lc];
-    lc = [NSLayoutConstraint constraintWithItem:_lblTimer
+    lc = [NSLayoutConstraint constraintWithItem:_timerLabel
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                          toItem:self
@@ -236,9 +236,9 @@
 //** END OF INIT **//
 - (void)timerDidTick
 {
-    _nTime--;
-    _lblTimer.text = [NSString stringWithFormat:@"%d Sec", _nTime];
-    if (_nTime == 0)
+    _time--;
+    _timerLabel.text = [NSString stringWithFormat:@"%d Sec", _time];
+    if (_time == 0)
     {
         [_timer invalidate];
         [_delegate timerDidFinish];
@@ -251,13 +251,13 @@
     NSNumber* numTotalTime = (NSNumber*)timer.userInfo;
     int nTotalTime = [numTotalTime intValue];
     // to tick
-    if (_nTicks < nTotalTime)
+    if (_ticks < nTotalTime)
     {
-        if (_nTicks % 2 == 0)
-            _lblTimer.alpha = 0;
+        if (_ticks % 2 == 0)
+            _timerLabel.alpha = 0;
         else
-            _lblTimer.alpha = 1;
-        _nTicks++;
+            _timerLabel.alpha = 1;
+        _ticks++;
     } else
     {
         [_timer invalidate];

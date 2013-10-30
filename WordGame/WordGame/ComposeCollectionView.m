@@ -90,7 +90,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     int nPage = self.contentOffset.x / (self.frame.size.width / NUM_PAGES);
-    [_ccvdDelegate pageWasScrolledTo:nPage];
+    [_composeCollectionViewDelegate pageWasScrolledTo:nPage];
 }
 
 @end

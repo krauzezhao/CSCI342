@@ -15,8 +15,8 @@ static const int IDV_PADDING = 3;
 @interface ItemDescriptionView : UIView
 
 ///*** PRIVATE ***///
-@property (strong, nonatomic) UILabel* lblName; // the item name
-@property (strong, nonatomic) UITextView* tvDescription; // the item description
+@property (strong, nonatomic) UILabel* nameLabel; // the item name
+@property (strong, nonatomic) UITextView* descriptionTextView; // the item description
 ///*** END OF PRIVATE ***///
 
 - (void)setItem:(ItemIndex)item;

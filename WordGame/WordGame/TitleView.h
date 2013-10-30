@@ -23,17 +23,17 @@ static const float TIME_FLASH = .5; // the time of one flash when the timer stop
 @interface TitleView : UIView
 
 ///*** PRIVATE ***///
-@property (strong, nonatomic) UILabel* lblWord;
-@property (strong, nonatomic) UILabel* lblNum; // the number of found words
-@property (strong, nonatomic) UILabel* lblTimer;
+@property (strong, nonatomic) UILabel* wordLabel;
+@property (strong, nonatomic) UILabel* numberLabel; // the number of found words
+@property (strong, nonatomic) UILabel* timerLabel;
 
-@property NSUInteger nTime;
-@property NSUInteger nTicks; // ticks to flash the timer when the timer stops
+@property NSUInteger time;
+@property NSUInteger ticks; // ticks to flash the timer when the timer stops
 @property (strong, nonatomic) NSTimer* timer;
 @property (weak, nonatomic) id<TitleViewDelegate> delegate;
 ///*** END OF PRIVATE ***///
 
-@property NSUInteger nNumHits; // the number of words found
+@property NSUInteger numberOfHits; // the number of words found
 
 - (void)startTimer;
 - (void)stopTimerFor:(NSTimeInterval)time;
