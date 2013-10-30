@@ -45,9 +45,11 @@
                                                             vBrick.frame.size.height);
                               }
                               completion:^(BOOL finished){
-                                  vBrick.image =
-                                  [UIImage imageNamed:
-                                   [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE], _letters[vBrick.tag]]];
+                                  NSString* strImage =
+                                    [NSString stringWithFormat:@"%s_%@.ico", LETTER[LI_BLUE],
+                                     _letters[vBrick.tag]];
+                                  vBrick.image = [UIImage imageNamed:strImage];
+                                  vBrick.accessibilityIdentifier = strImage;
                               }];
         [UIImageView animateWithDuration:.3
                               animations:^{

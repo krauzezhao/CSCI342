@@ -158,6 +158,7 @@
     if (pgr.state == UIGestureRecognizerStateBegan)
     {
         _isInCompositionArea = NO;
+        [_itemDescriptionView removeFromSuperview];
         // to compute the offset between 2 different refernces
         CGFloat fOffsetX = ref.x - [pgr locationInView:self.view].x;
         CGFloat fOffsetY = ref.y - [pgr locationInView:self.view].y;
